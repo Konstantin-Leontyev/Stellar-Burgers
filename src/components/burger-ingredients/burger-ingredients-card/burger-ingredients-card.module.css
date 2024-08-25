@@ -1,0 +1,22 @@
+.container {
+  box-sizing: border-box;
+  position: relative;
+  width: 272px;
+}
+
+.img {
+  height: 120px;
+  width: 240px;
+}
+
+.price {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  height: 48px;
+}

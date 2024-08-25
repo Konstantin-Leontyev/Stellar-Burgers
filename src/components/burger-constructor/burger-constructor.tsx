@@ -37,6 +37,7 @@ export default function BurgerConstructor() {
             text="Мясо бессмертных моллюсков Protostomia"
             price={300}
             thumbnail="https://code.s3.yandex.net/react/code/meat-02.png"
+            extraClass="ml-2"
           />
         </li>
         <li className={styles.li}>
@@ -54,6 +55,7 @@ export default function BurgerConstructor() {
             text="Плоды Фалленианского дерева"
             price={80}
             thumbnail="https://code.s3.yandex.net/react/code/sp_1.png"
+            extraClass="ml-2"
           />
         </li>
         <li className={styles.li}>

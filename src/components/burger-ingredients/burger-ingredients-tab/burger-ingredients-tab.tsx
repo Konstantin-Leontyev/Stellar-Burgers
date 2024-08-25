@@ -3,11 +3,10 @@ import styles from './burger-ingredients-tab';
 
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 
-export default function BurgerIngredientsTab(){
+export default function BurgerIngredientsTab(props: any){
   const [current, setCurrent] = useState('Булки');
-
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex'}}>
       <Tab value="Булки" active={current==='Булки'} onClick={setCurrent}>
         Булки
       </Tab>
