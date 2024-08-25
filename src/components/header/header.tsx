@@ -1,50 +1,54 @@
 import React from 'react';
-import './header.modules.css';
+import styles from './header.module.css';
 
 import {BurgerIcon, ListIcon, Logo, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 
 import HeaderNavItem from './header-nav-item/header-nav-item'
 
-function AppHeader() {
+export default function AppHeader() {
   return (
-    <header>
-      <div className="container pb-4 pt-4">
+    <div className={`${styles.container} pb-4 pt-4`}>
+      <header>
         <nav>
-          <ul>
-            <li>
-              <HeaderNavItem>
-                <BurgerIcon type="primary"/>
-                <span className="text text_type_main-default ml-2">
-                  Конструктор
-                </span>
-              </HeaderNavItem>
-            </li>
-            <li>
-              <HeaderNavItem>
-                <ListIcon type="primary"/>
-                <span className="text text_type_main-default text_color_inactive ml-2">
-                  Лента заказов
-                </span>
-              </HeaderNavItem>
-            </li>
+          <ul className={`${styles.ul} ${styles.navItems}`}>
+            {/*
+              Пока не умею передавать компоненты в компонент.
+              Как освою, теги ли будут перенесены в компонент HeaderNavItem,
+              что позволит избежать от дублирования кода.
+            */}
+            <HeaderNavItem>
+              <BurgerIcon type="primary"/>
+              <span className="text text_type_main-default ml-2">
+                Конструктор
+              </span>
+            </HeaderNavItem>
+            <HeaderNavItem>
+              <ListIcon type="primary"/>
+              <span className="text text_type_main-default text_color_inactive ml-2">
+                Лента заказов
+              </span>
+            </HeaderNavItem>
           </ul>
         </nav>
-        <Logo/>
+        <div className={styles.logo}>
+          <Logo/>
+        </div>
+        {/*
+          Далее мною добавлен еще один список.
+          Предполагается, у авторизованного пользователя
+          будет еще ссылка на страницу смены пароля и выйти.
+        */}
         <nav>
-          <ul>
-            <li>
-              <HeaderNavItem>
-                <ProfileIcon type="secondary"/>
-                <span className="text text_type_main-default text_color_inactive ml-2">
-                    Личный кабинет
-                  </span>
-              </HeaderNavItem>
-            </li>
+          <ul className={`${styles.ul} ${styles.authItems}`}>
+            <HeaderNavItem>
+              <ProfileIcon type="secondary"/>
+              <span className="text text_type_main-default text_color_inactive ml-2">
+                  Личный кабинет
+                </span>
+            </HeaderNavItem>
           </ul>
         </nav>
-      </div>
-    </header>
+      </header>
+    </div>
   );
 }
-
-export default AppHeader;

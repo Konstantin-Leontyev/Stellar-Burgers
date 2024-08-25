@@ -1,0 +1,41 @@
+.container {
+  box-sizing: border-box;
+  height: 88px;
+  margin: 0 auto;
+  max-width: 1920px;
+  min-height: 88px;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 1fr 290px 1fr;
+  margin: 0 auto;
+  min-width: 1240px;
+  width: 1240px;
+}
+
+.ul  {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+}
+
+.navItems {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  margin-left: -20px;
+  padding-left: 0;
+}
+
+.logo {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.authItems {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  justify-content: flex-end;
+  margin-right: -22px;
+}
