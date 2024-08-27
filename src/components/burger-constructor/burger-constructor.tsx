@@ -10,7 +10,7 @@ import {
 
 export default function BurgerConstructor() {
   return (
-    <div className={`${styles.container} pt-25 pl-4 pr-4`}>
+    <section className={`${styles.container} pt-25 pl-4 pr-4`}>
       <ul className={`${styles.ul}`}>
         <li className={styles.li}>
           <ConstructorElement
@@ -52,15 +52,6 @@ export default function BurgerConstructor() {
         <li className={styles.li}>
           <DragIcon type="primary"/>
           <ConstructorElement
-            text="Плоды Фалленианского дерева"
-            price={80}
-            thumbnail="https://code.s3.yandex.net/react/code/sp_1.png"
-            extraClass="ml-2"
-          />
-        </li>
-        <li className={styles.li}>
-          <DragIcon type="primary"/>
-          <ConstructorElement
             text="Хрустящие минеральные кольца"
             price={80}
             thumbnail="https://code.s3.yandex.net/react/code/mineral_rings.png"
@@ -94,6 +85,6 @@ export default function BurgerConstructor() {
           Оформить заказ
         </Button>
       </div>
-    </div>
+    </section>
   );
 }

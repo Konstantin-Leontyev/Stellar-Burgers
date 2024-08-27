@@ -7,26 +7,27 @@ import HeaderNavItem from './header-nav-item/header-nav-item'
 
 export default function AppHeader() {
   return (
-    <div className={`${styles.container} pb-4 pt-4`}>
-      <header>
+    <header className={styles.header}>
+      <div className={`${styles.container} pb-4 pt-4`}>
         <nav>
           <ul className={`${styles.ul} ${styles.navItems}`}>
             {/*
-              Пока не умею передавать компоненты в компонент.
-              Как освою, теги ли будут перенесены в компонент HeaderNavItem,
-              что позволит избежать от дублирования кода.
-            */}
+            TODO
+            Пока не умею передавать компоненты в компонент.
+            Перенести теги ли в компонент HeaderNavItem, было плохой идеей им там не место.
+            Дале дале верну их обратно и оберну теги в цикл.
+          */}
             <HeaderNavItem>
               <BurgerIcon type="primary"/>
               <span className="text text_type_main-default ml-2">
-                Конструктор
-              </span>
+              Конструктор
+            </span>
             </HeaderNavItem>
             <HeaderNavItem>
               <ListIcon type="primary"/>
               <span className="text text_type_main-default text_color_inactive ml-2">
-                Лента заказов
-              </span>
+              Лента заказов
+            </span>
             </HeaderNavItem>
           </ul>
         </nav>
@@ -34,21 +35,23 @@ export default function AppHeader() {
           <Logo/>
         </div>
         {/*
-          Далее мною добавлен еще один список.
-          Предполагается, у авторизованного пользователя
-          будет еще ссылка на страницу смены пароля и выйти.
-        */}
+        TODO
+        Далее мною добавлен еще один список.
+        Предполагается, у авторизованного пользователя
+        будет еще ссылка на страницу смены пароля и выйти.
+        Потому тут предполагается свой цикл.
+      */}
         <nav>
           <ul className={`${styles.ul} ${styles.authItems}`}>
             <HeaderNavItem>
               <ProfileIcon type="secondary"/>
               <span className="text text_type_main-default text_color_inactive ml-2">
-                  Личный кабинет
-                </span>
+                Личный кабинет
+              </span>
             </HeaderNavItem>
           </ul>
         </nav>
-      </header>
-    </div>
+      </div>
+    </header>
   );
 }

@@ -2,8 +2,9 @@ import React from 'react'
 import styles from './burger-ingredients-card.module.css'
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
-export default function BurgerIngredientsCard(props: any) {
-  const { image, name, price } = props.ingredient;
+// @ts-ignore
+export default function BurgerIngredientsCard({ ingredient }) {
+  const { image, name, price } = ingredient;
   console.log(image, name, price)
   return(
     <div className={`${styles.container} pt-6 pl-4 pr-4`}>

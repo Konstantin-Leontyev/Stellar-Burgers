@@ -1,4 +1,4 @@
-.container {
+.header {
   box-sizing: border-box;
   height: 88px;
   margin: 0 auto;
@@ -6,7 +6,7 @@
   min-height: 88px;
 }
 
-header {
+.container {
   display: grid;
   grid-template-columns: 1fr 290px 1fr;
   margin: 0 auto;

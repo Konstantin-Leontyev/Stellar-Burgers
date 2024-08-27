@@ -8,7 +8,7 @@ import BurgerIngredientsCard from "./burger-ingredients-card/burger-ingredients-
 
 export default function BurgerIngredients() {
   return (
-    <div className={`${styles.container}`}>
+    <section className={`${styles.container}`}>
       <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
       <BurgerIngredientsTab/>
       <h2 className="text text_type_main-medium pt-10">Булки</h2>
@@ -29,6 +29,6 @@ export default function BurgerIngredients() {
           (obj) => obj.type === "main").map(
           (item) => (<BurgerIngredientsCard ingredient={item}/>))}
       </div>
-    </div>
+    </section>
   );
 }
