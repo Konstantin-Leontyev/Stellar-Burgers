@@ -1,6 +1,6 @@
 .container {
-  width: 600px;
-  min-height: 900px;
+  width: 630px;
+  height: 912px;
 }
 
 .wrapper {
@@ -8,4 +8,14 @@
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+
+}
+
+.scroll {
+  overflow-y: scroll;
+  max-height: 606px;
+}
+
+.li {
+  list-style: none;
 }

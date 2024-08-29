@@ -1,16 +1,25 @@
 .container {
   box-sizing: border-box;
-  min-height: 900px;
-  width: 600px;
+  min-height: 912px;
+  width: 630px;
 }
 
 .ul {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
   margin-left: 0;
   padding-left: 0;
   padding-right: 0;
+  padding-right: 0;
+}
+
+.bun {
+  padding-right: 30px;
+}
+
+.main {
+  padding-right: 10px;
 }
 
 .li {
@@ -24,4 +33,9 @@
   align-items: center;
   display: flex;
   justify-content: flex-end;
+}
+
+.scroll {
+  overflow-y: scroll;
+  max-height: 370px;
 }
