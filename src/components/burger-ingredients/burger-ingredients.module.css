@@ -7,8 +7,7 @@
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
-
+  gap: 32px;
 }
 
 .scroll {

@@ -15,27 +15,35 @@ export default function App() {
 
   useEffect(() => {
     const getIngredients = async () => {
-      setState({ ...state, hasError: false, isLoading: true });
+      setState({...state, hasError: false, isLoading: true});
       try {
         const response = await fetch(ingredientsUrl);
         const jsonResponse = await response.json();
         const ingredients = jsonResponse.data
-        setState({ ...state, ingredients, isLoading: false })
-      } catch(error) {
-           setState({ ...state, hasError: true, isLoading: false });
-      };
+        setState({...state, ingredients, isLoading: false})
+      } catch (error) {
+        setState({...state, hasError: true, isLoading: false});
+      }
     }
 
     getIngredients();
   }, []);
 
-   return (
+  const {ingredients, isLoading, hasError} = state;
+
+  return (
     <>
-      <AppHeader />
-      <main>
-        <BurgerIngredients ingredients={state.ingredients}/>
-        <BurgerConstructor ingredients={state.ingredients}/>
-      </main>
+      <AppHeader/>
+      {isLoading && 'Загрузка...'}
+      {hasError && 'Произошла ошибка'}
+      {!isLoading &&
+        !hasError &&
+        ingredients.length &&
+        <main>
+          <BurgerIngredients ingredients={ingredients}/>
+          <BurgerConstructor ingredients={ingredients}/>
+        </main>
+      }
     </>
   );
 }

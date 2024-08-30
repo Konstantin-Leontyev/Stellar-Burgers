@@ -1,7 +1,8 @@
 .container {
   box-sizing: border-box;
   position: relative;
-  width: 272px;
+  max-width: 272px;
+  max-height: 208px;
 }
 
 .img {
@@ -12,10 +13,12 @@
 .price {
   align-items: center;
   display: flex;
+  height: 22px;
   justify-content: center;
 }
 
 .title {
+  text-align: center;
   display: flex;
   justify-content: center;
   height: 48px;

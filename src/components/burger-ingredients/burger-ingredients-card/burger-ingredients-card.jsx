@@ -1,13 +1,11 @@
 import React from 'react'
 import styles from './burger-ingredients-card.module.css'
-import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 
-// @ts-ignore
-export default function BurgerIngredientsCard({ ingredient }) {
-  const { image, name, price } = ingredient;
-  console.log(image, name, price)
+export default function BurgerIngredientsCard({ingredient}) {
+  const {image, name, price} = ingredient;
   return(
-    <div className={`${styles.container} pt-6 pl-4 pr-4`}>
+    <div className={`${styles.container} pl-4 pr-4`}>
       <img className={styles.img} src={image} alt={name}/>
       <Counter count={1} size="default" extraClass="m-1" />
       <div className={`${styles.price} pt-1 pb-1`}>

@@ -3,51 +3,47 @@ import styles from './burger-constructor.module.css';
 
 import {
   Button,
-  ConstructorElement,
   CurrencyIcon,
-  DragIcon
-} from "@ya.praktikum/react-developer-burger-ui-components";
+} from '@ya.praktikum/react-developer-burger-ui-components';
+import {BurgerConstructorElement} from "./burger-constructor-element/burger-constructor-element";
 
-export default function BurgerConstructor({ ingredients }) {
+export default function BurgerConstructor({ingredients}) {
+  const bun = ingredients.find(ingredient => ingredient.type === 'bun');
+  const inner = ingredients.filter(ingredient => ingredient.type !== 'bun');
+
   return (
-    <section className={`${styles.container} pt-25 pl-4`}>
-      <ul className={`${styles.ul}`}>
-        <li className={`${styles.li} ${styles.bun}`}>
-          <ConstructorElement
-            type="top"
-            isLocked={true}
-            text="Картонная булка N-200i (верх)"
-            price={20}
-            thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"
-            extraClass="ml-2"
-          />
-        </li>
-        <ul className={`${styles.ul}  ${styles.scroll} custom-scroll`}>
-          {ingredients.filter(ingredients => ingredients.type !== "bun").map(ingredient =>
+    <section className={`${styles.container} pt-25`}>
+      <div className={styles.topBottomElement}>
+        <BurgerConstructorElement
+          type='top'
+          price={bun['price']}
+          text={bun.name}
+          thumbnail={bun.image}
+        />
+      </div>
+      <ul className={styles.ul}>
+        <div className={`${styles.scroll} custom-scroll`}>
+          {inner.map((ingredient, index) =>
             <>
-              <li className={`${styles.li} ${styles.main}`} key={ingredient.id}>
-                <DragIcon type="primary"/>
-                <ConstructorElement
-                  text={ingredient.name}
+              <li className={`${styles.mainElement} ${index !== inner.length - 1 ? 'pb-4' : null}`} key={ingredient.id}>
+                <BurgerConstructorElement
                   price={ingredient.price}
+                  text={ingredient.name}
                   thumbnail={ingredient.image}
-                  extraClass="ml-2"
                 />
               </li>
             </>
           )}
-        </ul>
-        <li className={`${styles.li} ${styles.bun}`}>
-          <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text="Картонная булка N-200i (низ)"
-            price={20}
-            thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"
-            extraClass="ml-2"
-          />
-        </li>
+        </div>
       </ul>
+      <div className={styles.topBottomElement}>
+        <BurgerConstructorElement
+          type='bottom'
+          price={bun.price}
+          text={bun.name}
+          thumbnail={bun.image}
+        />
+      </div>
       <div className={`${styles.total} pt-10`}>
         <span className="text text_type_digits-medium mr-2">610</span>
         <CurrencyIcon type="primary"/>

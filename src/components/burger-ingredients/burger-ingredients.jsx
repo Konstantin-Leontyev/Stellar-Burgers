@@ -9,21 +9,21 @@ export default function BurgerIngredients({ ingredients }) {
   const titles = ingredientsTypes.map(item => item.title);
 
   return (
-    <section className={`${styles.container}`}>
-      <h1 className="text text_type_main-large pt-15 pb-5">Соберите бургер</h1>
+    <section className={styles.container}>
+      <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
       <BurgerIngredientsTab titles={titles} />
       <div className={`${styles.scroll} custom-scroll`}>
         {ingredientsTypes.map(item =>
-          <>
-            <h2 className="text text_type_main-medium pt-10">{item.title}</h2>
-            <ul className={`${styles.wrapper} pt-6 pl-4 pr-4`}>
+          <div className="pb-10">
+            <span className="text text_type_main-medium">{item.title}</span>
+            <ul className={`${styles.wrapper} pl-4 pr-4`}>
               {ingredients.filter(ingredient => ingredient.type === item.type)
                 .map(ingredient =>
                   <li className={styles.li} key={ingredient.id}>
                     <BurgerIngredientsCard ingredient={ingredient}/>
                   </li>)}
             </ul>
-          </>
+          </div>
         )}
       </div>
     </section>
