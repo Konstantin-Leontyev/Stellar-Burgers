@@ -1,7 +1,21 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import styles from '../header.module.css';
 
-export default function HeaderItem({item, handleOnClick}) {
+const ingredientsPropTypes = PropTypes.shape({
+  Icon: PropTypes.elementType.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
+});
+
+HeaderItem.propTypes = {
+  item: ingredientsPropTypes.isRequired,
+  handleOnClick: PropTypes.func.isRequired
+};
+
+export function HeaderItem({item, handleOnClick}) {
   const {Icon, isActive, name, title} = item;
 
   return (
@@ -15,6 +29,6 @@ export default function HeaderItem({item, handleOnClick}) {
         {title}
       </span>
     </li>
-  )
+  );
 }
 

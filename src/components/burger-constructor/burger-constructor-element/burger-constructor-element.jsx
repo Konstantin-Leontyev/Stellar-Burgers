@@ -1,6 +1,14 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
 import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
+
+BurgerConstructorElement.propsTypes = {
+  type: PropTypes.string,
+  price: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
+  thumbnail: PropTypes.string.isRequired,
+};
 
 export function BurgerConstructorElement({type, price, text, thumbnail}) {
 
@@ -26,5 +34,5 @@ export function BurgerConstructorElement({type, price, text, thumbnail}) {
         extraClass="ml-2"
       />
     </>
-  )
+  );
 }

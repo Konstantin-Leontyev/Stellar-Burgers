@@ -3,8 +3,13 @@ import styles from './burger-constructor.module.css';
 
 import {BurgerConstructorElement} from './burger-constructor-element/burger-constructor-element';
 import {BurgerConstructorTotalPrice} from './burger-constructor-total-price/burgerConstructorTotalPrice';
+import {ingredientsPropTypes} from "../utils/constants";
 
-export default function BurgerConstructor({ingredients}) {
+BurgerConstructor.propTypes = {
+  ingredients: ingredientsPropTypes.isRequired,
+};
+
+export function BurgerConstructor({ingredients}) {
   const bun = ingredients.find(ingredient => ingredient.type === 'bun');
   const inner = ingredients.filter(ingredient => ingredient.type !== 'bun');
   const sum = ingredients.reduce((totalSum, ingredient) => totalSum += ingredient.price, 0);
@@ -28,6 +33,7 @@ export default function BurgerConstructor({ingredients}) {
                 key={ingredient.id}
               >
                 <BurgerConstructorElement
+                  type="main"
                   price={ingredient.price}
                   text={ingredient.name}
                   thumbnail={ingredient.image}

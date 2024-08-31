@@ -1,10 +1,15 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import styles from './burger-constructor-total-price.module.css'
 
 import {
   Button,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
+
+BurgerConstructorTotalPrice.propTypes = {
+  sum: PropTypes.number.isRequired
+};
 
 export function BurgerConstructorTotalPrice({sum}) {
   return (
@@ -15,5 +20,5 @@ export function BurgerConstructorTotalPrice({sum}) {
         Оформить заказ
       </Button>
     </div>
-  )
+  );
 }

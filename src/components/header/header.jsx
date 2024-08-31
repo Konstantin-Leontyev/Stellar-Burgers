@@ -3,10 +3,10 @@ import styles from './header.module.css';
 
 import {Logo} from '@ya.praktikum/react-developer-burger-ui-components'
 
-import HeaderItem from './header-item/header-item'
+import {HeaderItem} from './header-item/header-item'
 import {headerItemsInitialState} from '../utils/constants'
 
-export default function AppHeader() {
+export function AppHeader() {
   const [items, setItems] = useState(headerItemsInitialState)
   const navItems = items.filter(item => item.type === 'navItems')
   const authItems = items.filter(item => item.type === 'authItems')
@@ -29,7 +29,7 @@ export default function AppHeader() {
         <Logo />
         <ul className={`${styles.ul} ${styles.authItems}`}>
           {authItems.map(item =>
-            <HeaderItem item={item} handleOnClick={handleOnClick}/>)
+            <HeaderItem item={item} handleOnClick={handleOnClick} />)
           }
         </ul>
       </nav>

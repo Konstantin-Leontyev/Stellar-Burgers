@@ -1,11 +1,15 @@
 import React from 'react';
 import styles from './burger-ingredients.module.css';
 
-import BurgerIngredientsTab from './burger-ingredients-tab/burger-ingredients-tab';
-import BurgerIngredientsCard from './burger-ingredients-card/burger-ingredients-card';
-import { ingredientsTypes } from '../utils/constants'
+import {BurgerIngredientsTab} from './burger-ingredients-tab/burger-ingredients-tab';
+import {BurgerIngredientsCard} from './burger-ingredients-card/burger-ingredients-card';
+import {ingredientsPropTypes, ingredientsTypes} from '../utils/constants'
 
-export default function BurgerIngredients({ ingredients }) {
+BurgerIngredients.propTypes = {
+  ingredients: ingredientsPropTypes.isRequired,
+};
+
+export function BurgerIngredients({ingredients}) {
   const titles = ingredientsTypes.map(item => item.title);
 
   return (
@@ -20,7 +24,11 @@ export default function BurgerIngredients({ ingredients }) {
               {ingredients.filter(ingredient => ingredient.type === item.type)
                 .map(ingredient =>
                   <li className={styles.li} key={ingredient.id}>
-                    <BurgerIngredientsCard ingredient={ingredient}/>
+                    <BurgerIngredientsCard
+                      image={ingredient.image}
+                      name={ingredient.name}
+                      price={ingredient.price}
+                    />
                   </li>)}
             </ul>
           </div>
