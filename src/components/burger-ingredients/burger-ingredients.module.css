@@ -11,8 +11,8 @@
 }
 
 .scroll {
-  overflow-y: scroll;
   max-height: 606px;
+  overflow-y: scroll;
 }
 
 .li {

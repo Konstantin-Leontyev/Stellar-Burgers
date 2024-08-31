@@ -29,11 +29,3 @@
   overflow-y: scroll;
   max-height: 465px;
 }
-
-.total {
-  align-items: center;
-  display: flex;
-  justify-content: flex-end;
-}
-
-

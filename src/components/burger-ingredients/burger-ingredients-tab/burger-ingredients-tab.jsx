@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styles from './burger-ingredients-tab.module.css';
 
-import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Tab} from '@ya.praktikum/react-developer-burger-ui-components';
 
 export default function BurgerIngredientsTab({titles}){
   const [current, setCurrent] = useState('Булки');

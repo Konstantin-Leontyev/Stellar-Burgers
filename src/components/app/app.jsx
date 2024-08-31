@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import './app.modules.css';
 
-import AppHeader from "../header/header";
-import BurgerConstructor from "../burger-constructor/burger-constructor";
-import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import {ingredientsUrl} from "../utils/constants";
+import AppHeader from '../header/header';
+import BurgerConstructor from '../burger-constructor/burger-constructor';
+import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import {ingredientsUrl} from '../utils/constants';
 
 export default function App() {
   const [state, setState] = useState({
