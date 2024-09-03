@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from "prop-types";
 import styles from './modal.module.css';
 
@@ -18,13 +18,28 @@ export function Modal({title, setItem, children}) {
     setItem(null);
   }
 
+  const handleOnKeyDown = (e) => {
+    if (e.key === "Escape") {
+      onModalClose()
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleOnKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleOnKeyDown);
+    };
+  });
+
   return createPortal(
     (
       <div className={`${styles.container}`}>
-        <div className={styles.modal}>
-          <span className={`${styles.span} text text_type_main-large pl-10 pt-10 pr-10`}>
-            {title}
-            <CloseIcon type="primary" onClick={onModalClose}/>
+        <div className={styles.modal} onClick={onModalClose} onKeyDown={handleOnKeyDown}>
+          <span className={`${styles.span} text text_type_main-large ml-10 mt-10 mr-10`}>
+            <div className={styles.title}>{title}</div>
+            <div className={styles.closeIcon}>
+              <CloseIcon type="primary" onClick={onModalClose}/>
+            </div>
           </span>
           {children}
         </div>

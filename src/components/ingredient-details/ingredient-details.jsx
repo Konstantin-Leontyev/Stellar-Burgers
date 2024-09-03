@@ -8,8 +8,6 @@ IngredientDetails.prorType = {
 };
 
 export function IngredientDetails({ingredient}) {
-
-  console.log(ingredient);
   return (
     <div className={styles.wrapper}>
       <img

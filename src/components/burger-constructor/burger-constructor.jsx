@@ -5,7 +5,7 @@ import {BurgerConstructorElement} from './burger-constructor-element/burger-cons
 import {BurgerConstructorTotalPrice} from './burger-constructor-total-price/burgerConstructorTotalPrice';
 import {ingredientPropTypes} from "../utils/constants";
 import {Modal} from "../modal/modal";
-import {IngredientDetails} from "../ingredient-details/ingredient-details";
+import {OrderDetails} from "../order-details/order-details";
 
 BurgerConstructor.propTypes = {
   ingredients: ingredientPropTypes.isRequired,
@@ -16,8 +16,6 @@ export function BurgerConstructor({ingredients}) {
   const bun = ingredients.find(ingredient => ingredient.type === 'bun');
   const inner = ingredients.filter(ingredient => ingredient.type !== 'bun');
   const sum = ingredients.reduce((totalSum, ingredient) => totalSum += ingredient.price, 0);
-
-  const handleOnClick = () => setShowOrderDetails(!showOrderDetails)
 
   return (
     <section className={`${styles.container} pt-25`}>
@@ -59,7 +57,7 @@ export function BurgerConstructor({ingredients}) {
       {
         showOrderDetails &&
         <Modal setItem={setShowOrderDetails}>
-          <IngredientDetails />
+          <OrderDetails />
         </Modal>
       }
     </section>
