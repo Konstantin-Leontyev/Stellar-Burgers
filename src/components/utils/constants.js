@@ -32,13 +32,14 @@ export const headerItemsInitialState = [
 
 export const ingredientsUrl = "https://norma.nomoreparties.space/api/ingredients"
 
-export const ingredientsPropTypes = PropTypes.shape({
+export const ingredientPropTypes = PropTypes.shape({
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  proteins: PropTypes.number.isRequired,
   fat: PropTypes.number.isRequired,
   carbohydrates: PropTypes.number.isRequired,
+  calories: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   image_mobile: PropTypes.string.isRequired,
@@ -46,7 +47,7 @@ export const ingredientsPropTypes = PropTypes.shape({
   __v: PropTypes.number.isRequired,
 });
 
-export const ingredientsTypes = [
+export const categories = [
   //   titles: ["Булки", "Соусы", "Начинки"],
   // types: ["bun", "sauce", "main"]
   {

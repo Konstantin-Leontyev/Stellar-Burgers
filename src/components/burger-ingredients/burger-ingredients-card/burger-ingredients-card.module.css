@@ -3,6 +3,7 @@
   position: relative;
   max-width: 272px;
   max-height: 208px;
+  list-style: none;
 }
 
 .img {

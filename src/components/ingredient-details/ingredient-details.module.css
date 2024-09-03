@@ -1,0 +1,32 @@
+.wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.img {
+  height: 240px;
+  width: 480px;
+}
+
+.span {
+  text-align: center;
+}
+
+.ul {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 0;
+}
+
+.li {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  list-style: none;
+  min-width: 120px;
+  min-height: 56px;
+  text-align: center;
+  width: 120px;
+}

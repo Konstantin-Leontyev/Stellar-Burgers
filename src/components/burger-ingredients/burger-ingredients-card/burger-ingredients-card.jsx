@@ -2,26 +2,34 @@ import React from 'react'
 import PropTypes from "prop-types";
 import styles from './burger-ingredients-card.module.css'
 
+import {ingredientPropTypes} from "../../utils/constants";
 import {Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 
+
 BurgerIngredientsCard.propTypes = {
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired
+  ingredient: ingredientPropTypes.isRequired,
+  setItem: PropTypes.func.isRequired
 };
 
-export function BurgerIngredientsCard({image, name, price}) {
+export function BurgerIngredientsCard({ingredient, setItem}) {
+
+  function handleOnClick() {
+    setItem({
+      ...ingredient
+    });
+  }
+
   return(
-    <div className={`${styles.container} pl-4 pr-4`}>
-      <img className={styles.img} src={image} alt={name}/>
+    <li className={`${styles.container} pl-4 pr-4`} onClick={handleOnClick} key={ingredient.id}>
+      <img className={styles.img} src={ingredient.image} alt={ingredient.name}/>
       <Counter count={1} size="default" extraClass="m-1" />
       <div className={`${styles.price} pt-1 pb-1`}>
-        <span className="text text_type_digits-default mr-2">{price}</span>
+        <span className="text text_type_digits-default mr-2">{ingredient.price}</span>
         <CurrencyIcon type="primary"/>
       </div>
       <div className={styles.title}>
-        <span className="text text_type_main-small">{name}</span>
+        <span className="text text_type_main-small">{ingredient.name}</span>
       </div>
-    </div>
+    </li>
   );
 }
