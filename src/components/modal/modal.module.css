@@ -6,6 +6,10 @@
   flex-direction: column;
   min-height: 539px;
   width: 720px;
+  position: fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
 }
 
 .span {
@@ -26,4 +30,10 @@
   grid-column-start: 2;
   grid-column-end: 2;
   justify-content: flex-end;
+}
+
+.wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }

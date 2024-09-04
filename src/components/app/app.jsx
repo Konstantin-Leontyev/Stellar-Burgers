@@ -16,14 +16,21 @@ export default function App() {
   useEffect(() => {
     const getIngredients = async () => {
       setState({...state, hasError: false, isLoading: true});
-      try {
-        const response = await fetch(ingredientsUrl);
-        const jsonResponse = await response.json();
-        const ingredients = jsonResponse.data
-        setState({...state, ingredients, isLoading: false})
-      } catch (error) {
-        setState({...state, hasError: true, isLoading: false});
-      }
+
+      await fetch(ingredientsUrl)
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          }
+          return Promise.reject(`Ошибка ${response.status}`);
+        })
+        .then(jsonResponse => {
+          const ingredients = jsonResponse.data;
+          setState({...state, ingredients, isLoading: false});
+        })
+        .catch(error => {
+          setState({...state, hasError: true, isLoading: false});
+        })
     }
 
     getIngredients();

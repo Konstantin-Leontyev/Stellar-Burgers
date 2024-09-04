@@ -20,17 +20,18 @@ export function Modal({title, setItem, children}) {
 
   return createPortal(
     (
-      <ModalOverlay onModalClose={onModalClose}>
+      <div className={styles.wrapper}>
+        <ModalOverlay onModalClose={onModalClose}/>
         <div className={styles.modal}>
-        <span className={`${styles.span} text text_type_main-large ml-10 mt-10 mr-10`}>
-          <div className={styles.title}>{title}</div>
-          <div className={styles.closeIcon}>
-            <CloseIcon type="primary" onClick={onModalClose}/>
-          </div>
-        </span>
-          {children}
+          <span className={`${styles.span} text text_type_main-large ml-10 mt-10 mr-10`}>
+            <div className={styles.title}>{title}</div>
+            <div className={styles.closeIcon}>
+              <CloseIcon type="primary" onClick={onModalClose}/>
+            </div>
+          </span>
+            {children}
         </div>
-      </ModalOverlay>
+      </div>
     ),
     modalRoot
   );

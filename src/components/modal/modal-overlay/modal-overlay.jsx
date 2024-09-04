@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import PropTypes from "prop-types";
-import styles from './modal-overlay.module.3css';
+import styles from './modal-overlay.module.css';
 
 ModalOverlay.propTypes = {
   onModalClose: PropTypes.func.isRequired
@@ -19,11 +19,7 @@ export function ModalOverlay({onModalClose, children}){
     return () => {
       document.removeEventListener("keydown", handleOnKeyDown);
     };
-  });
+  }, []);
 
-  return (
-    <div className={`${styles.container}`} onClick={onModalClose} onKeyDown={handleOnKeyDown}>
-      {children}
-    </div>
-  );
+  return <div className={`${styles.overlay}`} onClick={onModalClose} onKeyDown={handleOnKeyDown}></div>
 }
