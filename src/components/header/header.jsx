@@ -22,14 +22,14 @@ export function AppHeader() {
     <header className={styles.header}>
       <nav className={`${styles.container} pb-4 pt-4`}>
         <ul className={`${styles.ul} ${styles.navItems}`}>
-          {navItems.map((item, index) =>
-            <HeaderItem item={item} handleOnClick={handleOnClick} key={index}/>)
+          {navItems.map(item =>
+            <HeaderItem item={item} handleOnClick={handleOnClick} key={item.name}/>)
           }
         </ul>
-        <Logo />
+        <Logo/>
         <ul className={`${styles.ul} ${styles.authItems}`}>
-          {authItems.map((item, index) =>
-            <HeaderItem item={item} handleOnClick={handleOnClick} key={index}/>)
+          {authItems.map(item =>
+            <HeaderItem item={item} handleOnClick={handleOnClick} key={item.name}/>)
           }
         </ul>
       </nav>

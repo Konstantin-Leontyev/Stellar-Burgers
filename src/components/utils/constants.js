@@ -28,12 +28,12 @@ export const headerItemsInitialState = [
     isActive: false,
     Icon: ProfileIcon
   }
-]
+];
 
-export const ingredientsUrl = "https://norma.nomoreparties.space/api/ingredients"
+export const ingredientsUrl = "https://norma.nomoreparties.space/api/ingredients";
 
 export const ingredientPropTypes = PropTypes.shape({
-  id: PropTypes.number.isRequired,
+  _id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   proteins: PropTypes.number.isRequired,
@@ -62,4 +62,9 @@ export const categories = [
     title: "Начинки",
     type: "main"
   },
-]
+];
+
+export const categoryPropTypes = PropTypes.shape({
+  title: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired
+});

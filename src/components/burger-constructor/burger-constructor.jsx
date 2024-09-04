@@ -1,14 +1,16 @@
 import React, {useState} from 'react';
+import PropTypes from "prop-types";
 import styles from './burger-constructor.module.css';
 
+import {BurgerIngredients} from "../burger-ingredients/burger-ingredients";
 import {BurgerConstructorElement} from './burger-constructor-element/burger-constructor-element';
 import {BurgerConstructorTotalPrice} from './burger-constructor-total-price/burgerConstructorTotalPrice';
-import {ingredientPropTypes} from "../utils/constants";
 import {Modal} from "../modal/modal";
 import {OrderDetails} from "../order-details/order-details";
+import {ingredientPropTypes} from "../utils/constants";
 
-BurgerConstructor.propTypes = {
-  ingredients: ingredientPropTypes.isRequired,
+BurgerIngredients.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
 };
 
 export function BurgerConstructor({ingredients}) {
@@ -32,14 +34,13 @@ export function BurgerConstructor({ingredients}) {
           {inner.map((ingredient, index) =>
             <li
               className={`${styles.mainElement} ${index !== inner.length - 1 ? "pb-4" : null}`}
-              key={index}
+              key={ingredient._id}
             >
               <BurgerConstructorElement
                 type="main"
                 price={ingredient.price}
                 text={ingredient.name}
                 thumbnail={ingredient.image}
-                key={ingredient.id}
               />
             </li>
           )}

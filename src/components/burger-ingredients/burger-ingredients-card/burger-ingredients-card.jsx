@@ -20,7 +20,7 @@ export function BurgerIngredientsCard({ingredient, setItem}) {
   }
 
   return(
-    <li className={`${styles.container} pl-4 pr-4`} onClick={handleOnClick} key={ingredient.id}>
+    <li className={`${styles.container} pl-4 pr-4`} onClick={handleOnClick}>
       <img className={styles.img} src={ingredient.image} alt={ingredient.name}/>
       <Counter count={1} size="default" extraClass="m-1" />
       <div className={`${styles.price} pt-1 pb-1`}>
