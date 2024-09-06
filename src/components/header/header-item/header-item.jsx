@@ -15,7 +15,7 @@ HeaderItem.propTypes = {
   handleOnClick: PropTypes.func.isRequired
 };
 
-export function HeaderItem({item, handleOnClick}) {
+export function HeaderItem({ item, handleOnClick }) {
   const {Icon, isActive, name, title} = item;
 
   return (

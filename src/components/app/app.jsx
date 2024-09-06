@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './app.modules.css';
 
-import {AppHeader} from '../header/header';
-import {BurgerConstructor} from '../burger-constructor/burger-constructor';
-import {BurgerIngredients} from '../burger-ingredients/burger-ingredients';
-import {ingredientsUrl} from '../utils/constants';
+import { AppHeader } from '../header/header';
+import { BurgerConstructor } from '../burger-constructor/burger-constructor';
+import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
+import { ingredientsUrl } from '../utils/constants';
 
 export default function App() {
   const [state, setState] = useState({
@@ -36,7 +36,7 @@ export default function App() {
     getIngredients();
   }, []);
 
-  const {ingredients, isLoading, hasError} = state;
+  const { ingredients, isLoading, hasError } = state;
 
   return (
     <>
@@ -45,7 +45,7 @@ export default function App() {
       {hasError && 'Произошла ошибка'}
       {!isLoading &&
         !hasError &&
-        ingredients.length &&
+        ingredients.length > 0 &&
         <main>
           <BurgerIngredients ingredients={ingredients}/>
           <BurgerConstructor ingredients={ingredients}/>

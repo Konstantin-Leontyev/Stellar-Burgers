@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styles from './header.module.css';
 
-import {Logo} from '@ya.praktikum/react-developer-burger-ui-components'
+import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
 
-import {HeaderItem} from './header-item/header-item'
-import {headerItemsInitialState} from '../utils/constants'
+import { HeaderItem } from './header-item/header-item'
+import { headerItemsInitialState } from '../utils/constants'
 
 export function AppHeader() {
   const [items, setItems] = useState(headerItemsInitialState)

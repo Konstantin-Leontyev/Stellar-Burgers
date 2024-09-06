@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
 
-import {ingredientPropTypes} from "../utils/constants";
+import { ingredientPropTypes } from "../utils/constants";
 
 IngredientDetails.prorType = {
   ingredient: ingredientPropTypes.isRequired
 };
 
-export function IngredientDetails({ingredient}) {
+export function IngredientDetails({ ingredient }) {
   return (
     <div className={styles.wrapper}>
       <img

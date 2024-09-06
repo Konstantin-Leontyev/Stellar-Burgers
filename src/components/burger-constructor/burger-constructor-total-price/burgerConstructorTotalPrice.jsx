@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from "prop-types";
 import styles from './burger-constructor-total-price.module.css'
 
@@ -11,7 +11,7 @@ BurgerConstructorTotalPrice.propTypes = {
   sum: PropTypes.number.isRequired
 };
 
-export function BurgerConstructorTotalPrice({sum, handleOnClick}) {
+export function BurgerConstructorTotalPrice({ sum, handleOnClick }) {
 
   return (
     <div className={`${styles.total} pt-10`}>

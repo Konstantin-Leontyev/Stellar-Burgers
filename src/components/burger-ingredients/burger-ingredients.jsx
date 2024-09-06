@@ -1,18 +1,18 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styles from './burger-ingredients.module.css';
 import PropTypes from "prop-types";
 
-import {BurgerIngredientsTab} from './burger-ingredients-tab/burger-ingredients-tab';
-import {BurgerIngredientsCard} from './burger-ingredients-card/burger-ingredients-card';
-import {IngredientDetails} from "../ingredient-details/ingredient-details";
-import {categories, ingredientPropTypes} from '../utils/constants'
-import {Modal} from "../modal/modal";
+import { BurgerIngredientsTab } from './burger-ingredients-tab/burger-ingredients-tab';
+import { BurgerIngredientsCard } from './burger-ingredients-card/burger-ingredients-card';
+import { IngredientDetails } from "../ingredient-details/ingredient-details";
+import { categories, ingredientPropTypes } from '../utils/constants'
+import { Modal } from "../modal/modal";
 
 BurgerIngredients.propTypes = {
   ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
 };
 
-export function BurgerIngredients({ingredients}) {
+export function BurgerIngredients({ ingredients }) {
   const [item, setItem] = useState(null)
 
   return (
