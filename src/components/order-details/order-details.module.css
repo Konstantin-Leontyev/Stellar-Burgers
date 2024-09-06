@@ -1,0 +1,17 @@
+.wrapper {
+  align-self: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 520px;
+  height: 478px;
+}
+
+.span {
+  text-align: center;
+}
+
+.img {
+  height: 120px;
+  width: 120px;
+}

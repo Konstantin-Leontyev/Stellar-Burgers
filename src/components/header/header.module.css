@@ -1,0 +1,48 @@
+.header {
+  box-sizing: border-box;
+  height: 88px;
+  margin: 0 auto;
+  max-width: 1920px;
+  min-height: 88px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 290px 1fr;
+  margin: 0 auto;
+  min-width: 1300px;
+  width: 1240px;
+}
+
+.ul  {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+}
+
+.li {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+}
+
+.navItems {
+  grid-column-end: 2;
+  grid-column-start: 1;
+  margin-left: -20px;
+  padding-left: 0;
+}
+
+.logo {
+  grid-column-end: 3;
+  grid-column-start: 2;
+}
+
+.authItems {
+  grid-column-end: 4;
+  grid-column-start: 3;
+  justify-content: flex-end;
+  margin-right: -22px;
+}

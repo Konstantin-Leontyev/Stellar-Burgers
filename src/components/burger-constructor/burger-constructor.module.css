@@ -1,0 +1,31 @@
+.container {
+  align-items: flex-end;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 912px;
+  min-height: 912px;
+  width: 630px;
+}
+
+.topBottomElement {
+  padding-right: 30px;
+}
+
+.ul {
+  display: flex;
+  flex-direction: column;
+  padding-left: 32px;
+}
+
+.mainElement {
+  align-items: center;
+  display: flex;
+  list-style: none;
+  padding-right: 10px;
+}
+
+.scroll {
+  overflow-y: scroll;
+  max-height: 465px;
+}
