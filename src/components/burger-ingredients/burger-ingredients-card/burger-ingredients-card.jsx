@@ -1,22 +1,20 @@
-import React from 'react'
-import PropTypes from "prop-types";
-import styles from './burger-ingredients-card.module.css'
+import React from 'react';
+import styles from './burger-ingredients-card.module.css';
 
 import { ingredientPropTypes } from "../../utils/constants";
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-
+import { setIngredientDetails } from "../../services/ingredient-datails/reducer";
+import { useDispatch } from "react-redux";
 
 BurgerIngredientsCard.propTypes = {
   ingredient: ingredientPropTypes.isRequired,
-  setItem: PropTypes.func.isRequired
 };
 
-export function BurgerIngredientsCard({ ingredient, setItem }) {
+export function BurgerIngredientsCard({ ingredient }) {
+  const dispatch = useDispatch();
 
   function handleOnClick() {
-    setItem({
-      ...ingredient
-    });
+    dispatch(setIngredientDetails(ingredient))
   }
 
   return(

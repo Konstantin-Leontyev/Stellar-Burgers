@@ -1,13 +1,12 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
 
-import { ingredientPropTypes } from "../utils/constants";
+import { ingredientDetails } from "../services/ingredient-datails/reducer";
+import { useSelector } from "react-redux";
 
-IngredientDetails.prorType = {
-  ingredient: ingredientPropTypes.isRequired
-};
+export function IngredientDetails() {
+  const ingredient = useSelector(ingredientDetails);
 
-export function IngredientDetails({ ingredient }) {
   return (
     <div className={styles.wrapper}>
       <img

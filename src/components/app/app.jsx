@@ -28,8 +28,8 @@ export default function App() {
         !hasError &&
         ingredients.length > 0 &&
         <main>
-          <BurgerIngredients ingredients={ingredients}/>
-          <BurgerConstructor ingredients={ingredients}/>
+          <BurgerIngredients />
+          <BurgerConstructor />
         </main>
       }
     </>

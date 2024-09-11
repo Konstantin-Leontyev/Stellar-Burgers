@@ -8,16 +8,20 @@ import { BurgerConstructorTotalPrice } from './burger-constructor-total-price/bu
 import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
 import { ingredientPropTypes } from "../utils/constants";
+import { burgerIngredients } from "../services/burger-ingredients/reducers";
+import { useSelector } from "react-redux";
 
-BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
-};
+// BurgerIngredients.propTypes = {
+//   ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
+// };
 
-export function BurgerConstructor({ ingredients }) {
-  const [showOrderDetails, setShowOrderDetails] = useState(false)
+export function BurgerConstructor() {
+  const ingredients = useSelector(burgerIngredients);
   const bun = ingredients.find(ingredient => ingredient.type === 'bun');
   const inner = ingredients.filter(ingredient => ingredient.type !== 'bun');
   const sum = ingredients.reduce((totalSum, ingredient) => totalSum += ingredient.price, 0);
+
+  const [showOrderDetails, setShowOrderDetails] = useState(false);
 
   return (
     <section className={`${styles.container} pt-25`}>

@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './burger-ingredients.module.css';
-import PropTypes from "prop-types";
 
 import { BurgerIngredientsTab } from './burger-ingredients-tab/burger-ingredients-tab';
 import { BurgerIngredientsCard } from './burger-ingredients-card/burger-ingredients-card';
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
-import { categories, ingredientPropTypes } from '../utils/constants'
 import { Modal } from "../modal/modal";
+import { burgerIngredients } from "../services/burger-ingredients/reducers";
+import { categories } from '../utils/constants';
+import { showIngredientDetails } from "../services/ingredient-datails/reducer";
+import { useSelector } from "react-redux";
 
-BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
-};
-
-export function BurgerIngredients({ ingredients }) {
-  const [item, setItem] = useState(null)
+export function BurgerIngredients() {
+  const ingredients = useSelector(burgerIngredients);
+  const showDetails = useSelector(showIngredientDetails);
 
   return (
     <section className={styles.container}>
@@ -26,14 +25,14 @@ export function BurgerIngredients({ ingredients }) {
             <ul className={`${styles.wrapper} pl-4 pr-4`}>
               {ingredients.filter(ingredient => ingredient.type === category.type)
                 .map(ingredient =>
-                  <BurgerIngredientsCard ingredient={ingredient} setItem={setItem} key={ingredient._id}/>
+                  <BurgerIngredientsCard ingredient={ingredient} key={ingredient._id}/>
                 )}
             </ul>
           </div>
         )}
-        {item &&
-          <Modal title="Детали ингредиента" setItem={setItem}>
-            <IngredientDetails ingredient={item}/>
+        {showDetails &&
+          <Modal title="Детали ингредиента" >
+            <IngredientDetails />
           </Modal>
         }
       </div>

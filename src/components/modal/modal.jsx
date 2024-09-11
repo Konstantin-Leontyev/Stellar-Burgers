@@ -5,24 +5,27 @@ import styles from './modal.module.css';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ModalOverlay } from "./modal-overlay/modal-overlay";
 import { createPortal } from "react-dom";
+import { resetIngredientDetails } from "../services/ingredient-datails/reducer";
+import { useDispatch } from "react-redux";
 
 Modal.propType = {
   title: PropTypes.string,
-  setItem: PropTypes.func.isRequired
 };
 
 const modalRoot = document.getElementById("react-modals");
 
-export function Modal({ title, setItem, children }) {
+export function Modal({ title, children }) {
+  const dispatch = useDispatch();
+
   function onModalClose() {
-    setItem(null);
+    dispatch(resetIngredientDetails());
   }
 
-  const handleOnKeyDown = (e) => {
-    if (e.key === "Escape") {
-      onModalClose()
+  function handleOnKeyDown(event) {
+    if (event.key === "Escape") {
+      onModalClose();
     }
-  };
+  }
 
   useEffect(() => {
     document.addEventListener("keydown", handleOnKeyDown);
