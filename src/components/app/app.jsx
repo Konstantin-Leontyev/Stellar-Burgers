@@ -1,42 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './app.modules.css';
 
 import { AppHeader } from '../header/header';
 import { BurgerConstructor } from '../burger-constructor/burger-constructor';
 import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
-import { ingredientsUrl } from '../utils/constants';
+import { getIngredients } from '../services/burger-ingredients/actions';
+import { burgerIngredients, loadingStatus, errorStatus } from '../services/burger-ingredients/reducers';
+import {useDispatch, useSelector} from "react-redux";
 
 export default function App() {
-  const [state, setState] = useState({
-    ingredients: [],
-    isLoading: false,
-    hasError: false
-  });
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const getIngredients = async () => {
-      setState({...state, hasError: false, isLoading: true});
-
-      await fetch(ingredientsUrl)
-        .then(response => {
-          if (response.ok) {
-            return response.json();
-          }
-          return Promise.reject(`Ошибка ${response.status}`);
-        })
-        .then(jsonResponse => {
-          const ingredients = jsonResponse.data;
-          setState({...state, ingredients, isLoading: false});
-        })
-        .catch(error => {
-          setState({...state, hasError: true, isLoading: false});
-        })
-    }
-
-    getIngredients();
+    dispatch(getIngredients())
   }, []);
 
-  const { ingredients, isLoading, hasError } = state;
+  const isLoading = useSelector(loadingStatus)
+  const hasError = useSelector(errorStatus)
+  const ingredients = useSelector(burgerIngredients)
 
   return (
     <>
