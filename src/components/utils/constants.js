@@ -6,27 +6,28 @@ import {
   ProfileIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
+
 export const headerItemsInitialState = [
   {
     title: "Конструктор",
     name: "BurgerIcon",
     type: "navItems",
     isActive: true,
-    Icon: BurgerIcon
+    Icon: BurgerIcon,
   },
   {
     title: "Лента заказов",
     name: "ListIcon",
     type: "navItems",
     isActive: false,
-    Icon: ListIcon
+    Icon: ListIcon,
   },
   {
     title: "Личный кабинет",
     name: "ProfileIcon",
     type: "authItems",
     isActive: false,
-    Icon: ProfileIcon
+    Icon: ProfileIcon,
   }
 ];
 
@@ -48,24 +49,7 @@ export const ingredientPropTypes = PropTypes.shape({
   __v: PropTypes.number.isRequired,
 });
 
-export const categories = [
-  //   titles: ["Булки", "Соусы", "Начинки"],
-  // types: ["bun", "sauce", "main"]
-  {
-    title: "Булки",
-    type: "bun"
-  },
-  {
-    title: "Соусы",
-    type: "sauce"
-  },
-  {
-    title: "Начинки",
-    type: "main"
-  },
-];
-
 export const categoryPropTypes = PropTypes.shape({
   title: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
 });

@@ -35,7 +35,6 @@ export function BurgerConstructor() {
   const idList = [bun._id,
 "643d69a5c3f7b9001cfa093c", "643d69a5c3f7b9001cfa0941", "643d69a5c3f7b9001cfa093e", "643d69a5c3f7b9001cfa0942", bun._id]
 
-  console.log(idList)
   const isLoading = useSelector(isOrderDetailsLoading);
   const hasError = useSelector(hasOrderDetailsRequestError);
   const showDetails = useSelector(showOrderDetails);
