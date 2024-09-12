@@ -49,6 +49,23 @@ export const ingredientPropTypes = PropTypes.shape({
   __v: PropTypes.number.isRequired,
 });
 
+export const categories = [
+  //   titles: ["Булки", "Соусы", "Начинки"],
+  // types: ["bun", "sauce", "main"]
+  {
+    title: "Булки",
+    type: "bun",
+  },
+  {
+    title: "Начинки",
+    type: "main",
+  },
+  {
+    title: "Соусы",
+    type: "sauce",
+  }
+];
+
 export const categoryPropTypes = PropTypes.shape({
   title: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
