@@ -30,7 +30,8 @@ export const headerItemsInitialState = [
   }
 ];
 
-export const ingredientsUrl = "https://norma.nomoreparties.space/api/ingredients";
+export const baseUrl = "https://norma.nomoreparties.space/api/";
+
 
 export const ingredientPropTypes = PropTypes.shape({
   _id: PropTypes.string.isRequired,

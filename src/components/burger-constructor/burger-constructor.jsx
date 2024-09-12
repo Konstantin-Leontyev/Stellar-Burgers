@@ -1,27 +1,44 @@
-import React, { useState } from 'react';
-import PropTypes from "prop-types";
+import React, { useMemo } from 'react';
 import styles from './burger-constructor.module.css';
 
-import { BurgerIngredients } from "../burger-ingredients/burger-ingredients";
 import { BurgerConstructorElement } from './burger-constructor-element/burger-constructor-element';
 import { BurgerConstructorTotalPrice } from './burger-constructor-total-price/burgerConstructorTotalPrice';
 import { Modal } from "../modal/modal";
 import { OrderDetails } from "../order-details/order-details";
-import { ingredientPropTypes } from "../utils/constants";
-import { burgerIngredients } from "../services/burger-ingredients/reducers";
+import { ingredientsList } from "../services/burger-ingredients/reducers";
+import {
+  isOrderDetailsLoading,
+  hasOrderDetailsRequestError,
+  showOrderDetails
+} from "../services/burger-constructor/reducers";
 import { useSelector } from "react-redux";
 
-// BurgerIngredients.propTypes = {
-//   ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
-// };
-
 export function BurgerConstructor() {
-  const ingredients = useSelector(burgerIngredients);
-  const bun = ingredients.find(ingredient => ingredient.type === 'bun');
-  const inner = ingredients.filter(ingredient => ingredient.type !== 'bun');
-  const sum = ingredients.reduce((totalSum, ingredient) => totalSum += ingredient.price, 0);
+  const ingredients = useSelector(ingredientsList);
+  const bun = useMemo(
+    () => ingredients.find(ingredient => ingredient.type === 'bun'),
+    [ingredients]
+  );
+  const inner = useMemo(
+    () => ingredients.filter(ingredient => ingredient.type !== 'bun'),
+    [ingredients]
+  );
+  const sum = useMemo(
+    () => ingredients.reduce((totalSum, ingredient) => totalSum += ingredient.price, 0),
+    [ingredients]
+  );
+  // const idList = useMemo(
+  //   () => ingredients.map(ingredient => ingredient._id),
+  //   [ingredients]
+  // );
 
-  const [showOrderDetails, setShowOrderDetails] = useState(false);
+  const idList = [bun._id,
+"643d69a5c3f7b9001cfa093c", "643d69a5c3f7b9001cfa0941", "643d69a5c3f7b9001cfa093e", "643d69a5c3f7b9001cfa0942", bun._id]
+
+  console.log(idList)
+  const isLoading = useSelector(isOrderDetailsLoading);
+  const hasError = useSelector(hasOrderDetailsRequestError);
+  const showDetails = useSelector(showOrderDetails);
 
   return (
     <section className={`${styles.container} pt-25`}>
@@ -58,10 +75,12 @@ export function BurgerConstructor() {
           thumbnail={bun.image}
         />
       </div>
-      <BurgerConstructorTotalPrice sum={sum} handleOnClick={setShowOrderDetails}/>
+      <BurgerConstructorTotalPrice idList={idList} sum={sum} />
       {
-        showOrderDetails &&
-        <Modal setItem={setShowOrderDetails}>
+        !isLoading &&
+        !hasError &&
+        showDetails &&
+        <Modal >
           <OrderDetails />
         </Modal>
       }

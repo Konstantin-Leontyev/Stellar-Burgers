@@ -1,4 +1,4 @@
-import {ingredientsUrl} from './constants';
+import { baseUrl } from './constants';
 
 function checkResponse(response) {
   if (response.ok) {
@@ -13,7 +13,18 @@ function getIngredientsList(jsonResponse) {
 }
 
 export function getIngredients() {
-  return fetch(ingredientsUrl)
+  return fetch(baseUrl.concat('ingredients'))
     .then(checkResponse)
     .then(getIngredientsList)
-  }
+}
+
+export function getOrderDetails(burgerIngredients) {
+  return fetch(baseUrl.concat('orders'), {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({'ingredients': burgerIngredients})
+  })
+    .then(checkResponse)
+}

@@ -5,20 +5,29 @@ import styles from './modal.module.css';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ModalOverlay } from "./modal-overlay/modal-overlay";
 import { createPortal } from "react-dom";
-import { resetIngredientDetails } from "../services/ingredient-datails/reducer";
-import { useDispatch } from "react-redux";
+import { resetIngredientDetails, showIngredientDetails } from "../services/ingredient-datails/reducer";
+import { resetOrderDetails, showOrderDetails } from "../services/burger-constructor/reducers";
+import { useDispatch, useSelector } from "react-redux";
 
 Modal.propType = {
   title: PropTypes.string,
+  children: PropTypes.element
 };
 
 const modalRoot = document.getElementById("react-modals");
 
 export function Modal({ title, children }) {
   const dispatch = useDispatch();
+  const ingredients = useSelector(showIngredientDetails);
+  const constructor = useSelector(showOrderDetails);
 
   function onModalClose() {
-    dispatch(resetIngredientDetails());
+    if (ingredients) {
+      dispatch(resetIngredientDetails());
+    }
+    if (constructor) {
+      dispatch(resetOrderDetails());
+    }
   }
 
   function handleOnKeyDown(event) {

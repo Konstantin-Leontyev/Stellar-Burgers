@@ -1,8 +1,10 @@
 import { combineSlices } from "@reduxjs/toolkit";
-import { ingredientsSlice } from "./burger-ingredients/reducers";
-import {ingredientDetailsSlice} from "./ingredient-datails/reducer";
+import { burgerConstructorSlice } from "./burger-constructor/reducers";
+import { burgerIngredientsSlice } from "./burger-ingredients/reducers";
+import { ingredientDetailsSlice } from "./ingredient-datails/reducer";
 
 export const rootReducer = combineSlices(
-  ingredientsSlice,
+  burgerConstructorSlice,
+  burgerIngredientsSlice,
   ingredientDetailsSlice
 );

@@ -5,13 +5,13 @@ import { BurgerIngredientsTab } from './burger-ingredients-tab/burger-ingredient
 import { BurgerIngredientsCard } from './burger-ingredients-card/burger-ingredients-card';
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { Modal } from "../modal/modal";
-import { burgerIngredients } from "../services/burger-ingredients/reducers";
+import { ingredientsList } from "../services/burger-ingredients/reducers";
 import { categories } from '../utils/constants';
 import { showIngredientDetails } from "../services/ingredient-datails/reducer";
 import { useSelector } from "react-redux";
 
 export function BurgerIngredients() {
-  const ingredients = useSelector(burgerIngredients);
+  const ingredients = useSelector(ingredientsList);
   const showDetails = useSelector(showIngredientDetails);
 
   return (

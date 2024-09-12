@@ -5,8 +5,8 @@ import { AppHeader } from '../header/header';
 import { BurgerConstructor } from '../burger-constructor/burger-constructor';
 import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
 import { getIngredients } from '../services/burger-ingredients/actions';
-import { burgerIngredients, loadingStatus, errorStatus } from '../services/burger-ingredients/reducers';
-import {useDispatch, useSelector} from "react-redux";
+import { ingredientsList, isIngredientsListLoading, hasIngredientsListRequestError } from '../services/burger-ingredients/reducers';
+import { useDispatch, useSelector } from "react-redux";
 
 export default function App() {
   const dispatch = useDispatch()
@@ -15,9 +15,9 @@ export default function App() {
     dispatch(getIngredients())
   }, []);
 
-  const isLoading = useSelector(loadingStatus)
-  const hasError = useSelector(errorStatus)
-  const ingredients = useSelector(burgerIngredients)
+  const isLoading = useSelector(isIngredientsListLoading);
+  const hasError = useSelector(hasIngredientsListRequestError);
+  const ingredients = useSelector(ingredientsList);
 
   return (
     <>
