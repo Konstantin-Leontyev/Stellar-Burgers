@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getOrderDetails } from "./actions";
 
 const initialState = {
-  currentBurger: null,
+  currentBun: null,
+  currentIngredients: [],
   orderDetails: null,
   isOrderDetailsLoading: false,
   hasOrderDetailsRequestError: false,
@@ -13,6 +14,8 @@ export const burgerConstructorSlice = createSlice({
   name: 'burgerConstructor',
   initialState,
   selectors: {
+    currentBun: state => state.currentBun,
+    currentIngredients: state => state.currentIngredients,
     orderDetails: state => state.orderDetails,
     isOrderDetailsLoading: state => state.isOrderDetailsLoading,
     hasOrderDetailsRequestError: state => state.hasOrderDetailsRequestError,
@@ -20,13 +23,13 @@ export const burgerConstructorSlice = createSlice({
   },
   reducers: {
     addCurrentBurgerIngredient: ((state, action) => {
-      state.currentBurger = action.payload;
-    }),
-    setOrderDetails: ((state) => {
-      state.showOrderDetails = true;
+      if (action.payload.type === 'bun') {
+        state.bun = action.payload;
+      } else {
+        state.ingredients = state.ingredients.push(action.payload)
+      }
     }),
     resetOrderDetails: ((state) => {
-      // state.ingredientDetails = {};
       state.showOrderDetails = false;
     })
   },
@@ -39,6 +42,7 @@ export const burgerConstructorSlice = createSlice({
       .addCase(getOrderDetails.fulfilled, (state, action) => {
         state.orderDetails = action.payload;
         state.isOrderDetailsLoading = false;
+        state.showOrderDetails = true;
       })
       .addCase(getOrderDetails.rejected, (state, action) => {
         state.hasOrderDetailsRequestError = action.error?.message;
@@ -48,6 +52,8 @@ export const burgerConstructorSlice = createSlice({
 })
 
 export const {
+  currentBun,
+  currentIngredients,
   isOrderDetailsLoading,
   hasOrderDetailsRequestError,
   orderDetails,
@@ -57,5 +63,4 @@ export const {
 export const {
   addCurrentBurgerIngredient,
   resetOrderDetails,
-  setOrderDetails
 } = burgerConstructorSlice.actions;

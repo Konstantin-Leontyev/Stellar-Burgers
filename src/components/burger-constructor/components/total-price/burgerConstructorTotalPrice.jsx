@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import PropTypes from "prop-types";
 import styles from './burger-constructor-total-price.module.css'
 
@@ -6,20 +6,27 @@ import {
   Button,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { getOrderDetails } from "../../services/burger-constructor/actions";
-import { setOrderDetails } from "../../services/burger-constructor/reducers";
+import { getOrderDetails } from "../../../services/burger-constructor/actions";
 import { useDispatch } from "react-redux";
 
 BurgerConstructorTotalPrice.propTypes = {
-  idList: PropTypes.arrayOf(PropTypes.string),
-  sum: PropTypes.number.isRequired
+  burger: PropTypes.array.isRequired
 };
 
-export function BurgerConstructorTotalPrice({ idList, sum }) {
+export function BurgerConstructorTotalPrice({ burger }) {
   const dispatch = useDispatch();
+
+  const sum = useMemo(
+    () => burger.reduce((totalSum, ingredient) => totalSum += ingredient.price, 0),
+    [burger]
+  );
+  const idList = useMemo(
+    () => burger.map(ingredient => ingredient._id),
+    [burger]
+  );
+
   function handleOnClick() {
     dispatch(getOrderDetails(idList))
-    dispatch(setOrderDetails())
   }
 
   return (

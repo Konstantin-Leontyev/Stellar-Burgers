@@ -1,0 +1,21 @@
+.container {
+  align-items: center;
+  background-color: #2F2F37;
+  display: flex;
+  height: 80px;
+  justify-content: center;
+  width: 536px;
+}
+
+.top {
+  border-radius: 75px 75px 25px 25px;
+}
+
+.bottom {
+  border-radius: 25px 25px 75px 75px;
+}
+
+.main {
+  border-radius: 50px 50px 50px 50px;
+  margin-right: 20px;
+}
