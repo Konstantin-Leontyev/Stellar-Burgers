@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getOrderDetails } from "./actions";
 
 const initialState = {
-  currentBurger: [],
-  orderDetails: {},
+  currentBurger: null,
+  orderDetails: null,
   isOrderDetailsLoading: false,
   hasOrderDetailsRequestError: false,
   showOrderDetails: false,

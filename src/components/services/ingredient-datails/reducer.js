@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  ingredientDetails: {},
+  ingredientDetails: null,
   showIngredientDetails: false
 };
 
@@ -18,7 +18,7 @@ export const ingredientDetailsSlice = createSlice({
       state.showIngredientDetails = true;
     }),
     resetIngredientDetails: ((state) => {
-      state.ingredientDetails = {};
+      state.ingredientDetails = null;
       state.showIngredientDetails = false;
     })
   }

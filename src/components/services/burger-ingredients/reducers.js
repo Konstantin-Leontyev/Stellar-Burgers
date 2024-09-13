@@ -4,16 +4,24 @@ import { getIngredients } from "./actions";
 const initialState = {
   ingredientsList: [],
   isIngredientsListLoading: false,
-  hasIngredientsListRequestError: false
+  hasIngredientsListRequestError: false,
+
+  currentTab: 'Булки'
 }
 
 export const burgerIngredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
   selectors: {
+    currentTab: state => state.currentTab,
     ingredientsList: state => state.ingredientsList,
     isIngredientsListLoading: state => state.isIngredientsListLoading,
     hasIngredientsListRequestError: state => state.hasIngredientsListRequestError
+  },
+  reducers: {
+    setTab: ((state, action) => {
+      state.currentTab = action.payload;
+    })
   },
   extraReducers: builder => {
     builder
@@ -33,6 +41,9 @@ export const burgerIngredientsSlice = createSlice({
 });
 
 export const {
+  currentTab,
   ingredientsList,
   isIngredientsListLoading,
   hasIngredientsListRequestError } = burgerIngredientsSlice.selectors;
+
+export const { setTab } = burgerIngredientsSlice.actions;
