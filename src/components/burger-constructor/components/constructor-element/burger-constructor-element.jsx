@@ -1,36 +1,47 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from "prop-types";
 
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { deleteCurrentBurgerIngredient } from "../../../services/burger-constructor/reducers";
+import { ingredientPropTypes } from "../../../utils/constants";
+import { useDispatch } from "react-redux";
 
-BurgerConstructorElement.propsTypes = {
+BurgerConstructorElement.propTypes = {
   type: PropTypes.string,
-  price: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string.isRequired,
+  ingredient: ingredientPropTypes.isRequired,
 };
 
-export function BurgerConstructorElement({ type, price, text, thumbnail }) {
-  let icon = null
-  let comment = ''
+export function BurgerConstructorElement({ ingredient, type= null }) {
+  const dispatch = useDispatch();
+
+  const { price, name, image, key } = ingredient;
+
+  let icon = null;
+  let comment = '';
 
   if(type === 'top') {
-    comment = '(верх)'
+    comment = '(верх)';
   } else if (type === 'bottom') {
-    comment = '(низ)'
+    comment = '(низ)';
   } else {
-    icon = <DragIcon type="primary"/>
+    icon = <DragIcon type="primary"/>;
   }
+
+  const  onHandleClose = useCallback(() => {
+    dispatch(deleteCurrentBurgerIngredient(key));
+  }, [ingredient]);
 
   return (
     <>
       {icon}
       <ConstructorElement
         type={type}
-        text={`${text} ${comment}`}
+        text={`${name} ${comment}`}
         price={price}
-        thumbnail={thumbnail}
+        isLocked={!!type}
+        thumbnail={image}
         extraClass="ml-2"
+        handleClose={onHandleClose}
       />
     </>
   );

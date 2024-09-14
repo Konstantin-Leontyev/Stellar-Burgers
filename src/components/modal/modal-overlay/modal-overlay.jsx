@@ -7,6 +7,5 @@ ModalOverlay.propTypes = {
 };
 
 export function ModalOverlay({ onModalClose }){
-
   return <div className={`${styles.overlay}`} onClick={onModalClose}></div>
 }

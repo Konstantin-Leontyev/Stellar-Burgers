@@ -14,7 +14,6 @@ export function BurgerIngredients() {
   const ingredients = useSelector(ingredientsList);
   const showDetails = useSelector(showIngredientDetails);
 
-  // const tabRef = useRef({});
   const bunRef = useRef({});
   const innerRef = useRef({});
   const sauceRef = useRef({});

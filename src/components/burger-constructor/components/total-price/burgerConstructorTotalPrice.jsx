@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, { useCallback, useMemo } from 'react';
 import PropTypes from "prop-types";
 import styles from './burger-constructor-total-price.module.css'
 
@@ -25,9 +25,10 @@ export function BurgerConstructorTotalPrice({ burger }) {
     [burger]
   );
 
-  function handleOnClick() {
-    dispatch(getOrderDetails(idList))
-  }
+  const handleOnClick = useCallback(() => {
+    dispatch(getOrderDetails(idList));
+  }, [burger]);
+
 
   return (
     <div className={`${styles.total} pt-10`}>

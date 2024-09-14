@@ -13,7 +13,7 @@ IngredientsTab.propTypes = {
 };
 
 export function IngredientsTab({ categories }){
-  const current = useSelector(currentTab)
+  const current = useSelector(currentTab);
 
   return (
     <div className={`${styles.container} pb-10`}>

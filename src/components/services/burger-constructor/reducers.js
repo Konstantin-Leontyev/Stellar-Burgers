@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 import { getOrderDetails } from "./actions";
 
 const initialState = {
@@ -22,12 +22,20 @@ export const burgerConstructorSlice = createSlice({
     showOrderDetails: state => state.showOrderDetails
   },
   reducers: {
-    addCurrentBurgerIngredient: ((state, action) => {
-      if (action.payload.type === 'bun') {
-        state.bun = action.payload;
-      } else {
-        state.ingredients = state.ingredients.push(action.payload)
+    addCurrentBurgerBun: ((state, action) => {
+      state.currentBun = action.payload;
+    }),
+    addCurrentBurgerIngredient: {
+      reducer: ((state, action) => {
+        state.currentIngredients = [...state.currentIngredients, action.payload];
+      }),
+      prepare: (ingredient) => {
+        return { payload: {...ingredient, key: nanoid()} }
       }
+    },
+    deleteCurrentBurgerIngredient: ((state, action) => {
+      console.log(action.payload)
+      state.currentIngredients = [...state.currentIngredients.filter(ingredient => ingredient.key !== action.payload)];
     }),
     resetOrderDetails: ((state) => {
       state.showOrderDetails = false;
@@ -61,6 +69,8 @@ export const {
 } = burgerConstructorSlice.selectors;
 
 export const {
+  addCurrentBurgerBun,
   addCurrentBurgerIngredient,
+  deleteCurrentBurgerIngredient,
   resetOrderDetails,
 } = burgerConstructorSlice.actions;

@@ -2,9 +2,11 @@
   align-items: center;
   background-color: #2F2F37;
   display: flex;
-  height: 80px;
   justify-content: center;
-  width: 536px;
+  box-sizing: border-box;
+  border: 2px solid #2F2F37;
+  min-height: 80px;
+  min-width: 536px;
 }
 
 .top {
@@ -17,5 +19,4 @@
 
 .main {
   border-radius: 50px 50px 50px 50px;
-  margin-right: 20px;
 }

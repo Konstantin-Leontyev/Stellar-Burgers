@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import './app.modules.css';
 
 import { AppHeader } from '../header/header';
@@ -28,8 +30,10 @@ export default function App() {
         !hasError &&
         ingredients.length > 0 &&
         <main>
-          <BurgerIngredients />
-          <BurgerConstructor />
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
         </main>
       }
     </>

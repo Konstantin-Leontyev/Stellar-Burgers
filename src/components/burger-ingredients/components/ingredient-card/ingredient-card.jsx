@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useDrag } from "react-dnd";
 import styles from './ingredients-card.module.css';
 
 import { ingredientPropTypes } from "../../../utils/constants";
@@ -13,12 +14,17 @@ IngredientCard.propTypes = {
 export function IngredientCard({ ingredient }) {
   const dispatch = useDispatch();
 
-  function handleOnClick() {
+  const [, dragRef] = useDrag({
+        type: 'ingredient',
+        item: ingredient,
+  });
+
+  const handleOnClick = useCallback(() => {
     dispatch(setIngredientDetails(ingredient))
-  }
+  }, [ingredient]);
 
   return(
-    <li className={`${styles.container} pl-4 pr-4`} onClick={handleOnClick}>
+    <li className={`${styles.container} pl-4 pr-4`} onClick={handleOnClick} ref={dragRef}>
       <img className={styles.img} src={ingredient.image} alt={ingredient.name}/>
       <Counter count={1} size="default" extraClass="m-1" />
       <div className={`${styles.price} pt-1 pb-1`}>
