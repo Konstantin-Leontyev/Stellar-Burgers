@@ -26,7 +26,10 @@ export function IngredientCard({ ingredient }) {
   return(
     <li className={`${styles.container} pl-4 pr-4`} onClick={handleOnClick} ref={dragRef}>
       <img className={styles.img} src={ingredient.image} alt={ingredient.name}/>
-      <Counter count={1} size="default" extraClass="m-1" />
+      {
+        ingredient.__v > 0 &&
+        <Counter count={ingredient.__v} size="default" extraClass="m-1" />
+      }
       <div className={`${styles.price} pt-1 pb-1`}>
         <span className="text text_type_digits-default mr-2">{ingredient.price}</span>
         <CurrencyIcon type="primary"/>

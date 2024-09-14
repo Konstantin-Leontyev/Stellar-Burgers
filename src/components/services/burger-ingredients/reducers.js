@@ -21,6 +21,33 @@ export const burgerIngredientsSlice = createSlice({
   reducers: {
     setTab: ((state, action) => {
       state.currentTab = action.payload;
+    }),
+    setIngredientCount: ((state, action) => {
+      state.ingredientsList = [
+        ...state.ingredientsList.map(ingredient => ingredient._id === action.payload._id
+          ? {
+            ...ingredient,
+            __v: action.payload.type === 'bun' ? 2 : ingredient.__v += 1
+          }
+          : ingredient.type === 'bun'
+            ? {
+              ...ingredient,
+              __v: 0
+            }
+            : ingredient
+        )
+      ]
+    }),
+    resetIngredientCount: ((state, action) => {
+      state.ingredientsList = [
+        ...state.ingredientsList.map(ingredient => ingredient._id === action.payload._id
+          ? {
+            ...ingredient,
+            __v: ingredient.__v -= 1
+          }
+          : ingredient
+        )
+      ]
     })
   },
   extraReducers: builder => {
@@ -46,4 +73,8 @@ export const {
   isIngredientsListLoading,
   hasIngredientsListRequestError } = burgerIngredientsSlice.selectors;
 
-export const { setTab } = burgerIngredientsSlice.actions;
+export const {
+  resetIngredientCount,
+  setIngredientCount,
+  setTab
+} = burgerIngredientsSlice.actions;

@@ -4,14 +4,15 @@ import PropTypes from "prop-types";
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { deleteCurrentBurgerIngredient } from "../../../services/burger-constructor/reducers";
 import { ingredientPropTypes } from "../../../utils/constants";
+import { resetIngredientCount } from "../../../services/burger-ingredients/reducers";
 import { useDispatch } from "react-redux";
 
-BurgerConstructorElement.propTypes = {
+FilledElement.propTypes = {
   type: PropTypes.string,
   ingredient: ingredientPropTypes.isRequired,
 };
 
-export function BurgerConstructorElement({ ingredient, type= null }) {
+export function FilledElement({ ingredient, type= null }) {
   const dispatch = useDispatch();
 
   const { price, name, image, key } = ingredient;
@@ -29,6 +30,7 @@ export function BurgerConstructorElement({ ingredient, type= null }) {
 
   const  onHandleClose = useCallback(() => {
     dispatch(deleteCurrentBurgerIngredient(key));
+    dispatch(resetIngredientCount(ingredient));
   }, [ingredient]);
 
   return (

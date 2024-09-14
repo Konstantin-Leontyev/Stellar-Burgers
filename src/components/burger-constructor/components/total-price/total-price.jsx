@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import PropTypes from "prop-types";
-import styles from './burger-constructor-total-price.module.css'
+import styles from './total-price.module.css'
 
 import {
   Button,
@@ -9,11 +9,11 @@ import {
 import { getOrderDetails } from "../../../services/burger-constructor/actions";
 import { useDispatch } from "react-redux";
 
-BurgerConstructorTotalPrice.propTypes = {
+TotalPrice.propTypes = {
   burger: PropTypes.array.isRequired
 };
 
-export function BurgerConstructorTotalPrice({ burger }) {
+export function TotalPrice({ burger }) {
   const dispatch = useDispatch();
 
   const sum = useMemo(
