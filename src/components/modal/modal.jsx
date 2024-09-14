@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 Modal.propType = {
   title: PropTypes.string,
-  children: PropTypes.element
+  children: PropTypes.element,
 };
 
 const modalRoot = document.getElementById("react-modals");

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   BurgerIcon,
   ListIcon,
-  ProfileIcon
+  ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 
@@ -28,7 +28,7 @@ export const headerItemsInitialState = [
     type: "authItems",
     isActive: false,
     Icon: ProfileIcon,
-  }
+  },
 ];
 
 export const baseUrl = "https://norma.nomoreparties.space/api/";

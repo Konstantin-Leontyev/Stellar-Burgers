@@ -37,9 +37,15 @@ export const burgerConstructorSlice = createSlice({
       console.log(action.payload)
       state.currentIngredients = [...state.currentIngredients.filter(ingredient => ingredient.key !== action.payload)];
     }),
+    moveIngredients: ((state, action) => {
+      const { hoverIndex, dragIndex } = action.payload;
+      const newIngredients = [...state.currentIngredients];
+      newIngredients.splice(hoverIndex, 0, newIngredients.splice(dragIndex, 1)[0]);
+      state.currentIngredients = newIngredients;
+    }),
     resetOrderDetails: ((state) => {
       state.showOrderDetails = false;
-    })
+}),
   },
   extraReducers: builder => {
     builder
@@ -72,5 +78,6 @@ export const {
   addCurrentBurgerBun,
   addCurrentBurgerIngredient,
   deleteCurrentBurgerIngredient,
+  moveIngredients,
   resetOrderDetails,
 } = burgerConstructorSlice.actions;

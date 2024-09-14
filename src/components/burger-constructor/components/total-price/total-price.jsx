@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import PropTypes from "prop-types";
 import styles from './total-price.module.css'
 
@@ -7,28 +7,39 @@ import {
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getOrderDetails } from "../../../services/burger-constructor/actions";
+import { ingredientPropTypes } from "../../../utils/constants";
 import { useDispatch } from "react-redux";
 
 TotalPrice.propTypes = {
-  burger: PropTypes.array.isRequired
+  bun: ingredientPropTypes.isRequired,
+  ingredients: PropTypes.arrayOf(ingredientPropTypes).isRequired,
 };
 
-export function TotalPrice({ burger }) {
+export function TotalPrice({ bun, ingredients }) {
   const dispatch = useDispatch();
+  const [burger, setBurger] = useState([])
+
+  useEffect(() => {
+    setBurger([
+      bun,
+      ...ingredients,
+      bun,
+    ])
+  }, [bun, ingredients]);
+
+  const idList = useMemo(
+    () => burger.map(ingredient => ingredient._id),
+    [burger]
+  );
 
   const sum = useMemo(
     () => burger.reduce((totalSum, ingredient) => totalSum += ingredient.price, 0),
-    [burger]
-  );
-  const idList = useMemo(
-    () => burger.map(ingredient => ingredient._id),
     [burger]
   );
 
   const handleOnClick = useCallback(() => {
     dispatch(getOrderDetails(idList));
   }, [burger]);
-
 
   return (
     <div className={`${styles.total} pt-10`}>

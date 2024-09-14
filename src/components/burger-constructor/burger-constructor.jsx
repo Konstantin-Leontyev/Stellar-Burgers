@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDrop } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import styles from './burger-constructor.module.css';
@@ -7,7 +7,7 @@ import { FilledElement } from './components/filled-element/filled-element';
 import { TotalPrice } from './components/total-price/total-price';
 import { EmptyElement } from "./components/empty-element/empty-element";
 import { Modal } from "../modal/modal";
-import { OrderDetails } from "../order-details/order-details";
+import { OrderDetails } from "./components/order-details/order-details";
 
 import {
   addCurrentBurgerBun,
@@ -15,7 +15,7 @@ import {
   currentBun, currentIngredients,
   isOrderDetailsLoading,
   hasOrderDetailsRequestError,
-  showOrderDetails,
+  showOrderDetails, moveIngredients,
 } from "../services/burger-constructor/reducers";
 import {setIngredientCount} from "../services/burger-ingredients/reducers";
 
@@ -23,16 +23,6 @@ export function BurgerConstructor() {
   const dispatch = useDispatch();
   const bun = useSelector(currentBun);
   const ingredients = useSelector(currentIngredients);
-
-  const [burger, setBurger] = useState([])
-
-  useEffect(() => {
-    setBurger([
-      bun,
-      ...ingredients,
-      bun
-    ])
-  }, [bun, ingredients]);
 
   const [{ isOver, item }, dropTarget] = useDrop({
     accept: 'ingredient',
@@ -47,7 +37,7 @@ export function BurgerConstructor() {
     },
     collect: monitor => ({
       isOver: monitor.isOver(),
-      item: monitor.getItem()
+      item: monitor.getItem(),
     })
   });
 
@@ -75,7 +65,7 @@ export function BurgerConstructor() {
                   className={`${styles.mainElement} ${index !== ingredients.length - 1 ? "pb-4" : null}`}
                   key={ingredient.key}
                 >
-                  <FilledElement ingredient={ingredient} />
+                  <FilledElement ingredient={ingredient} index={index}/>
                 </li>)
               : <li className={`${styles.mainElement}`}>
                   <EmptyElement type={"main"} item={item} isOver={isOver}/>
@@ -93,7 +83,7 @@ export function BurgerConstructor() {
       {
         bun &&
         ingredients.length > 0 &&
-        <TotalPrice burger={burger} />
+        <TotalPrice bun={bun} ingredients={ingredients} />
       }
       {
         !isLoading &&

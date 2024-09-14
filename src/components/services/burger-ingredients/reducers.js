@@ -6,7 +6,7 @@ const initialState = {
   isIngredientsListLoading: false,
   hasIngredientsListRequestError: false,
 
-  currentTab: 'Булки'
+  currentTab: 'Булки',
 }
 
 export const burgerIngredientsSlice = createSlice({

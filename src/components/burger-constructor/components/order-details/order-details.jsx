@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './order-details.module.css'
+import styles from './order-details.module.css';
 
-import { orderDetails } from "../services/burger-constructor/reducers";
+import { orderDetails } from "../../../services/burger-constructor/reducers";
 import { useSelector } from "react-redux";
 export function OrderDetails() {
-  const { order } = useSelector(orderDetails)
+  const { order } = useSelector(orderDetails);
 
   return (
     <div className={`${styles.wrapper} mb-30`}>

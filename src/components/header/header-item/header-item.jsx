@@ -7,12 +7,12 @@ const ingredientsPropTypes = PropTypes.shape({
   isActive: PropTypes.bool.isRequired,
   name: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
 });
 
 HeaderItem.propTypes = {
   item: ingredientsPropTypes.isRequired,
-  handleOnClick: PropTypes.func.isRequired
+  handleOnClick: PropTypes.func.isRequired,
 };
 
 export function HeaderItem({ item, handleOnClick }) {

@@ -21,7 +21,7 @@ export function BurgerIngredients() {
   const categories = [
     { title: "Булки", type: "bun", ref: bunRef},
     { title: "Соусы", type: "sauce", ref: sauceRef},
-    { title: "Начинки", type: "main", ref: innerRef}
+    { title: "Начинки", type: "main", ref: innerRef},
   ];
 
   function handleOnScroll(event) {

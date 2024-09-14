@@ -6,5 +6,5 @@ import { ingredientDetailsSlice } from "./ingredient-datails/reducer";
 export const rootReducer = combineSlices(
   burgerConstructorSlice,
   burgerIngredientsSlice,
-  ingredientDetailsSlice
+  ingredientDetailsSlice,
 );
