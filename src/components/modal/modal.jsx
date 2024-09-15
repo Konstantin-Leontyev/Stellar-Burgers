@@ -5,34 +5,20 @@ import styles from './modal.module.css';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ModalOverlay } from "./modal-overlay/modal-overlay";
 import { createPortal } from "react-dom";
-import { resetIngredientDetails, showIngredientDetails } from "../services/ingredient-datails/reducer";
-import { resetOrderDetails, showOrderDetails } from "../services/burger-constructor/reducers";
-import { useDispatch, useSelector } from "react-redux";
 
 Modal.propType = {
   title: PropTypes.string,
+  onClose: PropTypes.func.isRequired,
   children: PropTypes.element,
 };
 
 const modalRoot = document.getElementById("react-modals");
 
-export function Modal({ title, children }) {
-  const dispatch = useDispatch();
-  const ingredients = useSelector(showIngredientDetails);
-  const constructor = useSelector(showOrderDetails);
-
-  function onModalClose() {
-    if (ingredients) {
-      dispatch(resetIngredientDetails());
-    }
-    if (constructor) {
-      dispatch(resetOrderDetails());
-    }
-  }
+export function Modal({ title, onClose, children }) {
 
   function handleOnKeyDown(event) {
     if (event.key === "Escape") {
-      onModalClose();
+      onClose();
     }
   }
 
@@ -46,12 +32,12 @@ export function Modal({ title, children }) {
   return createPortal(
     (
       <div className={styles.wrapper} onKeyDown={handleOnKeyDown}>
-        <ModalOverlay onModalClose={onModalClose}/>
+        <ModalOverlay onClose={onClose}/>
         <div className={styles.modal}>
           <span className={`${styles.span} text text_type_main-large ml-10 mt-10 mr-10`}>
             <div className={styles.title}>{title}</div>
             <div className={styles.closeIcon}>
-              <CloseIcon type="primary" onClick={onModalClose}/>
+              <CloseIcon type="primary" onClick={onClose}/>
             </div>
           </span>
             {children}

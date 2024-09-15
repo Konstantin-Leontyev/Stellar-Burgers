@@ -15,9 +15,10 @@ import {
   currentBun, currentIngredients,
   isOrderDetailsLoading,
   hasOrderDetailsRequestError,
-  showOrderDetails, moveIngredients,
+  resetOrderDetails,
+  showOrderDetails,
 } from "../services/burger-constructor/reducers";
-import {setIngredientCount} from "../services/burger-ingredients/reducers";
+import { setIngredientCount } from "../services/burger-ingredients/reducers";
 
 export function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -46,6 +47,10 @@ export function BurgerConstructor() {
   const showDetails = useSelector(showOrderDetails);
 
   const scroll = ingredients.length > 5 ? `${styles.scroll} custom-scroll` : 'mr-5';
+
+  function onModalClose() {
+    dispatch(resetOrderDetails());
+  }
 
   return (
     <section className={`${styles.container} pt-25`} ref={dropTarget}>
@@ -89,7 +94,7 @@ export function BurgerConstructor() {
         !isLoading &&
         !hasError &&
         showDetails &&
-        <Modal >
+        <Modal onClose={onModalClose}>
           <OrderDetails />
         </Modal>
       }
