@@ -6,7 +6,7 @@ import { ingredientPropTypes } from "../../../utils/constants";
 
 EmptyElement.propTypes = {
   type: PropTypes.string.isRequired,
-  item: ingredientPropTypes.isRequired,
+  item: ingredientPropTypes,
   isOver: PropTypes.bool,
 };
 

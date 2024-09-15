@@ -8,23 +8,28 @@ function checkResponse(response) {
   return Promise.reject(`Ошибка ${response.status}`);
 }
 
+function request(endpoint, options) {
+   return fetch(baseUrl.concat(endpoint), options)
+    .then(checkResponse)
+}
+
 function getIngredientsList(jsonResponse) {
   return jsonResponse.data;
 }
 
 export function getIngredients() {
-  return fetch(baseUrl.concat('ingredients'))
-    .then(checkResponse)
+  return request('ingredients')
     .then(getIngredientsList)
 }
 
 export function getOrderDetails(burgerIngredients) {
-  return fetch(baseUrl.concat('orders'), {
+  let options ={
     method: 'POST',
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({'ingredients': burgerIngredients})
-  })
-    .then(checkResponse)
+  }
+
+  return request('orders', options)
 }
