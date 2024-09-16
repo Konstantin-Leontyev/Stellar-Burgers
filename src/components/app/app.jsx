@@ -1,42 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import './app.modules.css';
 
 import { AppHeader } from '../header/header';
 import { BurgerConstructor } from '../burger-constructor/burger-constructor';
 import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
-import { ingredientsUrl } from '../utils/constants';
+import { getIngredients } from '../services/burger-ingredients/actions';
+import { ingredientsList, isIngredientsListLoading, hasIngredientsListRequestError } from '../services/burger-ingredients/reducers';
+import { useDispatch, useSelector } from "react-redux";
 
 export default function App() {
-  const [state, setState] = useState({
-    ingredients: [],
-    isLoading: false,
-    hasError: false
-  });
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const getIngredients = async () => {
-      setState({...state, hasError: false, isLoading: true});
-
-      await fetch(ingredientsUrl)
-        .then(response => {
-          if (response.ok) {
-            return response.json();
-          }
-          return Promise.reject(`Ошибка ${response.status}`);
-        })
-        .then(jsonResponse => {
-          const ingredients = jsonResponse.data;
-          setState({...state, ingredients, isLoading: false});
-        })
-        .catch(error => {
-          setState({...state, hasError: true, isLoading: false});
-        })
-    }
-
-    getIngredients();
+    dispatch(getIngredients())
   }, []);
 
-  const { ingredients, isLoading, hasError } = state;
+  const isLoading = useSelector(isIngredientsListLoading);
+  const hasError = useSelector(hasIngredientsListRequestError);
+  const ingredients = useSelector(ingredientsList);
 
   return (
     <>
@@ -47,8 +30,10 @@ export default function App() {
         !hasError &&
         ingredients.length > 0 &&
         <main>
-          <BurgerIngredients ingredients={ingredients}/>
-          <BurgerConstructor ingredients={ingredients}/>
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </DndProvider>
         </main>
       }
     </>

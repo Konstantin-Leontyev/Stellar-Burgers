@@ -8,21 +8,19 @@ import { createPortal } from "react-dom";
 
 Modal.propType = {
   title: PropTypes.string,
-  setItem: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  children: PropTypes.element,
 };
 
 const modalRoot = document.getElementById("react-modals");
 
-export function Modal({ title, setItem, children }) {
-  function onModalClose() {
-    setItem(null);
-  }
+export function Modal({ title, onClose, children }) {
 
-  const handleOnKeyDown = (e) => {
-    if (e.key === "Escape") {
-      onModalClose()
+  function handleOnKeyDown(event) {
+    if (event.key === "Escape") {
+      onClose();
     }
-  };
+  }
 
   useEffect(() => {
     document.addEventListener("keydown", handleOnKeyDown);
@@ -34,12 +32,12 @@ export function Modal({ title, setItem, children }) {
   return createPortal(
     (
       <div className={styles.wrapper} onKeyDown={handleOnKeyDown}>
-        <ModalOverlay onModalClose={onModalClose}/>
+        <ModalOverlay onClose={onClose}/>
         <div className={styles.modal}>
           <span className={`${styles.span} text text_type_main-large ml-10 mt-10 mr-10`}>
             <div className={styles.title}>{title}</div>
             <div className={styles.closeIcon}>
-              <CloseIcon type="primary" onClick={onModalClose}/>
+              <CloseIcon type="primary" onClick={onClose}/>
             </div>
           </span>
             {children}

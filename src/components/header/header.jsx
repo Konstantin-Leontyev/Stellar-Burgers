@@ -7,9 +7,9 @@ import { HeaderItem } from './header-item/header-item'
 import { headerItemsInitialState } from '../utils/constants'
 
 export function AppHeader() {
-  const [items, setItems] = useState(headerItemsInitialState)
-  const navItems = items.filter(item => item.type === 'navItems')
-  const authItems = items.filter(item => item.type === 'authItems')
+  const [items, setItems] = useState(headerItemsInitialState);
+  const navItems = items.filter(item => item.type === 'navItems');
+  const authItems = items.filter(item => item.type === 'authItems');
 
   function handleOnClick(e) {
     items.map(item => item.name === e.currentTarget.id ? item.isActive = true : item.isActive = false)

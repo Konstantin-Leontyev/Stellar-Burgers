@@ -1,0 +1,11 @@
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.element {
+  max-width: 536px;
+  min-width: 536px;
+  padding-right: 10px;
+}
