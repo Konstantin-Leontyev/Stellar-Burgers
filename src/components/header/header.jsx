@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import styles from './header.module.css';
 
-import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
-
-import { HeaderItem } from './header-item/header-item'
-import { headerItemsInitialState } from '../utils/constants'
+import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
+import { HeaderItem } from './header-item/header-item';
+import { headerItemsInitialState } from '../utils/constants';
 
 export function AppHeader() {
   const [items, setItems] = useState(headerItemsInitialState);
@@ -26,7 +25,7 @@ export function AppHeader() {
             <HeaderItem item={item} handleOnClick={handleOnClick} key={item.name}/>)
           }
         </ul>
-        <Logo/>
+        <Logo />
         <ul className={`${styles.ul} ${styles.authItems}`}>
           {authItems.map(item =>
             <HeaderItem item={item} handleOnClick={handleOnClick} key={item.name}/>)

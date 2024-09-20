@@ -67,7 +67,7 @@ export default function App() {
               <Route path="/ingredients/:id" element={<ModalDetails />}/>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/password-reset" element={<ResetPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
             </Routes>
           </DndProvider>

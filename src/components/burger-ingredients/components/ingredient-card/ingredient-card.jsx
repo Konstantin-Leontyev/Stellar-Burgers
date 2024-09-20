@@ -19,12 +19,13 @@ export function IngredientCard({ ingredient }) {
   });
 
   return(
-    <li className={`${styles.li} pl-4 pr-4`} ref={dragRef}>
+    <li className={`${styles.li}`} ref={dragRef}>
       <Link
+        className={styles.link}
         to={`/ingredients/${ingredient._id}`}
         state={{ backgroundLocation : location }}
-        style={{ textDecoration: 'none' }}>
-        <div className={`${styles.container}`}>
+        >
+        <div className={`${styles.container} pl-4 pr-4`}>
           <img className={styles.img} src={ingredient.image} alt={ingredient.name}/>
           {
             ingredient.__v > 0 &&

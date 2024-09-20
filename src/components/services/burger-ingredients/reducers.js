@@ -29,12 +29,10 @@ export const burgerIngredientsSlice = createSlice({
             ...ingredient,
             __v: action.payload.type === 'bun' ? 2 : ingredient.__v += 1
           }
-          : ingredient.type === 'bun'
-            ? {
+          : {
               ...ingredient,
-              __v: 0
+              __v: ingredient.type === 'bun' && action.payload.type === 'bun' ? 0 : ingredient.__v
             }
-            : ingredient
         )
       ]
     }),
