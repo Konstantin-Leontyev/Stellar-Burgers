@@ -27,6 +27,7 @@ export function Modal({ title, onClose, children }) {
     return () => {
       document.removeEventListener("keydown", handleOnKeyDown);
     };
+    // eslint-disable-next-line
   }, []);
 
   return createPortal(

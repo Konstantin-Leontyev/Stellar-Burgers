@@ -1,18 +1,14 @@
 import React, { useRef } from 'react';
 import styles from './burger-ingredients.module.css';
 
-import { IngredientsTab } from './components/ingredients-tab/ingredients-tab';
 import { IngredientCard } from './components/ingredient-card/ingredient-card';
-import { IngredientDetails } from "./components/ingredient-details/ingredient-details";
-import { Modal } from "../modal/modal";
+import { IngredientsTab } from './components/ingredients-tab/ingredients-tab';
 import { ingredientsList, setTab } from "../services/burger-ingredients/reducers";
-import { resetIngredientDetails, showIngredientDetails } from "../services/ingredient-datails/reducer";
 import { useDispatch, useSelector } from "react-redux";
 
 export function BurgerIngredients() {
   const dispatch = useDispatch();
   const ingredients = useSelector(ingredientsList);
-  const showDetails = useSelector(showIngredientDetails);
 
   const bunRef = useRef({});
   const innerRef = useRef({});
@@ -41,10 +37,6 @@ export function BurgerIngredients() {
     }
   }
 
-  function onModalClose() {
-    dispatch(resetIngredientDetails());
-  }
-
   return (
     <section className={styles.container}>
       <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
@@ -61,11 +53,6 @@ export function BurgerIngredients() {
             </ul>
           </div>
         )}
-        {showDetails &&
-          <Modal title="Детали ингредиента" onClose={onModalClose}>
-            <IngredientDetails />
-          </Modal>
-        }
       </div>
     </section>
   );

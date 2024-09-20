@@ -39,7 +39,8 @@ export function TotalPrice({ bun, ingredients }) {
 
   const handleOnClick = useCallback(() => {
     dispatch(getOrderDetails(idList));
-  }, [burger]);
+    // eslint-disable-next-line
+  }, [idList]);
 
   return (
     <div className={`${styles.total} pt-10`}>

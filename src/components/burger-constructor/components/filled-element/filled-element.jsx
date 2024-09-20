@@ -35,6 +35,7 @@ export function FilledElement({ ingredient, index, type}) {
   const  onHandleClose = useCallback(() => {
     dispatch(deleteCurrentBurgerIngredient(key));
     dispatch(resetIngredientCount(ingredient));
+    // eslint-disable-next-line
   }, [ingredient]);
 
   const [{ isDragging }, dragRef] = useDrag({

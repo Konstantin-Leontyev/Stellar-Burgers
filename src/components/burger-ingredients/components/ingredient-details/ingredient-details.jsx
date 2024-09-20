@@ -1,11 +1,14 @@
 import React from 'react';
 import styles from './ingredient-details.module.css';
 
-import { ingredientDetails } from "../../../services/ingredient-datails/reducer";
 import { useSelector } from "react-redux";
+import {useParams} from "react-router-dom";
+import {ingredientsList} from "../../../services/burger-ingredients/reducers";
 
 export function IngredientDetails() {
-  const ingredient = useSelector(ingredientDetails);
+  const { id } = useParams();
+  const ingredients = useSelector(ingredientsList);
+  const ingredient = ingredients.find(ingredient => ingredient._id === id);
 
   return (
     <div className={styles.wrapper}>
