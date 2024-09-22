@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { Route, Routes, useLocation, useNavigate} from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import './app.modules.css';
 
 import { AppHeader } from '../header/header';
@@ -9,6 +9,7 @@ import { IngredientDetails } from "../burger-ingredients/components/ingredient-d
 import { Home } from "../../pages/Home";
 import { Login } from "../../pages/Login";
 import { Modal } from "../modal/modal";
+import { NotFound } from "../../pages/NotFound";
 import { Register } from "../../pages/Register";
 import { ResetPassword } from "../../pages/ResetPassword";
 import { ForgotPassword } from "../../pages/ForgotPassword";
@@ -66,9 +67,11 @@ export default function App() {
               <Route index element={<Home />} />
               <Route path="/ingredients/:id" element={<ModalDetails />}/>
               <Route path="/login" element={<Login />} />
+              <Route path="/logout" element={<NotFound title={"Вы успешно вышли из аккаунта"} />} />
               <Route path="/register" element={<Register />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="*" element={<NotFound title={"Такой страницы не существует"} />} />
             </Routes>
           </DndProvider>
         </main>

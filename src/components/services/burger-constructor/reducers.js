@@ -49,7 +49,7 @@ export const burgerConstructorSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(getOrderDetails.pending, (state) =>{
+      .addCase(getOrderDetails.pending, (state) => {
         state.isOrderDetailsLoading = true;
         state.hasOrderDetailsRequestError = false;
       })
