@@ -1,0 +1,41 @@
+.container {
+  align-items: center;
+  display: flex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%, -50%);
+  width: 1300px;
+}
+
+.navigation {
+  width: 320px;
+}
+
+.li {
+  align-items: center;
+  display: flex;
+  list-style: none;
+  min-height: 64px;
+}
+
+.ul {
+  padding-left: 0px;
+  margin-top: 0px;
+  margin-bottom: 80px;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
+
+.buttons {
+  float: right;
+}
+
+.abort_button {
+  background-color: #131316;
+  color: #4c4cff;
+  border: none
+}

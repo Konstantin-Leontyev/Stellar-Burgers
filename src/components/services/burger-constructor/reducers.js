@@ -63,7 +63,7 @@ export const burgerConstructorSlice = createSlice({
         state.isOrderDetailsLoading = false;
       })
   }
-})
+});
 
 export const {
   currentBun,

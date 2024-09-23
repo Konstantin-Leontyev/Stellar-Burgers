@@ -10,12 +10,14 @@ import { Home } from "../../pages/Home";
 import { Login } from "../../pages/Login";
 import { Modal } from "../modal/modal";
 import { NotFound } from "../../pages/NotFound";
+import { Profile } from "../../pages/Profile";
 import { Register } from "../../pages/Register";
 import { ResetPassword } from "../../pages/ResetPassword";
 import { ForgotPassword } from "../../pages/ForgotPassword";
 import { getIngredients } from '../services/burger-ingredients/actions';
 import { ingredientsList, isIngredientsListLoading, hasIngredientsListRequestError } from '../services/burger-ingredients/reducers';
 import { useDispatch, useSelector } from "react-redux";
+
 
 export default function App() {
   const dispatch = useDispatch()
@@ -71,6 +73,7 @@ export default function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="*" element={<NotFound title={"Такой страницы не существует"} />} />
             </Routes>
           </DndProvider>

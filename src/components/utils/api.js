@@ -285,3 +285,19 @@ export function getOrderDetails(ingredients) {
 
   return request('orders', options)
 }
+
+export function getUser() {
+  options.method = 'GET'
+  options.headers.authorization = localStorage.getItem('accessToken');
+
+  try {
+    return requestWithRefresh('auth/user', options)
+      .then((response) => {
+        tokenUpload(response)
+      })
+  } catch(error) {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    throw error
+  }
+}
