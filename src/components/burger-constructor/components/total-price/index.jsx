@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './total-price.module.css';
 
 import {
@@ -8,6 +9,7 @@ import {
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getOrderDetails } from '../../../services/burger-constructor/actions';
+import { getUser } from '../../../services/auth/reducers';
 import { ingredientPropTypes } from '../../../utils/constants';
 
 TotalPrice.propTypes = {
@@ -17,6 +19,9 @@ TotalPrice.propTypes = {
 
 export function TotalPrice({ bun, ingredients }) {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const user = useSelector(getUser);
+  const navigate = useNavigate();
   const [burger, setBurger] = useState([]);
 
   useEffect(() => {
@@ -38,9 +43,13 @@ export function TotalPrice({ bun, ingredients }) {
   );
 
   const handleOnClick = useCallback(() => {
+    if (!user) {
+      return navigate('/login', { state: { from: location }});
+    }
+
     dispatch(getOrderDetails(idList));
     // eslint-disable-next-line
-  }, [idList]);
+  }, [burger])
 
   return (
     <div className={`${styles.total} pt-10`}>

@@ -5,7 +5,7 @@ import styles from './profile.module.css';
 
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getUser } from '../components/services/auth/reducers';
-import { logout, updateUserProfile } from '../components/services/auth/actions';
+import { updateUserProfile } from '../components/services/auth/actions';
 import { useForm } from '../components/utils/useForm';
 
 export function Profile() {
@@ -37,7 +37,6 @@ export function Profile() {
 
   const handleOnLogoutClick = (event) => {
     event.preventDefault();
-    dispatch(logout());
     navigate('/logout');
   }
 

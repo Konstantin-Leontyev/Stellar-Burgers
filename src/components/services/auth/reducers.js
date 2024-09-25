@@ -1,6 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getUserProfile, login, logout, register, updateUserProfile } from './actions'
-
+import { createSlice } from '@reduxjs/toolkit';
+import { getUserProfile, login, logout, register, setUser, updateUserProfile } from './actions'
 
 const initialState = {
   user: null,
@@ -14,6 +13,11 @@ export const authSlice = createSlice({
     getUser: state => state.user,
     getIsAuthChecked: state => state.isAuthChecked,
   },
+  reducers: {
+    setIsAuthChecked: (state, action) => {
+      state.isAuthChecked = action.payload
+    }
+  },
   extraReducers: builder => {
     builder
       .addCase(register.fulfilled, (state, action) => {
@@ -26,7 +30,9 @@ export const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state, action) => {
         state.user = null;
-        state.isAuthChecked = false;
+      })
+      .addCase(setUser, (state, action) => {
+        state.user = action.payload;
       })
       .addCase(getUserProfile.fulfilled, (state, action) => {
         state.user = action.payload.user;
@@ -37,5 +43,7 @@ export const authSlice = createSlice({
       })
   },
 });
+
+export const { setIsAuthChecked } = authSlice.actions;
 
 export const { getIsAuthChecked, getUser } = authSlice.selectors;

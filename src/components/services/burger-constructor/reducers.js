@@ -1,5 +1,6 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
-import { getOrderDetails } from "./actions";
+import { createSlice, nanoid } from '@reduxjs/toolkit';
+
+import { getOrderDetails } from './actions';
 
 const initialState = {
   currentBun: null,
@@ -7,7 +8,6 @@ const initialState = {
   orderDetails: null,
   isOrderDetailsLoading: false,
   hasOrderDetailsRequestError: false,
-  showOrderDetails: false,
 }
 
 export const burgerConstructorSlice = createSlice({
@@ -19,7 +19,6 @@ export const burgerConstructorSlice = createSlice({
     orderDetails: state => state.orderDetails,
     isOrderDetailsLoading: state => state.isOrderDetailsLoading,
     hasOrderDetailsRequestError: state => state.hasOrderDetailsRequestError,
-    showOrderDetails: state => state.showOrderDetails
   },
   reducers: {
     addCurrentBurgerBun: ((state, action) => {
@@ -34,7 +33,6 @@ export const burgerConstructorSlice = createSlice({
       }
     },
     deleteCurrentBurgerIngredient: ((state, action) => {
-      console.log(action.payload)
       state.currentIngredients = [...state.currentIngredients.filter(ingredient => ingredient.key !== action.payload)];
     }),
     moveIngredients: ((state, action) => {
@@ -44,7 +42,9 @@ export const burgerConstructorSlice = createSlice({
       state.currentIngredients = newIngredients;
     }),
     resetOrderDetails: ((state) => {
-      state.showOrderDetails = false;
+      state.currentBun = null;
+      state.currentIngredients = [];
+      state.orderDetails = null;
 }),
   },
   extraReducers: builder => {
@@ -56,7 +56,6 @@ export const burgerConstructorSlice = createSlice({
       .addCase(getOrderDetails.fulfilled, (state, action) => {
         state.orderDetails = action.payload;
         state.isOrderDetailsLoading = false;
-        state.showOrderDetails = true;
       })
       .addCase(getOrderDetails.rejected, (state, action) => {
         state.hasOrderDetailsRequestError = action.error?.message;
@@ -71,7 +70,6 @@ export const {
   isOrderDetailsLoading,
   hasOrderDetailsRequestError,
   orderDetails,
-  showOrderDetails
 } = burgerConstructorSlice.selectors;
 
 export const {

@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getIngredients } from "./actions";
+import { createSlice } from '@reduxjs/toolkit';
+import { getIngredients } from './actions';
 
 const initialState = {
   ingredientsList: [],
@@ -41,7 +41,7 @@ export const burgerIngredientsSlice = createSlice({
         ...state.ingredientsList.map(ingredient => ingredient._id === action.payload._id
           ? {
             ...ingredient,
-            __v: ingredient.__v -= 1
+            __v: action.payload.type === 'bun' ? -2 : ingredient.__v -= 1
           }
           : ingredient
         )

@@ -5,7 +5,7 @@ import styles from './burger-constructor.module.css';
 
 import { FilledElement } from '../components/filled-element';
 import { EmptyElement } from '../components/empty-element';
-import { Modal } from '../../modal';
+import { Modal, ModalPreloader } from '../../modal';
 import { OrderDetails } from '../components/order-details';
 import { TotalPrice } from '../components/total-price';
 
@@ -16,9 +16,9 @@ import {
   isOrderDetailsLoading,
   hasOrderDetailsRequestError,
   resetOrderDetails,
-  showOrderDetails,
-} from "../../services/burger-constructor/reducers";
-import { setIngredientCount } from "../../services/burger-ingredients/reducers";
+  orderDetails,
+} from '../../services/burger-constructor/reducers';
+import { resetIngredientCount, setIngredientCount } from '../../services/burger-ingredients/reducers';
 
 export function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -44,11 +44,13 @@ export function BurgerConstructor() {
 
   const isLoading = useSelector(isOrderDetailsLoading);
   const hasError = useSelector(hasOrderDetailsRequestError);
-  const showDetails = useSelector(showOrderDetails);
+  const details = useSelector(orderDetails);
 
   const scroll = ingredients.length > 5 ? `${styles.scroll} custom-scroll` : 'mr-5';
 
   function onModalClose() {
+    ingredients.map(ingredient => dispatch(resetIngredientCount(ingredient)));
+    dispatch(resetIngredientCount(bun));
     dispatch(resetOrderDetails());
   }
 
@@ -91,12 +93,13 @@ export function BurgerConstructor() {
         <TotalPrice bun={bun} ingredients={ingredients} />
       }
       {
-        !isLoading &&
-        !hasError &&
-        showDetails &&
-        <Modal onClose={onModalClose}>
-          <OrderDetails />
-        </Modal>
+        isLoading
+        ? <ModalPreloader title={'Оформление заказа ...'} />
+        : !hasError &&
+          details &&
+          <Modal onClose={onModalClose}>
+            <OrderDetails />
+          </Modal>
       }
     </section>
   );
