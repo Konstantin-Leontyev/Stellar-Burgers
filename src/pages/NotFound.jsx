@@ -1,19 +1,19 @@
 import React, {useEffect} from 'react';
-import PropTypes from "prop-types";
-import {useDispatch} from "react-redux";
-import styles from './auth.module.css';
+import PropTypes from 'prop-types';
+import {useDispatch} from 'react-redux';
+import styles from './pages.module.css';
 
-import { logout } from "../components/services/auth/actions";
+import { logout } from '../components/services/auth/actions';
 
 NotFound.propTypes = {
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
 }
 
 export function NotFound({title}) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(logout())
+    dispatch(logout());
     // eslint-disable-next-line
   }, [])
 

@@ -1,40 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
-import styles from './auth.module.css';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import styles from './pages.module.css';
 
-import { Button, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { getUser } from "../components/services/auth/reducers";
-import { login } from "../components/services/auth/actions";
-import { useDispatch, useSelector } from "react-redux";
-
+import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { getUser } from '../components/services/auth/reducers';
+import { login } from '../components/services/auth/actions';
+import { useForm } from '../components/utils/useForm';
 
 export function Login() {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
   const navigate = useNavigate();
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
-
-  const onEmailChange = (event) => {
-    setEmailValue(event.target.value)
-  }
-
-  const onPasswordChange = (event) => {
-    setPasswordValue(event.target.value)
-  }
+  const { formData, handleOnChange } = useForm({});
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    const formData = {
-      email: emailValue,
-      password: passwordValue,
-    }
     dispatch(login(formData));
   }
 
   useEffect(() => {
     if (user) {
-      navigate('/')
+      navigate('/');
     }
     // eslint-disable-next-line
   }, [user])
@@ -45,15 +32,15 @@ export function Login() {
       <EmailInput
         extraClass="mt-6"
         name="email"
-        onChange={onEmailChange}
+        onChange={handleOnChange}
         placeholder="E-mail"
-        value={emailValue}
+        value={formData.email ?? ""}
       />
       <PasswordInput
         extraClass="mt-6"
         name="password"
-        onChange={onPasswordChange}
-        value={passwordValue}
+        onChange={handleOnChange}
+        value={formData.password ?? ""}
       />
       <Button
         extraClass="mt-6"

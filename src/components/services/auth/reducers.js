@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUserInfo, login, logout, register } from './actions'
+import { getUserProfile, login, logout, register, updateUserProfile } from './actions'
 
 
 const initialState = {
@@ -28,9 +28,12 @@ export const authSlice = createSlice({
         state.user = null;
         state.isAuthChecked = false;
       })
-      .addCase(getUserInfo.fulfilled, (state, action) => {
+      .addCase(getUserProfile.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.isAuthChecked = true;
+      })
+      .addCase(updateUserProfile.fulfilled, (state, action) => {
+        state.user = action.payload.user;
       })
   },
 });

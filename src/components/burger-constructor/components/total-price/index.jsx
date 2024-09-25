@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import PropTypes from "prop-types";
-import styles from './total-price.module.css'
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import styles from './total-price.module.css';
 
 import {
   Button,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { getOrderDetails } from "../../../services/burger-constructor/actions";
-import { ingredientPropTypes } from "../../../utils/constants";
-import { useDispatch } from "react-redux";
+import { getOrderDetails } from '../../../services/burger-constructor/actions';
+import { ingredientPropTypes } from '../../../utils/constants';
 
 TotalPrice.propTypes = {
   bun: ingredientPropTypes.isRequired,
@@ -17,7 +17,7 @@ TotalPrice.propTypes = {
 
 export function TotalPrice({ bun, ingredients }) {
   const dispatch = useDispatch();
-  const [burger, setBurger] = useState([])
+  const [burger, setBurger] = useState([]);
 
   useEffect(() => {
     setBurger([

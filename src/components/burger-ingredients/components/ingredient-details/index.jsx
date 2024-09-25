@@ -1,9 +1,9 @@
 import React from 'react';
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styles from './ingredient-details.module.css';
 
-import { useSelector } from "react-redux";
-import {useParams} from "react-router-dom";
-import {ingredientsList} from "../../../services/burger-ingredients/reducers";
+import { ingredientsList } from "../../../services/burger-ingredients/reducers";
 
 export function IngredientDetails() {
   const { id } = useParams();

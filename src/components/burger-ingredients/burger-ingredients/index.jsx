@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './burger-ingredients.module.css';
 
-import { IngredientCard } from './components/ingredient-card/ingredient-card';
-import { IngredientsTab } from './components/ingredients-tab/ingredients-tab';
-import { ingredientsList, setTab } from "../services/burger-ingredients/reducers";
-import { useDispatch, useSelector } from "react-redux";
+import { IngredientCard } from '../components/ingredient-card';
+import { IngredientsTab } from '../components/ingredients-tab';
+import { ingredientsList, setTab } from '../../services/burger-ingredients/reducers';
 
 export function BurgerIngredients() {
   const dispatch = useDispatch();
@@ -26,14 +26,14 @@ export function BurgerIngredients() {
     let sauceTop = Math.abs(cursor - sauceRef.current.getBoundingClientRect().top);
     let innerTop = Math.abs(cursor - innerRef.current.getBoundingClientRect().top);
 
-    let closestTitle = Math.min(...[bunTop, sauceTop, innerTop])
+    let closestTitle = Math.min(...[bunTop, sauceTop, innerTop]);
 
     if (closestTitle === bunTop) {
-      dispatch(setTab('Булки'))
+      dispatch(setTab('Булки'));
     } else if (closestTitle === sauceTop) {
-      dispatch(setTab('Соусы'))
+      dispatch(setTab('Соусы'));
     } else if (closestTitle === innerTop) {
-      dispatch(setTab('Начинки'))
+      dispatch(setTab('Начинки'));
     }
   }
 

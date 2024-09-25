@@ -1,35 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from "react-router-dom";
-import styles from "./auth.module.css";
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import styles from './pages.module.css';
 
-import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { resetPassword } from "../components/utils/api";
+import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { resetPassword } from '../components/utils/api';
+import { useForm } from '../components/utils/useForm';
 
 export function ResetPassword() {
   const navigate = useNavigate();
-  const [passwordValue, setPasswordValue] = useState('');
-  const [inputValue, setInputValue] = useState('');
-
-  const onInputChange = (event) => {
-    setInputValue(event.target.value);
-  }
-
-  const onPasswordChange = (event) => {
-    setPasswordValue(event.target.value);
-  }
+  const { formData, handleOnChange } = useForm({});
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    let formData = {
-      password: passwordValue,
-      token: inputValue
-    };
 
     resetPassword(formData)
       .then((response) => {
         if (response.success) {
           localStorage.removeItem('forgotPassword');
-          navigate('/')
+          navigate('/');
         }
     })
   }
@@ -47,17 +35,17 @@ export function ResetPassword() {
       <PasswordInput
         extraClass="mt-6"
         name="password"
-        onChange={onPasswordChange}
+        onChange={handleOnChange}
         placeholder="Введите новый пароль"
-        value={passwordValue}
+        value={formData.password ?? ""}
       />
       <Input
         extraClass="mt-6"
-        name="input"
-        onChange={onInputChange}
+        name="token"
+        onChange={handleOnChange}
         placeholder="Введите код из письма"
         type="text"
-        value={inputValue}
+        value={formData.token ?? ""}
       />
       <Button
         extraClass="mt-6"

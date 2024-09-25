@@ -1,13 +1,13 @@
 import React from 'react';
-import { useDrop } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
+import { useDrop } from 'react-dnd';
 import styles from './burger-constructor.module.css';
 
-import { FilledElement } from './components/filled-element/filled-element';
-import { TotalPrice } from './components/total-price/total-price';
-import { EmptyElement } from "./components/empty-element/empty-element";
-import { Modal } from "../modal/modal";
-import { OrderDetails } from "./components/order-details/order-details";
+import { FilledElement } from '../components/filled-element';
+import { EmptyElement } from '../components/empty-element';
+import { Modal } from '../../modal';
+import { OrderDetails } from '../components/order-details';
+import { TotalPrice } from '../components/total-price';
 
 import {
   addCurrentBurgerBun,
@@ -17,8 +17,8 @@ import {
   hasOrderDetailsRequestError,
   resetOrderDetails,
   showOrderDetails,
-} from "../services/burger-constructor/reducers";
-import { setIngredientCount } from "../services/burger-ingredients/reducers";
+} from "../../services/burger-constructor/reducers";
+import { setIngredientCount } from "../../services/burger-ingredients/reducers";
 
 export function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -34,12 +34,12 @@ export function BurgerConstructor() {
       else {
         dispatch(addCurrentBurgerIngredient(item));
       }
-      dispatch(setIngredientCount(item))
+      dispatch(setIngredientCount(item));
     },
     collect: monitor => ({
       isOver: monitor.isOver(),
       item: monitor.getItem(),
-    })
+    }),
   });
 
   const isLoading = useSelector(isOrderDetailsLoading);

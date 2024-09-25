@@ -1,15 +1,14 @@
 import React from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import { useSelector } from "react-redux";
 import styles from './ingredients-tab.module.css';
 
+import { categoryPropTypes } from '../../../utils/constants';
+import { currentTab } from '../../../services/burger-ingredients/reducers';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import { categoryPropTypes } from "../../../utils/constants";
-import { currentTab } from "../../../services/burger-ingredients/reducers";
-import { useSelector } from "react-redux";
-
 
 IngredientsTab.propTypes = {
-  categories: PropTypes.arrayOf(categoryPropTypes).isRequired
+  categories: PropTypes.arrayOf(categoryPropTypes).isRequired,
 };
 
 export function IngredientsTab({ categories }){

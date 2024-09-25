@@ -1,50 +1,45 @@
-import React, {useEffect, useState} from 'react';
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './profile.module.css';
 
-import { Button, EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { getUser } from "../components/services/auth/reducers";
-import { useSelector } from "react-redux";
+import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { getUser } from '../components/services/auth/reducers';
+import { logout, updateUserProfile } from '../components/services/auth/actions';
+import { useForm } from '../components/utils/useForm';
 
 export function Profile() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector(getUser);
-  const [emailValue, setEmailValue] = useState('');
-  const [passwordValue, setPasswordValue] = useState('');
-  const [nameValue, setNameValue] = useState('');
+  const [isChanged, setIsChanged] = useState(false);
+  const { formData, handleOnChange } = useForm({ name: user?.name ?? "", email: user?.email ?? "" });
 
-  const onEmailChange = (event) => {
-    setEmailValue(event.target.value)
-  }
-
-  const onNameChange = (event) => {
-    setNameValue(event.target.value)
-  }
-
-  const onPasswordChange = (event) => {
-    setPasswordValue(event.target.value)
-  }
-
-  const handleOnSubmit = (event) => {
-    event.preventDefault();
-    const formData = {
-      name: nameValue,
-      email: emailValue,
-      password: passwordValue,
-    }
-    // dispatch(profileUpdate(formData));
-  }
-
-  const handleOnReset = (event) => {
+  function handleOnReset(event) {
     event.preventDefault();
 
-    // dispatch(profileUpdate(formData));
+    formData.name = user?.name ?? "";
+    formData.email = user?.email ?? "";
+    setIsChanged(false);
   }
 
-  useEffect(() => {
-    console.log(user)
-    // setNameValue(user.name)
-    // setEmailValue(user.email)
-  }, []);
+  function handleOnFormChange(event) {
+    event.preventDefault();
+
+    setIsChanged(true);
+  }
+
+  function handleOnSubmit(event) {
+    event.preventDefault();
+
+    dispatch(updateUserProfile(formData));
+  }
+
+  const handleOnLogoutClick = (event) => {
+    event.preventDefault();
+    dispatch(logout());
+    navigate('/logout');
+  }
 
   return (
     <div className={styles.container}>
@@ -57,41 +52,42 @@ export function Profile() {
             <Link className={`${styles.link} text text_type_main-medium`} to="/feed">История заказов</Link>
           </li>
           <li className={styles.li}>
-            <Link className={`${styles.link} text text_type_main-medium`} to="/logout">Выход</Link>
+            <button className={`${styles.logout_button} text text_type_main-medium`} onClick={handleOnLogoutClick}>Выход</button>
           </li>
         </ul>
         <span className="text text_type_main-default text_color_inactive">
           В этом разделе вы можете изменить свои персональные данные
         </span>
       </div>
-      <form className="ml-25" onSubmit={handleOnSubmit} onReset={handleOnReset}>
+      <form className="ml-25" onChange={handleOnFormChange} onSubmit={handleOnSubmit} onReset={handleOnReset}>
         <Input
           name="name"
           icon="EditIcon"
-          onChange={onNameChange}
+          onChange={handleOnChange}
           placeholder="Имя"
           type="text"
-          value={nameValue}
+          value={formData.name}
         />
         <EmailInput
           extraClass="mt-6"
           icon="EditIcon"
           name="email"
-          onChange={onEmailChange}
+          onChange={handleOnChange}
           placeholder="Логин"
-          value={emailValue}
+          value={formData.email}
         />
         <PasswordInput
           extraClass="mt-6"
           icon="EditIcon"
           name="password"
-          onChange={onPasswordChange}
+          onChange={handleOnChange}
           placeholder="Пароль"
-          value={passwordValue}
+          value={formData.password ?? ""}
         />
-        <div className={`${styles.buttons} mt-6`}>
+        { isChanged &&
+        <div className={`${styles.buttons}`}>
           <Button
-            className={styles.abort_button}
+            className={styles.reset_button}
             htmlType="reset"
             size={"medium"}
           >
@@ -106,6 +102,7 @@ export function Profile() {
             Сохранить
           </Button>
         </div>
+        }
       </form>
     </div>
   );

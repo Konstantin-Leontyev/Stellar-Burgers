@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
+import { NavLink } from "react-router-dom";
 import styles from './header.module.css';
 
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components';
-import { HeaderItem } from './header-item/header-item';
-import { headerItemsInitialState } from '../utils/constants';
-import {NavLink} from "react-router-dom";
+import { HeaderItem } from '../header-item';
+import { headerItemsInitialState } from '../../utils/constants';
 
-export function AppHeader() {
+export function Header() {
   const [items, setItems] = useState(headerItemsInitialState);
   const navItems = items.filter(item => item.type === 'navItems');
   const authItems = items.filter(item => item.type === 'authItems');

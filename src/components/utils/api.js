@@ -1,6 +1,6 @@
 import { baseUrl } from './constants';
 
-let options ={
+let defaultOptions = {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
@@ -15,7 +15,7 @@ function checkResponse(response) {
     return response.json();
   }
 
-  return Promise.reject(`Ошибка ${response.status} - ${response.details}`);
+  return response.json().then((error) => Promise.reject(error));
 }
 
 /**
@@ -31,12 +31,12 @@ function request(endpoint, options) {
  */
 function tokenUpload(responseData) {
   if (!responseData.success) {
-    return Promise.reject(responseData);
+    return Promise.reject(`Ошибка ${responseData.status} - ${responseData.details}`);
   }
 
   localStorage.setItem('accessToken', responseData.accessToken);
   localStorage.setItem('refreshToken', responseData.refreshToken);
-  return responseData;
+  return Promise.resolve(responseData);
 }
 
 /**
@@ -56,28 +56,35 @@ function tokenUpload(responseData) {
  * @permission Auth only.
  * @returns {Object} Refresh request status and new JWT tokens.
  */
-export const refreshToken = () => {
-  options.body = JSON.stringify({token: localStorage.getItem('refreshToken')});
-
-  return request('/auth/token', options)
-    .then((refreshData) => {
-        return tokenUpload(refreshData);
+function refreshToken() {
+  const options = {
+    ...defaultOptions,
+    body: JSON.stringify({token: localStorage.getItem('refreshToken')})
+  };
+  return request('auth/token', options)
+    .then((refreshedData) => {
+        return tokenUpload(refreshedData);
     });
 }
 
-export const requestWithRefresh = (endpoint, options) => {
+/**
+ * Send authenticated with accessToken request and check response status.
+ * If accessToken is expired automatically sent refresh token request,
+ * and then repeat base request.
+ */
+async function requestWithRefresh(endpoint, options) {
   try {
-    return request(endpoint, options);
-  } catch (error) {
+    return await request(endpoint, options);
+  } catch(error) {
     if (error.message === 'jwt expired') {
-      const refreshData = refreshToken(); //обновляем токен
+      const refreshData = await refreshToken();
       options.headers.authorization = refreshData.accessToken;
-      return request(endpoint, options); //повторяем запрос
+      return request(endpoint, options);
     } else {
-      return Promise.reject(error);
+      throw error;
     }
   }
-};
+}
 
 /**
  * Send ingredients list request.
@@ -109,7 +116,7 @@ export const requestWithRefresh = (endpoint, options) => {
 export function getIngredients() {
   return request('ingredients')
     .then((jsonResponse) => {
-      return jsonResponse.data
+      return jsonResponse.data;
     });
 }
 
@@ -137,12 +144,16 @@ export function getIngredients() {
  * @returns {Object} Register request status, JWT tokens and user object.
  */
 export function registerUser(formData) {
-  options.body = JSON.stringify({...formData});
+  console.log(formData)
+  const options = {
+    ...defaultOptions,
+    body: JSON.stringify(formData),
+  };
 
   return request('auth/register', options)
     .then((response) => {
       return tokenUpload(response);
-    })
+    });
 }
 
 /**
@@ -168,7 +179,10 @@ export function registerUser(formData) {
  * @returns {Object} Login request status, JWT tokens and user object.
  */
 export function loginUser(formData) {
-  options.body = JSON.stringify({...formData});
+  const options = {
+    ...defaultOptions,
+    body: JSON.stringify(formData),
+  };
 
   return request('auth/login', options)
     .then((response) => {
@@ -193,7 +207,10 @@ export function loginUser(formData) {
  * @returns {Object} Logout request status.
  */
 export function logoutUser() {
-  options.body = JSON.stringify({token: localStorage.getItem('refreshToken')});
+  const options = {
+    ...defaultOptions,
+    body: JSON.stringify({token: localStorage.getItem('refreshToken')})
+  };
 
   return request('auth/logout', options)
   .then((response) => {
@@ -225,7 +242,10 @@ export function logoutUser() {
  * @returns {Object} Email conformation sent status.
  */
 export async function sendPasswordResetConformationEmail(email) {
-  options.body = JSON.stringify({email});
+  const options = {
+    ...defaultOptions,
+    body: JSON.stringify(email)
+  }
 
   return await request('password-reset', options);
 }
@@ -249,9 +269,12 @@ export async function sendPasswordResetConformationEmail(email) {
  * @returns {Object} Password reset request status.
  */
 export async function resetPassword(formData) {
-  options.body = JSON.stringify({...formData});
+  const options = {
+    ...defaultOptions,
+    body: JSON.stringify(formData)
+  }
 
-  return await request(`password-reset/reset`, options)
+  return await request(`password-reset/reset`, options);
 }
 
 /**
@@ -281,23 +304,86 @@ export async function resetPassword(formData) {
  * @returns {Object} Order details object.
  */
 export function getOrderDetails(ingredients) {
-  options.body = JSON.stringify({ingredients})
+  const options = {
+    ...defaultOptions,
+    body: JSON.stringify({ingredients}),
+    headers: {
+        ...defaultOptions.headers,
+        authorization: localStorage.getItem("accessToken")
+    }
+  }
 
-  return request('orders', options)
+  return request('orders', options);
 }
 
-export function getUser() {
-  options.method = 'GET'
-  options.headers.authorization = localStorage.getItem('accessToken');
+/**
+ * Get auth user data.
+ * @example
+ * // response
+ * {
+ *   "success": true,
+ *   "user": {
+ *     "email": "",
+ *     "name": ""
+ *   }
+ * }
+ * @permission Auth user only.
+ * @returns {Object} Request status and user data.
+ */
+export async function getUser() {
+  const options = {
+    ...defaultOptions,
+    method: 'GET',
+    headers: {
+      ...defaultOptions.headers,
+      authorization: localStorage.getItem('accessToken')
+    }
+  }
 
   try {
-    return requestWithRefresh('auth/user', options)
+    return await requestWithRefresh('auth/user', options)
       .then((response) => {
-        tokenUpload(response)
-      })
+        tokenUpload(response);
+      });
   } catch(error) {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
-    throw error
+    throw error;
   }
+}
+
+/**
+ * Update auth user data.
+ * @param {Object} formData Submitted form data.
+ * @example
+ * // request body
+ * {
+ *   "email": "",
+ *   "password": "",
+ *   "name": ""
+ * }
+ * @example
+ * // response
+ * {
+ *   "success": true,
+ *   "user": {
+ *     "email": "",
+ *     "name": ""
+ *   }
+ * }
+ * @permission Auth user only.
+ * @returns {Object} Request status and user data.
+ */
+export function updateUser(formData) {
+  const options = {
+    ...defaultOptions,
+    method: 'PATCH',
+    headers: {
+      ...defaultOptions.headers,
+      authorization: localStorage.getItem('accessToken')
+    },
+    body: JSON.stringify(formData)
+  }
+
+  return requestWithRefresh('auth/user', options);
 }

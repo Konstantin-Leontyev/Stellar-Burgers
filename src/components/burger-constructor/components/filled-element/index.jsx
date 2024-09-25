@@ -1,13 +1,13 @@
 import React, { useCallback, useRef } from 'react';
-import PropTypes from "prop-types";
-import { useDrag, useDrop } from "react-dnd";
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { useDrag, useDrop } from 'react-dnd';
 import styles from './filled-element.module.css'
 
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { deleteCurrentBurgerIngredient, moveIngredients} from "../../../services/burger-constructor/reducers";
-import { ingredientPropTypes } from "../../../utils/constants";
-import { resetIngredientCount } from "../../../services/burger-ingredients/reducers";
-import { useDispatch } from "react-redux";
+import { deleteCurrentBurgerIngredient, moveIngredients} from '../../../services/burger-constructor/reducers';
+import { ingredientPropTypes } from '../../../utils/constants';
+import { resetIngredientCount } from '../../../services/burger-ingredients/reducers';
 
 FilledElement.propTypes = {
   type: PropTypes.string,
@@ -44,39 +44,39 @@ export function FilledElement({ ingredient, index, type}) {
       return {key, index};
     },
     collect: monitor => ({
-      isDragging: monitor.isDragging()
+      isDragging: monitor.isDragging(),
     })
   })
 
-  const opacity = isDragging ? 0 : 1
+  const opacity = isDragging ? 0 : 1;
 
   const [, dropRef] = useDrop({
     accept: 'card',
     hover: (item, monitor) => {
       if (!ref.current) {
-        return
+        return;
       }
-      const dragIndex = item.index
-      const hoverIndex = index
+      const dragIndex = item.index;
+      const hoverIndex = index;
       if (dragIndex === hoverIndex) {
-        return
+        return;
       }
-      const hoverBoundingRect = ref.current?.getBoundingClientRect()
-      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
-      const clientOffset = monitor.getClientOffset()
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const clientOffset = monitor.getClientOffset();
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return
+        return;
       }
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return
+        return;
       }
 
-      dispatch(moveIngredients({dragIndex, hoverIndex}))
+      dispatch(moveIngredients({dragIndex, hoverIndex}));
 
-      item.index = hoverIndex
+      item.index = hoverIndex;
     }
-  })
+  });
 
   dragRef(dropRef(ref));
 

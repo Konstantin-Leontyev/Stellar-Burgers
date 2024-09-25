@@ -1,10 +1,10 @@
 import React from 'react';
-import {Link, useLocation } from "react-router-dom";
-import { useDrag } from "react-dnd";
+import { Link, useLocation } from 'react-router-dom';
+import { useDrag } from 'react-dnd';
 import styles from './ingredients-card.module.css';
 
-import { ingredientPropTypes } from "../../../utils/constants";
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { ingredientPropTypes } from '../../../utils/constants';
 
 IngredientCard.propTypes = {
   ingredient: ingredientPropTypes.isRequired,

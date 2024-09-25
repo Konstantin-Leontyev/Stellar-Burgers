@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './order-details.module.css';
 
-import { orderDetails } from "../../../services/burger-constructor/reducers";
-import { useSelector } from "react-redux";
+import { orderDetails } from '../../../services/burger-constructor/reducers';
+import { useSelector } from 'react-redux';
 export function OrderDetails() {
   const { order } = useSelector(orderDetails);
 

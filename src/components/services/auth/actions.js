@@ -1,9 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   getUser,
-  loginUser,
-  logoutUser,
-  registerUser,
+  loginUser, logoutUser,
+  registerUser, updateUser,
 } from "../../utils/api";
 
 export const register = createAsyncThunk(
@@ -27,9 +26,16 @@ export const logout = createAsyncThunk(
   }
 );
 
-export const getUserInfo = createAsyncThunk(
-  'auth/get-user',
+export const getUserProfile = createAsyncThunk(
+  'auth/user',
   async () => {
     return getUser();
+  }
+);
+
+export const updateUserProfile = createAsyncThunk(
+  'auth/patch',
+  async (formData) => {
+    return updateUser(formData);
   }
 );

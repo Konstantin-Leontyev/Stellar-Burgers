@@ -1,28 +1,25 @@
-import React, { useState } from 'react';
-import { Button, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link, useNavigate } from "react-router-dom";
-import styles from "./auth.module.css";
+import React from 'react';
+import { Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Link, useNavigate } from 'react-router-dom';
+import styles from './pages.module.css';
 
-import { sendPasswordResetConformationEmail } from "../components/utils/api";
+import { sendPasswordResetConformationEmail } from '../components/utils/api';
+import { useForm } from '../components/utils/useForm';
 
 
 export function ForgotPassword() {
   const navigate = useNavigate();
-  const [emailValue, setEmailValue] = useState('');
-
-  const onEmailChange = (event) => {
-    setEmailValue(event.target.value)
-  }
+  const { formData, handleOnChange } = useForm({});
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    sendPasswordResetConformationEmail(emailValue)
+    sendPasswordResetConformationEmail(formData)
       .then((response) => {
         if (response.success) {
           localStorage.setItem('forgotPassword', 'true');
-          navigate('/reset-password')
+          navigate('/reset-password');
         }
-    })
+    });
   }
 
   return (
@@ -31,9 +28,9 @@ export function ForgotPassword() {
       <EmailInput
         extraClass="mt-6"
         name="email"
-        onChange={onEmailChange}
+        onChange={handleOnChange}
         placeholder="Укажите e-mail"
-        value={emailValue}
+        value={formData.email ?? ""}
       />
       <Button
         extraClass="mt-6"

@@ -1,15 +1,17 @@
 .container {
-  align-items: center;
+  align-items: stretch;
   display: flex;
   position: fixed;
   top: 50%;
   left: 50%;
   transform:translate(-50%, -50%);
   width: 1300px;
+  height: 250px;
 }
 
 .navigation {
   width: 320px;
+
 }
 
 .li {
@@ -34,8 +36,14 @@
   float: right;
 }
 
-.abort_button {
+.reset_button {
   background-color: #131316;
   color: #4c4cff;
+  border: none
+}
+
+.logout_button {
+  background-color: #131316;
+  color: white;
   border: none
 }

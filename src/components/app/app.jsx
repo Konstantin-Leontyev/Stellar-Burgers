@@ -1,33 +1,23 @@
 import React, { useEffect } from 'react';
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import './app.modules.css';
 
-import { AppHeader } from '../header/header';
-import { IngredientDetails } from "../burger-ingredients/components/ingredient-details/ingredient-details";
-import { Home } from "../../pages/Home";
-import { Login } from "../../pages/Login";
-import { Modal } from "../modal/modal";
-import { NotFound } from "../../pages/NotFound";
-import { Profile } from "../../pages/Profile";
-import { Register } from "../../pages/Register";
-import { ResetPassword } from "../../pages/ResetPassword";
-import { ForgotPassword } from "../../pages/ForgotPassword";
+import { ForgotPassword, Home, Login, NotFound, Profile, Register, ResetPassword } from '../../pages';
+import { Header } from '../header';
+import { ModalDetails } from '../modal';
 import { getIngredients } from '../services/burger-ingredients/actions';
 import { ingredientsList, isIngredientsListLoading, hasIngredientsListRequestError } from '../services/burger-ingredients/reducers';
 import { useDispatch, useSelector } from "react-redux";
 
-
 export default function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const location = useLocation();
-  const navigate = useNavigate();
-  // const state = location.state as { backgroundLocation?: location };
   const state = location.state;
 
   useEffect(() => {
-    dispatch(getIngredients())
+    dispatch(getIngredients());
     // eslint-disable-next-line
   }, []);
 
@@ -35,23 +25,9 @@ export default function App() {
   const hasError = useSelector(hasIngredientsListRequestError);
   const ingredients = useSelector(ingredientsList);
 
-  function onModalClose() {
-    navigate('/')
-  }
-
-  function ModalDetails() {
-    return (
-      <Modal
-        title="Детали ингредиента"
-        onClose={onModalClose}>
-        <IngredientDetails />
-      </Modal>
-    );
-  }
-
   return (
     <>
-      <AppHeader/>
+      <Header/>
       {isLoading && 'Загрузка...'}
       {hasError && 'Произошла ошибка'}
       {!isLoading &&
