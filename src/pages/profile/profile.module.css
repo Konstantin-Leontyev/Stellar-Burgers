@@ -27,9 +27,13 @@
   margin-bottom: 80px;
 }
 
-.link {
+.active {
   text-decoration: none;
   color: white;
+}
+
+.inactive {
+  text-decoration: none;
 }
 
 .buttons {

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './profile.module.css';
 
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { getUser } from '../components/services/auth/reducers';
-import { updateUserProfile } from '../components/services/auth/actions';
-import { useForm } from '../components/utils/useForm';
+import { getUser } from '../../components/services/auth/reducers';
+import { updateUserProfile } from '../../components/services/auth/actions';
+import { useForm } from '../../components/utils/useForm';
 
 export function Profile() {
   const dispatch = useDispatch();
@@ -20,6 +20,7 @@ export function Profile() {
 
     formData.name = user?.name ?? "";
     formData.email = user?.email ?? "";
+    formData.password = ""
     setIsChanged(false);
   }
 
@@ -40,18 +41,30 @@ export function Profile() {
     navigate('/logout');
   }
 
+  const active = `${styles.active} text text_type_main-medium`
+  const inactive = `${styles.inactive} text text_type_main-medium text_color_inactive`
+
   return (
     <div className={styles.container}>
       <div className={styles.navigation}>
         <ul className={styles.ul}>
           <li className={styles.li}>
-            <Link className={`${styles.link} text text_type_main-medium`} to="/profile">Профиль</Link>
+            <NavLink
+              className={({isActive}) => isActive ? active : inactive}
+              to="/profile">Профиль
+            </NavLink>
           </li>
           <li className={styles.li}>
-            <Link className={`${styles.link} text text_type_main-medium`} to="/feed">История заказов</Link>
+            <NavLink
+              className={({isActive}) => isActive ? active : inactive}
+              to="/feed">История заказов
+            </NavLink>
           </li>
           <li className={styles.li}>
-            <button className={`${styles.logout_button} text text_type_main-medium`} onClick={handleOnLogoutClick}>Выход</button>
+            <NavLink
+              className={({isActive}) => isActive ? active : inactive}
+              to="/logout">Выход
+            </NavLink>
           </li>
         </ul>
         <span className="text text_type_main-default text_color_inactive">

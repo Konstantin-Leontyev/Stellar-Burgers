@@ -141,7 +141,7 @@ export function getIngredients() {
  *   "refreshToken": ""
  * }
  * @permission Allow any.
- * @returns {Object} Register request status, JWT tokens and user object.
+ * @returns {Object} register request status, JWT tokens and user object.
  */
 export function registerUser(formData) {
   console.log(formData)
@@ -176,7 +176,7 @@ export function registerUser(formData) {
  *   }
  * }
  * @permission Allow any.
- * @returns {Object} Login request status, JWT tokens and user object.
+ * @returns {Object} login request status, JWT tokens and user object.
  */
 export function loginUser(formData) {
   const options = {
@@ -204,7 +204,7 @@ export function loginUser(formData) {
  *   "message": "Successful logout"
  * }
  * @permission Auth user only.
- * @returns {Object} Logout request status.
+ * @returns {Object} logout request status.
  */
 export function logoutUser() {
   const options = {

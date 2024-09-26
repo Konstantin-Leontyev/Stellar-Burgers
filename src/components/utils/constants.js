@@ -13,7 +13,6 @@ export const headerItemsInitialState = [
     name: 'BurgerIcon',
     route: '/',
     type: 'navItems',
-    // isActive: true,
     Icon: BurgerIcon,
   },
   {
@@ -21,7 +20,6 @@ export const headerItemsInitialState = [
     name: "ListIcon",
     route: '/feed',
     type: 'navItems',
-    // isActive: false,
     Icon: ListIcon,
   },
   {
@@ -29,7 +27,6 @@ export const headerItemsInitialState = [
     name: 'ProfileIcon',
     route: '/profile',
     type: 'authItems',
-    // isActive: false,
     Icon: ProfileIcon,
   },
 ];

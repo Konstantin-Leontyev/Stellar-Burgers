@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import styles from './pages.module.css';
+import styles from '../pages.module.css';
 
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { login } from '../components/services/auth/actions';
-import { useForm } from '../components/utils/useForm';
+import { login } from '../../components/services/auth/actions';
+import { useForm } from '../../components/utils/useForm';
 
 export function Login() {
   const dispatch = useDispatch();

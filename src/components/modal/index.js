@@ -1,6 +1,5 @@
 import { Modal } from './modal';
-import { ModalDetails } from './modal-details';
 import { ModalOverlay } from './modal-overlay';
-import { ModalPreloader } from './modal-preload';
+import { ModalPreloader } from './modal-preloader';
 
-export { Modal, ModalDetails, ModalOverlay, ModalPreloader };
+export { Modal, ModalOverlay, ModalPreloader };

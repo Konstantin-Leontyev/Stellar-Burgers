@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styles from './pages.module.css';
+import styles from '../pages.module.css';
 
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { resetPassword } from '../components/utils/api';
-import { useForm } from '../components/utils/useForm';
+import { resetPassword } from '../../components/utils/api';
+import { useForm } from '../../components/utils/useForm';
 
 export function ResetPassword() {
   const navigate = useNavigate();
@@ -16,14 +16,14 @@ export function ResetPassword() {
     resetPassword(formData)
       .then((response) => {
         if (response.success) {
-          localStorage.removeItem('forgotPassword');
+          localStorage.removeItem('forgot-password');
           navigate('/');
         }
     })
   }
 
   useEffect(() => {
-    if (!localStorage.getItem('forgotPassword')) {
+    if (!localStorage.getItem('forgot-password')) {
       navigate('/forgot-password');
     }
     // eslint-disable-next-line

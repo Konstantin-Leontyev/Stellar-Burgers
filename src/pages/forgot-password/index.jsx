@@ -1,11 +1,10 @@
 import React from 'react';
 import { Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
-import styles from './pages.module.css';
+import styles from '../pages.module.css';
 
-import { sendPasswordResetConformationEmail } from '../components/utils/api';
-import { useForm } from '../components/utils/useForm';
-
+import { sendPasswordResetConformationEmail } from '../../components/utils/api';
+import { useForm } from '../../components/utils/useForm';
 
 export function ForgotPassword() {
   const navigate = useNavigate();
@@ -16,7 +15,7 @@ export function ForgotPassword() {
     sendPasswordResetConformationEmail(formData)
       .then((response) => {
         if (response.success) {
-          localStorage.setItem('forgotPassword', 'true');
+          localStorage.setItem('forgot-password', 'true');
           navigate('/reset-password');
         }
     });
