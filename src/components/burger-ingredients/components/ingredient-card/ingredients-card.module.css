@@ -3,7 +3,15 @@
   position: relative;
   max-width: 272px;
   max-height: 208px;
+}
+
+.li {
   list-style: none;
+}
+
+.link{
+  text-decoration: none;
+  color: white;
 }
 
 .img {

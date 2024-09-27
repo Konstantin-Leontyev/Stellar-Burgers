@@ -1,14 +1,32 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styles from './ingredient-details.module.css';
 
-import { ingredientDetails } from "../../../services/ingredient-datails/reducer";
-import { useSelector } from "react-redux";
+import {
+  hasIngredientsListRequestError,
+  ingredientsList,
+  isIngredientsListLoading
+} from '../../../services/burger-ingredients/reducers';
+import {ModalPreloader} from "../../../modal";
 
-export function IngredientDetails() {
-  const ingredient = useSelector(ingredientDetails);
+
+export function IngredientDetailsCard() {
+  const { id } = useParams();
+  const isLoading = useSelector(isIngredientsListLoading);
+  const hasError = useSelector(hasIngredientsListRequestError);
+  const ingredients = useSelector(ingredientsList);
+  const ingredient = ingredients.find(ingredient => ingredient._id === id);
 
   return (
-    <div className={styles.wrapper}>
+    <>
+      {isLoading && <ModalPreloader title={'Загрузка ингредиентов ...'} />}
+      {hasError && 'Произошла ошибка'}
+      {
+        !isLoading &&
+        !hasError &&
+        ingredients.length > 0 &&
+        <div className={styles.wrapper}>
       <img
         className={styles.img}
         src={ingredient.image_large}
@@ -33,5 +51,7 @@ export function IngredientDetails() {
         </li>
       </ul>
     </div>
+      }
+    </>
   );
 }

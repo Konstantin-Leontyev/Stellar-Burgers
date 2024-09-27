@@ -4,34 +4,34 @@ import {
   BurgerIcon,
   ListIcon,
   ProfileIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+} from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 export const headerItemsInitialState = [
   {
-    title: "Конструктор",
-    name: "BurgerIcon",
-    type: "navItems",
-    isActive: true,
+    title: 'Конструктор',
+    name: 'BurgerIcon',
+    route: '/',
+    type: 'navItems',
     Icon: BurgerIcon,
   },
   {
     title: "Лента заказов",
     name: "ListIcon",
-    type: "navItems",
-    isActive: false,
+    route: '/feed',
+    type: 'navItems',
     Icon: ListIcon,
   },
   {
-    title: "Личный кабинет",
-    name: "ProfileIcon",
-    type: "authItems",
-    isActive: false,
+    title: 'Личный кабинет',
+    name: 'ProfileIcon',
+    route: '/profile',
+    type: 'authItems',
     Icon: ProfileIcon,
   },
 ];
 
-export const baseUrl = "https://norma.nomoreparties.space/api/";
+export const baseUrl = 'https://norma.nomoreparties.space/api/';
 
 
 export const ingredientPropTypes = PropTypes.shape({

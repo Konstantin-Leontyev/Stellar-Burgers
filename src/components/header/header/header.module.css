@@ -46,3 +46,8 @@
   justify-content: flex-end;
   margin-right: -22px;
 }
+
+.link {
+  text-decoration: none;
+  color: white;
+}

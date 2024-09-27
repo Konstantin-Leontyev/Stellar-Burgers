@@ -1,14 +1,16 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import PropTypes from "prop-types";
-import styles from './total-price.module.css'
+import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import styles from './total-price.module.css';
 
 import {
   Button,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { getOrderDetails } from "../../../services/burger-constructor/actions";
-import { ingredientPropTypes } from "../../../utils/constants";
-import { useDispatch } from "react-redux";
+import { getOrderDetails } from '../../../services/burger-constructor/actions';
+import { getUser } from '../../../services/auth/reducers';
+import { ingredientPropTypes } from '../../../utils/constants';
 
 TotalPrice.propTypes = {
   bun: ingredientPropTypes.isRequired,
@@ -17,7 +19,10 @@ TotalPrice.propTypes = {
 
 export function TotalPrice({ bun, ingredients }) {
   const dispatch = useDispatch();
-  const [burger, setBurger] = useState([])
+  const location = useLocation();
+  const user = useSelector(getUser);
+  const navigate = useNavigate();
+  const [burger, setBurger] = useState([]);
 
   useEffect(() => {
     setBurger([
@@ -38,8 +43,13 @@ export function TotalPrice({ bun, ingredients }) {
   );
 
   const handleOnClick = useCallback(() => {
+    if (!user) {
+      return navigate('/login', { state: { from: location }});
+    }
+
     dispatch(getOrderDetails(idList));
-  }, [burger]);
+    // eslint-disable-next-line
+  }, [burger])
 
   return (
     <div className={`${styles.total} pt-10`}>

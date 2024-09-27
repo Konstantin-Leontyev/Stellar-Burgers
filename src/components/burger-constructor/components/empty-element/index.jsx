@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import styles from './empty-element.module.css'
 
-import { ingredientPropTypes } from "../../../utils/constants";
+import { ingredientPropTypes } from '../../../utils/constants';
 
 EmptyElement.propTypes = {
   type: PropTypes.string.isRequired,
