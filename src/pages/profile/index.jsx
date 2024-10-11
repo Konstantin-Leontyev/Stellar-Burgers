@@ -36,11 +36,6 @@ export function Profile() {
     dispatch(updateUserProfile(formData));
   }
 
-  const handleOnLogoutClick = (event) => {
-    event.preventDefault();
-    navigate('/logout');
-  }
-
   const active = `${styles.active} text text_type_main-medium`
   const inactive = `${styles.inactive} text text_type_main-medium text_color_inactive`
 
