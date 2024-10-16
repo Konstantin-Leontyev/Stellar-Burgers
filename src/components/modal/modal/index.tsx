@@ -1,22 +1,26 @@
 import React, { useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { useNavigate } from "react-router-dom";
 import styles from './modal.module.css';
 
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ModalOverlay } from '../modal-overlay';
-import {useNavigate} from "react-router-dom";
 
 type TModalProps = {
-  title: string;
   children: React.JSX.Element;
   closeIcon?: boolean;
+  onClose?: () => void;
+  title?: string;
 };
 
 const modalRoot = document.getElementById('react-modals') as HTMLElement;
 
-export function Modal({ title, children, closeIcon = true }: TModalProps): React.JSX.Element {
+export function Modal({ title, children, onClose, closeIcon = true }: TModalProps): React.JSX.Element {
   const navigate = useNavigate();
   function onModalClose(): void {
+    if (onClose) {
+      onClose();
+    }
     navigate('/');
   }
 
