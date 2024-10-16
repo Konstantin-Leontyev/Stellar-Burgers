@@ -6,7 +6,7 @@ type TFormData = {
 
 type TUseForm = {
   formData: TFormData;
-  handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export function useForm(initialState: TFormData): TUseForm {

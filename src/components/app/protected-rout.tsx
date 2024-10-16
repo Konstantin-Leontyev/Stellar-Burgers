@@ -4,7 +4,12 @@ import { useSelector } from 'react-redux';
 
 import { getIsAuthChecked, getUser } from '../services/auth/reducers';
 
-function Protected({ component, onlyUnAuth = false }: { component: React.JSX.Element; onlyUnAuth?: boolean; }): React.JSX.Element {
+type TProtectedProps = {
+  component: React.JSX.Element;
+  onlyUnAuth?: boolean;
+};
+
+function Protected({ component, onlyUnAuth = false }: TProtectedProps): React.JSX.Element {
   const isAuthChecked = useSelector(getIsAuthChecked);
   const user = useSelector(getUser);
   const location = useLocation();

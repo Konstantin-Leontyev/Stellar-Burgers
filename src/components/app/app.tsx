@@ -16,8 +16,10 @@ export default function App() {
   const state = location.state;
 
   useEffect(() => {
+    // TODO delete ts-ignore
     // @ts-ignore
     dispatch(checkUserAuth());
+    // TODO delete ts-ignore
     // @ts-ignore
     dispatch(getIngredients());
     // eslint-disable-next-line

@@ -9,6 +9,7 @@ import { Modal, ModalPreloader } from '../../modal';
 import { OrderDetails } from '../components/order-details';
 import { TotalPrice } from '../components/total-price';
 
+import { TIngredient } from "../../utils/types";
 import {
   addCurrentBurgerBun,
   addCurrentBurgerIngredient,
@@ -20,12 +21,20 @@ import {
 } from '../../services/burger-constructor/reducers';
 import { resetIngredientCount, setIngredientCount } from '../../services/burger-ingredients/reducers';
 
-export function BurgerConstructor() {
-  const dispatch = useDispatch();
-  const bun = useSelector(currentBun);
-  const ingredients = useSelector(currentIngredients);
+// TODO replace key
+type TKeyIngredient = TIngredient & { key: string };
 
-  const [{ isOver, item }, dropTarget] = useDrop({
+type TCollectedProps = {
+  isOver: boolean;
+  item: TIngredient;
+};
+
+export function BurgerConstructor(): React.JSX.Element {
+  const dispatch = useDispatch();
+
+  const bun: TKeyIngredient  = useSelector(currentBun);
+  const ingredients: TKeyIngredient[] = useSelector(currentIngredients);
+  const [{ isOver, item }, dropTarget] = useDrop<TIngredient, unknown, TCollectedProps>({
     accept: 'ingredient',
     drop(item) {
       if (item.type === 'bun') {
@@ -51,6 +60,7 @@ export function BurgerConstructor() {
   function onModalClose() {
     ingredients.map(ingredient => dispatch(resetIngredientCount(ingredient)));
     dispatch(resetIngredientCount(bun));
+    // @ts-ignore
     dispatch(resetOrderDetails());
   }
 
