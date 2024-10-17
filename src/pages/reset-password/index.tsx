@@ -11,7 +11,7 @@ export function ResetPassword(): React.JSX.Element {
   const navigate = useNavigate();
   const { formData, handleOnChange } = useForm<TPasswordResetData>({} as TPasswordResetData);
 
-  function handleOnSubmit(event: FormEvent): void {
+  function handleOnSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
 
     resetPassword(formData)

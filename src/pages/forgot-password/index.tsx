@@ -11,7 +11,7 @@ export function ForgotPassword(): React.JSX.Element {
   const navigate = useNavigate();
   const { formData, handleOnChange } = useForm<TPasswordConformationData>({} as TPasswordConformationData);
 
-  function handleOnSubmit(event: FormEvent) {
+  function handleOnSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     sendPasswordResetConformationEmail(formData)
       .then((response) => {

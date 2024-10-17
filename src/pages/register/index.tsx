@@ -12,7 +12,7 @@ export function Register(): React.JSX.Element {
   const dispatch = useDispatch();
   const { formData, handleOnChange } = useForm<TUserRegisterData>({} as TUserRegisterData);
 
-  function handleOnSubmit(event: FormEvent): void {
+  function handleOnSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
     // TODO remove ts-ignore
     // @ts-ignore

@@ -16,7 +16,7 @@ export function Profile(): React.JSX.Element {
   const [isChanged, setIsChanged] = useState(false);
   const { formData, handleOnChange } = useForm<TUserUpdateData>({} as TUserUpdateData);
 
-  function handleOnReset(event: FormEvent): void {
+  function handleOnReset(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
 
     // TODO use prevent data
@@ -32,7 +32,7 @@ export function Profile(): React.JSX.Element {
     setIsChanged(true);
   }
 
-  function handleOnSubmit(event: FormEvent): void {
+  function handleOnSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
     // TODO remove ts-ignore
     // @ts-ignore
