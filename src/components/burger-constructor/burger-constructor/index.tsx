@@ -31,7 +31,6 @@ type TCollectedProps = {
 
 export function BurgerConstructor(): React.JSX.Element {
   const dispatch = useDispatch();
-
   const bun: TKeyIngredient  = useSelector(currentBun);
   const ingredients: TKeyIngredient[] = useSelector(currentIngredients);
   const [{ isOver, item }, dropTarget] = useDrop<TIngredient, unknown, TCollectedProps>({
@@ -66,51 +65,53 @@ export function BurgerConstructor(): React.JSX.Element {
 
   return (
     <section className={`${styles.container} pt-25`} ref={dropTarget}>
-      <div className={styles.topBottomElement} >
-        {
-          bun
-          ? <FilledElement type="top" ingredient={bun} />
-          : <EmptyElement type="top" item={item} isOver={isOver} />
-        }
-      </div>
-      <ul className={styles.ul} >
-        <div className={scroll}>
+      <>
+        <div className={styles.topBottomElement} >
           {
-            ingredients.length > 0
-              ? ingredients.map((ingredient, index) =>
-                <li
-                  className={`${styles.mainElement} ${index !== ingredients.length - 1 ? "pb-4" : null}`}
-                  key={ingredient.key}
-                >
-                  <FilledElement ingredient={ingredient} index={index}/>
-                </li>)
-              : <li className={`${styles.mainElement}`}>
-                  <EmptyElement type={"main"} item={item} isOver={isOver}/>
-                </li>
+            bun
+            ? <FilledElement type="top" ingredient={bun} />
+            : <EmptyElement type="top" item={item} isOver={isOver} />
           }
         </div>
-      </ul>
-      <div className={styles.topBottomElement} >
+        <ul className={styles.ul} >
+          <div className={scroll}>
+            {
+              ingredients.length > 0
+                ? ingredients.map((ingredient, index) =>
+                  <li
+                    className={`${styles.mainElement} ${index !== ingredients.length - 1 ? "pb-4" : null}`}
+                    key={ingredient.key}
+                  >
+                    <FilledElement ingredient={ingredient} index={index}/>
+                  </li>)
+                : <li className={`${styles.mainElement}`}>
+                    <EmptyElement type={"main"} item={item} isOver={isOver}/>
+                  </li>
+            }
+          </div>
+        </ul>
+        <div className={styles.topBottomElement} >
+          {
+            bun
+            ? <FilledElement type="bottom" ingredient={bun} />
+            : <EmptyElement type={"bottom"} item={item} isOver={isOver} />
+          }
+        </div>
         {
-          bun
-          ? <FilledElement type="bottom" ingredient={bun} />
-          : <EmptyElement type={"bottom"} item={item} isOver={isOver} />
+          bun &&
+          ingredients.length > 0 &&
+          <TotalPrice bun={bun} ingredients={ingredients} />
         }
-      </div>
-      {
-        bun &&
-        ingredients.length > 0 &&
-        <TotalPrice bun={bun} ingredients={ingredients} />
-      }
-      {
-        isLoading
-        ? <ModalPreloader title={'Оформление заказа ...'} />
-        : !hasError &&
-          details &&
-          <Modal onClose={onModalClose}>
-            <OrderDetails />
-          </Modal>
-      }
+        {
+          isLoading
+          ? <ModalPreloader title={'Оформление заказа ...'} />
+          : !hasError &&
+            details &&
+            <Modal onClose={onModalClose}>
+              <OrderDetails />
+            </Modal>
+        }
+      </>
     </section>
   );
 }

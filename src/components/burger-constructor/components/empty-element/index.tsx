@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './empty-element.module.css'
 
-import {TIngredient} from "../../../utils/types";
+import { TIngredient } from "../../../utils/types";
 
 type TEmptyElementProps = {
   type: string;
