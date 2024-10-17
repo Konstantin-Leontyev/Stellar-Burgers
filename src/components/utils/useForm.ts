@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
 
-type TFormData = {
-  [key: string]: string;
-};
-
-type TUseForm = {
-  formData: TFormData;
+type TUseForm<T> = {
+  formData: T
   handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export function useForm(initialState: TFormData): TUseForm {
+export function useForm<T>(initialState: T): TUseForm<T> {
   const [formData, setFormData] = useState(initialState);
 
   function handleOnChange(event: React.ChangeEvent<HTMLInputElement>): void {

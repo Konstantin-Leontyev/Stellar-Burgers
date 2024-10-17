@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector } from "react-redux";
 import styles from './ingredients-tab.module.css';
 
+import { TCategories } from "../../burger-ingredients";
 import { currentTab } from '../../../services/burger-ingredients/reducers';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import {TCategories} from "../../burger-ingredients";
 
 export function IngredientsTab({ categories }: { categories: TCategories }): React.JSX.Element {
   const current = useSelector(currentTab);

@@ -3,7 +3,7 @@ import {
   TIngredient, TIngredientsResponse, TLogoutResponse, TPasswordResetResponse,
   TRefreshedData, TPasswordResetData, TUserUpdateData, TUserDataResponse,
   TUserRegisterData, TUserRegisterResponse, TLoginData, TLoginResponse,
-  TPasswordConfirmationResponse, TIngredientID, TOrderDetails,
+  TPasswordConfirmationResponse, TIngredientID, TOrderDetails, TPasswordConformationData,
 } from "./types";
 
 let defaultOptions = {
@@ -251,7 +251,7 @@ export function logoutUser(): Promise<TLogoutResponse> {
 
 /**
  * Send password reset conformation request.
- * @param {Object} email Submitted user email.
+ * @param {Object} formData submitted user email.
  * @example
  * // request body
  * {
@@ -266,10 +266,10 @@ export function logoutUser(): Promise<TLogoutResponse> {
  * @permission Auth user only.
  * @returns {Object} Email conformation sent status.
  */
-export async function sendPasswordResetConformationEmail(email: string): Promise<TPasswordConfirmationResponse> {
+export async function sendPasswordResetConformationEmail(formData: TPasswordConformationData): Promise<TPasswordConfirmationResponse> {
   const options = {
     ...defaultOptions,
-    body: JSON.stringify(email)
+    body: JSON.stringify(formData)
   }
 
   return await request<TPasswordConfirmationResponse>('password-reset', options);

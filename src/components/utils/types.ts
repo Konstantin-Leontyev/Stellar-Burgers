@@ -26,7 +26,12 @@ type TSuccess = {
   success: boolean;
 };
 
-type TUserData = { user: TEmail & TName };
+export type TUserData = {
+  user: {
+    email: TEmail;
+    name: TName;
+  }
+};
 
 export type TUserUpdateData = {
   email?: string;
@@ -44,12 +49,13 @@ export type TLoginResponse = TRefreshedData & TUserData;
 export type TLogoutResponse = TMessageResponse;
 
 export type TPasswordResetData = TPassword & { token: string };
+export type TPasswordConformationData = TEmail;
 export type TPasswordConfirmationResponse = TMessageResponse;
 export type TPasswordResetResponse = TMessageResponse;
 
 export type TUserDataResponse = TSuccess & TUserData;
 
-export type TUserRegisterData = TUserData & TPassword;
+export type TUserRegisterData = TName & TEmail & TPassword;
 export type TUserRegisterResponse = TRefreshedData & TUserData;
 
 export type TIngredient = {

@@ -15,6 +15,7 @@ export function IngredientDetailsCard(): React.JSX.Element {
   const { id } = useParams();
   const isLoading = useSelector(isIngredientsListLoading);
   const hasError = useSelector(hasIngredientsListRequestError);
+  // TODO type useSelector
   const ingredients: TIngredient[] = useSelector(ingredientsList);
   const ingredient = ingredients.find(ingredient => ingredient._id === id);
 

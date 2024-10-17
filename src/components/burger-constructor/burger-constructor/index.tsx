@@ -31,6 +31,7 @@ type TCollectedProps = {
 
 export function BurgerConstructor(): React.JSX.Element {
   const dispatch = useDispatch();
+  // TODO type useSelector
   const bun: TKeyIngredient  = useSelector(currentBun);
   const ingredients: TKeyIngredient[] = useSelector(currentIngredients);
   const [{ isOver, item }, dropTarget] = useDrop<TIngredient, unknown, TCollectedProps>({

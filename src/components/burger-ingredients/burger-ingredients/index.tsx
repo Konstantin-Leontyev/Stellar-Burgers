@@ -15,6 +15,7 @@ export type TCategories = {
 
 export function BurgerIngredients(): React.JSX.Element {
   const dispatch = useDispatch();
+  // TODO type useSelector
   const ingredients: TIngredient[] = useSelector(ingredientsList);
 
   const bunRef = useRef({} as HTMLDivElement);
