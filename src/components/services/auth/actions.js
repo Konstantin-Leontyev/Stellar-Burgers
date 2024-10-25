@@ -5,7 +5,7 @@ import {
   loginUser, logoutUser,
   registerUser, updateUser,
 } from '../../utils/api';
-import { setIsAuthChecked } from './reducers';
+import { setIsAuthChecked } from './slice';
 
 export const register = createAsyncThunk(
   'auth/register',

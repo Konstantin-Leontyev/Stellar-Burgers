@@ -18,8 +18,8 @@ import {
   hasOrderDetailsRequestError,
   resetOrderDetails,
   orderDetails,
-} from '../../services/burger-constructor/reducers';
-import { resetIngredientCount, setIngredientCount } from '../../services/burger-ingredients/reducers';
+} from '../../services/burger-constructor/slice';
+import { resetIngredientCount, setIngredientCount } from '../../services/burger-ingredients/slice';
 
 // TODO replace key
 type TKeyIngredient = TIngredient & { key: string };

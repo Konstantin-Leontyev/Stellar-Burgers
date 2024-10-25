@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import styles from './ingredients-tab.module.css';
 
 import { TCategories } from "../../burger-ingredients";
-import { currentTab } from '../../../services/burger-ingredients/reducers';
+import { currentTab } from '../../../services/burger-ingredients/slice';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 export function IngredientsTab({ categories }: { categories: TCategories }): React.JSX.Element {

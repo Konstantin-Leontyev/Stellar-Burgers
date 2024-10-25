@@ -10,7 +10,7 @@ import { TIngredient } from "../../components/utils/types";
 import {
   hasIngredientsListRequestError, ingredientsList,
   isIngredientsListLoading
-} from '../../components/services/burger-ingredients/reducers';
+} from '../../components/services/burger-ingredients/slice';
 
 export function Home(): React.JSX.Element {
   const isLoading = useSelector(isIngredientsListLoading);

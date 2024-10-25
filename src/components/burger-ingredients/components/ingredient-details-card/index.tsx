@@ -9,7 +9,7 @@ import {
   hasIngredientsListRequestError,
   ingredientsList,
   isIngredientsListLoading
-} from '../../../services/burger-ingredients/reducers';
+} from '../../../services/burger-ingredients/slice';
 
 export function IngredientDetailsCard(): React.JSX.Element {
   const { id } = useParams();

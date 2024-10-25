@@ -4,7 +4,7 @@ import styles from './burger-ingredients.module.css';
 
 import { IngredientCard } from '../components/ingredient-card';
 import { IngredientsTab } from '../components/ingredients-tab';
-import { ingredientsList, setTab } from '../../services/burger-ingredients/reducers';
+import { ingredientsList, setTab } from '../../services/burger-ingredients/slice';
 import { TIngredient } from "../../utils/types";
 
 export type TCategories = {

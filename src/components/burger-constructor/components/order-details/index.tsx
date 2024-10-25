@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './order-details.module.css';
 
-import { orderDetails } from '../../../services/burger-constructor/reducers';
+import { orderDetails } from '../../../services/burger-constructor/slice';
 import { useSelector } from 'react-redux';
 
 export function OrderDetails(): React.JSX.Element {

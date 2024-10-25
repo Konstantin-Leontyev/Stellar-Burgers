@@ -5,8 +5,8 @@ import styles from './filled-element.module.css';
 
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TIngredient } from "../../../utils/types";
-import { deleteCurrentBurgerIngredient, moveIngredients} from '../../../services/burger-constructor/reducers';
-import { resetIngredientCount } from '../../../services/burger-ingredients/reducers';
+import { deleteCurrentBurgerIngredient, moveIngredients} from '../../../services/burger-constructor/slice';
+import { resetIngredientCount } from '../../../services/burger-ingredients/slice';
 
 type TFilledElementProps = {
   type?: "top" | "bottom";

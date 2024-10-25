@@ -5,7 +5,7 @@ import styles from './profile.module.css';
 
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TUserData, TUserUpdateData } from "../../components/utils/types";
-import { getUser } from '../../components/services/auth/reducers';
+import { getUser } from '../../components/services/auth/slice';
 import { updateUserProfile } from '../../components/services/auth/actions';
 import { useForm } from '../../components/utils/useForm';
 

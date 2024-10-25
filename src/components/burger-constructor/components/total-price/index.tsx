@@ -9,7 +9,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TIngredient } from "../../../utils/types";
 import { getOrderDetails } from '../../../services/burger-constructor/actions';
-import { getUser } from '../../../services/auth/reducers';
+import { getUser } from '../../../services/auth/slice';
 
 type TTotalPriceProps = {
   bun: TIngredient,

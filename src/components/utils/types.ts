@@ -1,3 +1,6 @@
+import { TIconProps } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/utils";
+import React from "react";
+
 type TAccessToken = {
   accessToken: string;
 };
@@ -22,9 +25,27 @@ type TRefreshToken = {
   refreshToken: string;
 };
 
+type TRoute = {
+  route: string;
+};
+
 type TSuccess = {
   success: boolean;
 };
+
+type TTitle = {
+  title: string;
+};
+
+type TType = {
+  type: string;
+}
+
+type TIcon = {
+  Icon: ({type}: TIconProps) => React.JSX.Element
+};
+
+export type THeaderItem = TTitle & TName & TRoute & TType & TIcon;
 
 export type TUserData = {
   user: {
@@ -78,3 +99,30 @@ export type TIngredientID = Pick<TIngredient, '_id'>;
 export type TIngredientsResponse = TSuccess & { data: TIngredient[] };
 
 export type TOrderDetails = TSuccess & TName & { order: { number: number} };
+
+enum OrderStatus {
+  CREATED = 'created',
+  DONE = 'done',
+  PENDING = 'pending'
+}
+
+export type TOrderList = TSuccess & {
+  "orders":
+    {
+      "ingredients": TIngredientID[],
+      "_id": string,
+      "status": OrderStatus,
+      "number": number,
+      "createdAt": string,
+      "updatedAt": string
+    }[],
+  "total": number,
+  "totalToday": number
+}
+
+export enum WebsocketStatus {
+  CONNECTING = 'Connecting ...',
+  OFFLINE = 'Offline',
+  ONLINE = 'Online'
+}
+
