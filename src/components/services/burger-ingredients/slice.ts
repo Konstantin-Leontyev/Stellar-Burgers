@@ -1,11 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
+
+import { TIngredient } from "../../utils/types";
 import { getIngredients } from './actions';
 
-const initialState = {
+
+type TBurgerIngredientStore = {
+  ingredientsList: TIngredient[],
+  isIngredientsListLoading: boolean,
+  hasIngredientsListRequestError: string | unknown,
+  currentTab: string
+};
+
+const initialState: TBurgerIngredientStore = {
   ingredientsList: [],
   isIngredientsListLoading: false,
-  hasIngredientsListRequestError: false,
-
+  hasIngredientsListRequestError: null,
   currentTab: 'Булки',
 }
 

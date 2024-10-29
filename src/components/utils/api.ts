@@ -1,9 +1,9 @@
 import { baseUrl } from './constants';
 import {
-  TIngredient, TIngredientsResponse, TLogoutResponse, TPasswordResetResponse,
-  TRefreshedData, TPasswordResetData, TUserUpdateData, TUserDataResponse,
-  TUserRegisterData, TUserRegisterResponse, TLoginData, TLoginResponse,
-  TPasswordConfirmationResponse, TIngredientID, TOrderDetails, TPasswordConformationData,
+  TIngredient, TIngredientsResponse, TLoginData, TLoginResponse, TLogoutResponse,
+  TOrderDetailsResponse, TPasswordResetResponse, TPasswordResetData,
+  TPasswordConfirmationResponse, TPasswordConformationData, TRefreshedData,
+  TUser, TUserDataResponse, TUserRegisterData, TUserRegisterResponse, TUserUpdateData, TUserData,
 } from "./types";
 
 let defaultOptions = {
@@ -31,19 +31,6 @@ function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
   return fetch(baseUrl.concat(endpoint), options)
     .then(checkResponse<T>);
 }
-
-// /**
-//  * Set JWT tokens to local storage.
-//  */
-// function tokenUpload(responseData: TRefreshedData): Promise<TRefreshedData> {
-//   if (!responseData.success) {
-//     return Promise.reject(responseData);
-//   }
-//
-//   localStorage.setItem('accessToken', responseData.accessToken);
-//   localStorage.setItem('refreshToken', responseData.refreshToken);
-//   return Promise.resolve(responseData);
-// }
 
 /**
  * Send JWT tokens refresh request and set them to local storage.
@@ -328,7 +315,7 @@ export async function resetPassword(formData: TPasswordResetData): Promise<TPass
  * @permisson Auth user only.
  * @returns {Object} Order details object.
  */
-export function getOrderDetails(ingredients: { ingredients: TIngredientID[] }): Promise<TOrderDetails> {
+export function getOrderDetails(ingredients: string[]): Promise<TOrderDetailsResponse> {
   const options = {
     ...defaultOptions,
     body: JSON.stringify({ingredients}),
@@ -338,7 +325,7 @@ export function getOrderDetails(ingredients: { ingredients: TIngredientID[] }): 
     }
   }
 
-  return request<TOrderDetails>('orders', options);
+  return request<TOrderDetailsResponse>('orders', options);
 }
 
 /**
@@ -355,7 +342,7 @@ export function getOrderDetails(ingredients: { ingredients: TIngredientID[] }): 
  * @permission Auth user only.
  * @returns {Object} Request status and user data.
  */
-export async function getUser(): Promise<TUserDataResponse | unknown> {
+export async function getUser(): Promise<TUser> {
   const options = {
     ...defaultOptions,
     method: 'GET',
@@ -372,8 +359,7 @@ export async function getUser(): Promise<TUserDataResponse | unknown> {
           return Promise.reject(response);
         }
 
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
+        return response.user;
       });
   } catch(error) {
     localStorage.removeItem('accessToken');

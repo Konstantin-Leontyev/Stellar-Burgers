@@ -47,11 +47,10 @@ type TIcon = {
 
 export type THeaderItem = TTitle & TName & TRoute & TType & TIcon;
 
+export type TUser = TEmail & TName
+
 export type TUserData = {
-  user: {
-    email: TEmail;
-    name: TName;
-  }
+  user: TUser
 };
 
 export type TUserUpdateData = {
@@ -94,11 +93,11 @@ export type TIngredient = {
   __v: number;
 };
 
-export type TIngredientID = Pick<TIngredient, '_id'>;
+export type TKeyIngredient = TIngredient & { key: string; };
 
-export type TIngredientsResponse = TSuccess & { data: TIngredient[] };
+export type TIngredientsResponse = TSuccess & { data: TIngredient[]; };
 
-export type TOrderDetails = TSuccess & TName & { order: { number: number} };
+export type TOrderDetailsResponse = TSuccess & TName & { order: { number: number; }; };
 
 enum OrderStatus {
   CREATED = 'created',
@@ -109,15 +108,16 @@ enum OrderStatus {
 export type TOrderList = TSuccess & {
   "orders":
     {
-      "ingredients": TIngredientID[],
-      "_id": string,
-      "status": OrderStatus,
-      "number": number,
-      "createdAt": string,
-      "updatedAt": string
-    }[],
-  "total": number,
-  "totalToday": number
+      "ingredients": string[];
+      "_id": string;
+      "status": OrderStatus;
+      "name": string;
+      "number": number;
+      "createdAt": string;
+      "updatedAt": string;
+    }[];
+  "total": number;
+  "totalToday": number;
 }
 
 export enum WebsocketStatus {

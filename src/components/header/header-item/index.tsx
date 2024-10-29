@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../header/header.module.css';
 
-import {THeaderItem} from "../../utils/constants";
+import { THeaderItem } from "../../utils/types";
 
 type THeaderItemProps = {
   item: THeaderItem;

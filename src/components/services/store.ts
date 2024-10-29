@@ -5,17 +5,28 @@ import {
 } from 'react-redux';
 
 import { rootReducer as reducer } from './root-reducer';
+import {socketMiddleware} from "./middleware/websocket";
+import {wsConnect, wsDisconnect} from "./feed/actions";
+import {wsClose, wsConnecting, wsError, wsMessage, wsOpen} from "./feed/slice";
+
+const webSocketMiddleware = socketMiddleware({
+  connect: wsConnect,
+  disconnect: wsDisconnect,
+  onConnecting: wsConnecting,
+  onClose: wsClose,
+  onError: wsError,
+  onOpen: wsOpen,
+  onMessage: wsMessage,
+});
 
 export const store = configureStore({
   reducer,
-  // Пример подключения middleware
-  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(webSocketMiddleware),
   devTools: process.env.NODE_ENV !== 'production',
 });
 
-type TRootState = ReturnType<typeof reducer>;
+export type TRootState = ReturnType<typeof reducer>;
 type TStoreDispatch = typeof store.dispatch;
 
-export const useDispatch = dispatchHook.withTypes<TStoreDispatch>;
-export const useSelector = selectorHook.withTypes<TRootState>;
-
+export const useDispatch = dispatchHook.withTypes<TStoreDispatch>();
+export const useSelector = selectorHook.withTypes<TRootState>();

@@ -1,22 +1,20 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import styles from './ingredient-details.module.css';
 
 import { ModalPreloader } from "../../../modal";
-import { TIngredient } from "../../../utils/types";
 import {
   hasIngredientsListRequestError,
   ingredientsList,
   isIngredientsListLoading
 } from '../../../services/burger-ingredients/slice';
+import { useSelector } from "../../../services/store";
 
 export function IngredientDetailsCard(): React.JSX.Element {
   const { id } = useParams();
   const isLoading = useSelector(isIngredientsListLoading);
   const hasError = useSelector(hasIngredientsListRequestError);
-  // TODO type useSelector
-  const ingredients: TIngredient[] = useSelector(ingredientsList);
+  const ingredients = useSelector(ingredientsList);
   const ingredient = ingredients.find(ingredient => ingredient._id === id);
 
   return (

@@ -1,13 +1,22 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 
+import { TKeyIngredient, TOrderDetailsResponse } from "../../utils/types";
 import { getOrderDetails } from './actions';
 
-const initialState = {
+type TBurgerConstructorStore = {
+  currentBun: TKeyIngredient | null,
+  currentIngredients: TKeyIngredient[],
+  orderDetails: TOrderDetailsResponse | null,
+  isOrderDetailsLoading: boolean,
+  hasOrderDetailsRequestError: string | unknown,
+};
+
+const initialState: TBurgerConstructorStore = {
   currentBun: null,
   currentIngredients: [],
   orderDetails: null,
   isOrderDetailsLoading: false,
-  hasOrderDetailsRequestError: false,
+  hasOrderDetailsRequestError: null,
 }
 
 export const burgerConstructorSlice = createSlice({
@@ -21,18 +30,18 @@ export const burgerConstructorSlice = createSlice({
     hasOrderDetailsRequestError: state => state.hasOrderDetailsRequestError,
   },
   reducers: {
-    addCurrentBurgerBun: ((state, action) => {
+    addCurrentBurgerBun: ((state, action: PayloadAction<TKeyIngredient>) => {
       state.currentBun = action.payload;
     }),
     addCurrentBurgerIngredient: {
-      reducer: ((state, action) => {
+      reducer: ((state, action: PayloadAction<TKeyIngredient>) => {
         state.currentIngredients = [...state.currentIngredients, action.payload];
       }),
       prepare: (ingredient) => {
         return { payload: {...ingredient, key: nanoid()} }
       }
     },
-    deleteCurrentBurgerIngredient: ((state, action) => {
+    deleteCurrentBurgerIngredient: ((state, action: PayloadAction<string>) => {
       state.currentIngredients = [...state.currentIngredients.filter(ingredient => ingredient.key !== action.payload)];
     }),
     moveIngredients: ((state, action) => {

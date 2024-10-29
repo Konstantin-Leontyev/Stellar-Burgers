@@ -1,27 +1,24 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import styles from './profile.module.css';
 
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { TUserData, TUserUpdateData } from "../../components/utils/types";
-import { getUser } from '../../components/services/auth/slice';
+import { TUserUpdateData } from "../../components/utils/types";
+import { getUser } from "../../components/services/auth/slice";
 import { updateUserProfile } from '../../components/services/auth/actions';
 import { useForm } from '../../components/utils/useForm';
+import { useDispatch, useSelector } from "../../components/services/store";
 
 export function Profile(): React.JSX.Element {
   const dispatch = useDispatch();
-  // TODO type useSelector
-  const user = useSelector(getUser);
+  const user = useSelector(getUser)
   const [isChanged, setIsChanged] = useState(false);
-  const { formData, handleOnChange } = useForm<TUserUpdateData>({} as TUserUpdateData);
+  const { formData, handleOnChange } = useForm<TUserUpdateData>({email: user?.email, name: user?.name, password: ""});
 
   function handleOnReset(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
-
-    // TODO use prevent data
-    formData.name = "";
-    formData.email = "";
+    formData.name = user?.name;
+    formData.email = user?.email;
     formData.password = "";
     setIsChanged(false);
   }
@@ -34,9 +31,8 @@ export function Profile(): React.JSX.Element {
 
   function handleOnSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
-    // TODO remove ts-ignore
-    // @ts-ignore
-    dispatch(updateUserProfile(formData));
+    dispatch(updateUserProfile(formData))
+    setIsChanged(false);
   }
 
   const active = `${styles.active} text text_type_main-medium`

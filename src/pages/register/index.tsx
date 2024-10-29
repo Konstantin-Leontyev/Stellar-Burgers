@@ -1,12 +1,12 @@
 import React, {FormEvent} from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import styles from '../pages.module.css';
 
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TUserRegisterData } from "../../components/utils/types";
 import { register } from '../../components/services/auth/actions';
 import { useForm } from '../../components/utils/useForm';
+import { useDispatch } from "../../components/services/store";
 
 export function Register(): React.JSX.Element {
   const dispatch = useDispatch();
@@ -14,8 +14,6 @@ export function Register(): React.JSX.Element {
 
   function handleOnSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
-    // TODO remove ts-ignore
-    // @ts-ignore
     dispatch(register(formData));
   }
 

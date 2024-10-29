@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import styles from './burger-constructor.module.css';
 
@@ -9,7 +9,7 @@ import { Modal, ModalPreloader } from '../../modal';
 import { OrderDetails } from '../components/order-details';
 import { TotalPrice } from '../components/total-price';
 
-import { TIngredient } from "../../utils/types";
+import { TKeyIngredient } from "../../utils/types";
 import {
   addCurrentBurgerBun,
   addCurrentBurgerIngredient,
@@ -20,21 +20,18 @@ import {
   orderDetails,
 } from '../../services/burger-constructor/slice';
 import { resetIngredientCount, setIngredientCount } from '../../services/burger-ingredients/slice';
-
-// TODO replace key
-type TKeyIngredient = TIngredient & { key: string };
+import { useDispatch, useSelector} from "../../services/store";
 
 type TCollectedProps = {
   isOver: boolean;
-  item: TIngredient;
+  item: TKeyIngredient;
 };
 
 export function BurgerConstructor(): React.JSX.Element {
   const dispatch = useDispatch();
-  // TODO type useSelector
-  const bun: TKeyIngredient  = useSelector(currentBun);
-  const ingredients: TKeyIngredient[] = useSelector(currentIngredients);
-  const [{ isOver, item }, dropTarget] = useDrop<TIngredient, unknown, TCollectedProps>({
+  const bun  = useSelector(currentBun);
+  const ingredients = useSelector(currentIngredients);
+  const [{ isOver, item }, dropTarget] = useDrop<TKeyIngredient, unknown, TCollectedProps>({
     accept: 'ingredient',
     drop(item) {
       if (item.type === 'bun') {
