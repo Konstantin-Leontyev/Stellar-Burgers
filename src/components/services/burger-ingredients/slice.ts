@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { TIngredient } from "../../utils/types";
 import { getIngredients } from './actions';
-
+import {authSlice} from "../auth/slice";
 
 type TBurgerIngredientStore = {
   ingredientsList: TIngredient[],
@@ -85,3 +85,7 @@ export const {
   setIngredientCount,
   setTab
 } = burgerIngredientsSlice.actions;
+
+type TActionsCreator = typeof burgerIngredientsSlice.actions;
+
+export type TInternalBurgerIngredientsActions = ReturnType<TActionsCreator[keyof TActionsCreator]>;

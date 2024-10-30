@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 import { TOrderList } from "../../utils/types";
 import { WebsocketStatus } from "../../utils/constants";
+import {authSlice} from "../auth/slice";
 
 type TFeedStore = {
   feed: TOrderList,
@@ -44,3 +45,7 @@ export const feedSlice = createSlice({
 export const { getStatus, getFeed } = feedSlice.selectors;
 
 export const { wsConnecting, wsOpen, wsClose, wsError, wsMessage } = feedSlice.actions;
+
+type TActionsCreator = typeof feedSlice.actions;
+
+export type TInternalFeedActions = ReturnType<TActionsCreator[keyof TActionsCreator]>;

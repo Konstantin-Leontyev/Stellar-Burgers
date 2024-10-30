@@ -2,6 +2,7 @@ import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 
 import { TIngredientWithKeyField, TOrderDetailsResponse } from "../../utils/types";
 import { getOrderDetails } from './actions';
+import {authSlice} from "../auth/slice";
 
 type TBurgerConstructorStore = {
   currentBun: TIngredientWithKeyField | null,
@@ -88,3 +89,7 @@ export const {
   moveIngredients,
   resetOrderDetails,
 } = burgerConstructorSlice.actions;
+
+type TActionsCreator = typeof burgerConstructorSlice.actions;
+
+export type TInternalBurgerConstructorActions = ReturnType<TActionsCreator[keyof TActionsCreator]>;

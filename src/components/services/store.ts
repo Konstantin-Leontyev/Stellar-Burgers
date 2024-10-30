@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {configureStore, ThunkDispatch} from '@reduxjs/toolkit';
 import {
   useDispatch as dispatchHook,
   useSelector as selectorHook
@@ -6,10 +6,12 @@ import {
 
 import { rootReducer as reducer } from './root-reducer';
 import { socketMiddleware } from "./middleware/websocket";
-import { wsConnect, wsDisconnect } from "./feed/actions";
-import { wsClose, wsConnecting, wsError, wsMessage, wsOpen } from "./feed/slice";
+import {TExternalFeedActions, wsConnect, wsDisconnect} from "./feed/actions";
+import {TInternalFeedActions, wsClose, wsConnecting, wsError, wsMessage, wsOpen} from "./feed/slice";
 import { TExternalAuthActions } from "./auth/actions";
 import { TInternalAuthActions } from "./auth/slice";
+import {TInternalBurgerConstructorActions} from "./burger-constructor/slice";
+import {TInternalBurgerIngredientsActions} from "./burger-ingredients/slice";
 
 const webSocketMiddleware = socketMiddleware({
   connect: wsConnect,
@@ -29,9 +31,15 @@ export const store = configureStore({
 
 export type TRootState = ReturnType<typeof reducer>;
 
-type AuthActions = TExternalAuthActions | TInternalAuthActions
+type TAppActions =
+  TExternalAuthActions
+  | TInternalAuthActions
+  | TExternalFeedActions
+  | TInternalFeedActions
+  | TInternalBurgerConstructorActions
+  | TInternalBurgerIngredientsActions
 
-type TStoreDispatch = typeof store.dispatch;
+type TStoreDispatch = ThunkDispatch<TRootState, unknown, TAppActions>;
 
 export const useDispatch = dispatchHook.withTypes<TStoreDispatch>();
 export const useSelector = selectorHook.withTypes<TRootState>();

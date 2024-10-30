@@ -55,4 +55,4 @@ export const checkUserAuth = createAsyncThunk(
   }
 );
 
-export type TExternalAuthActions = ReturnType<typeof checkUserAuth>;
+export type TExternalAuthActions = ReturnType<typeof setUser>;
