@@ -50,7 +50,7 @@ function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
  * @permission Auth only.
  * @returns {Object} Refresh request status and new JWT tokens.
  */
-function refreshToken(): Promise<TRefreshedTokensResponse> {
+export function refreshToken(): Promise<TRefreshedTokensResponse> {
   const options = {
     ...defaultOptions,
     body: JSON.stringify({token: localStorage.getItem('refreshToken')})

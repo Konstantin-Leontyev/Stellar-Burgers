@@ -2,6 +2,7 @@ import { ActionCreatorWithPayload, ActionCreatorWithoutPayload, Middleware } fro
 
 import { DELAY, WSS_URL } from "../../utils/constants";
 import { TRootState } from "../store";
+import { refreshToken } from "../../utils/api";
 import { wsConnect } from "../feed/actions";
 
 type TWsActions<S, R> = {
@@ -15,7 +16,7 @@ type TWsActions<S, R> = {
   sendMessage?: ActionCreatorWithPayload<S>;
 };
 
-export function socketMiddleware<S, R>(wsActions: TWsActions<S, R>): Middleware<{}, TRootState> {
+export function socketMiddleware<S, R>(wsActions: TWsActions<S, R>, tokenRefresh: boolean = false): Middleware<{}, TRootState> {
   return (store) => {
     let socket: WebSocket | null = null;
     const {
@@ -29,6 +30,7 @@ export function socketMiddleware<S, R>(wsActions: TWsActions<S, R>): Middleware<
       sendMessage
     } = wsActions;
 
+    let url = '';
     let isConnect: boolean = false;
     let reconnectInterval: number = 0;
 
@@ -38,6 +40,7 @@ export function socketMiddleware<S, R>(wsActions: TWsActions<S, R>): Middleware<
 
         if (connect.match(action)) {
           socket = new WebSocket(action.payload);
+          url = action.payload;
           onConnecting && dispatch(onConnecting());
 
           socket.onopen = () => {
@@ -54,7 +57,7 @@ export function socketMiddleware<S, R>(wsActions: TWsActions<S, R>): Middleware<
 
             if (isConnect) {
               reconnectInterval = window.setInterval(() => {
-                dispatch(wsConnect(WSS_URL));
+                dispatch(wsConnect(url));
               }, DELAY)
             }
           }
@@ -64,6 +67,23 @@ export function socketMiddleware<S, R>(wsActions: TWsActions<S, R>): Middleware<
 
             try {
               const parsedData = JSON.parse(data);
+
+              if (tokenRefresh && parsedData.message === 'Invalid or missing token') {
+                refreshToken()
+                  .then((refreshedData) => {
+                    const wssUrl = new URL(url);
+                    wssUrl.searchParams.set(
+                      'token',
+                      refreshedData.accessToken.replace('Bearer', '')
+                    );
+                    dispatch(connect(wssUrl.toString()));
+                  })
+                  .catch((error) => {
+                    dispatch(onError((error as Error).message));
+                  })
+
+                dispatch(disconnect())
+              }
 
               dispatch(onMessage(parsedData));
             } catch (error) {
