@@ -1,11 +1,11 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 
-import { TKeyIngredient, TOrderDetailsResponse } from "../../utils/types";
+import { TIngredientWithKeyField, TOrderDetailsResponse } from "../../utils/types";
 import { getOrderDetails } from './actions';
 
 type TBurgerConstructorStore = {
-  currentBun: TKeyIngredient | null,
-  currentIngredients: TKeyIngredient[],
+  currentBun: TIngredientWithKeyField | null,
+  currentIngredients: TIngredientWithKeyField[],
   orderDetails: TOrderDetailsResponse | null,
   isOrderDetailsLoading: boolean,
   hasOrderDetailsRequestError: string | unknown,
@@ -30,11 +30,11 @@ export const burgerConstructorSlice = createSlice({
     hasOrderDetailsRequestError: state => state.hasOrderDetailsRequestError,
   },
   reducers: {
-    addCurrentBurgerBun: ((state, action: PayloadAction<TKeyIngredient>) => {
+    addCurrentBurgerBun: ((state, action: PayloadAction<TIngredientWithKeyField>) => {
       state.currentBun = action.payload;
     }),
     addCurrentBurgerIngredient: {
-      reducer: ((state, action: PayloadAction<TKeyIngredient>) => {
+      reducer: ((state, action: PayloadAction<TIngredientWithKeyField>) => {
         state.currentIngredients = [...state.currentIngredients, action.payload];
       }),
       prepare: (ingredient) => {

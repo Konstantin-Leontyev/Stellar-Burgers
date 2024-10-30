@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import styles from './profile.module.css';
 
 import { Button, EmailInput, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { TUserUpdateData } from "../../components/utils/types";
+import { TUserUpdateRequest } from "../../components/utils/types";
 import { getUser } from "../../components/services/auth/slice";
 import { updateUserProfile } from '../../components/services/auth/actions';
 import { useForm } from '../../components/utils/useForm';
@@ -13,7 +13,7 @@ export function Profile(): React.JSX.Element {
   const dispatch = useDispatch();
   const user = useSelector(getUser)
   const [isChanged, setIsChanged] = useState(false);
-  const { formData, handleOnChange } = useForm<TUserUpdateData>({email: user?.email, name: user?.name, password: ""});
+  const { formData, handleOnChange } = useForm<TUserUpdateRequest>({email: user?.email, name: user?.name, password: ""});
 
   function handleOnReset(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();

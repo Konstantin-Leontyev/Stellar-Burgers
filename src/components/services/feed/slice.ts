@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-import { TOrderList, WebsocketStatus } from "../../utils/types";
+import { TOrderList } from "../../utils/types";
+import { WebsocketStatus } from "../../utils/constants";
 
 type TFeedStore = {
   feed: TOrderList,

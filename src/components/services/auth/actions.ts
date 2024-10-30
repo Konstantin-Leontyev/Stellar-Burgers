@@ -5,20 +5,20 @@ import {
   loginUser, logoutUser,
   registerUser, updateUser,
 } from '../../utils/api';
-import { TLoginData, TUser, TUserRegisterData, TUserUpdateData } from "../../utils/types";
+import { TLoginRequest, TUser, TRegistrationRequest, TUserUpdateRequest } from "../../utils/types";
 import { setIsAuthChecked } from './slice';
 
 
 export const register = createAsyncThunk(
   'auth/register',
-  async (formData: TUserRegisterData) => {
+  async (formData: TRegistrationRequest) => {
     return registerUser(formData);
   }
 );
 
 export const login = createAsyncThunk(
   'auth/login',
-  async (formData: TLoginData) => {
+  async (formData: TLoginRequest) => {
     return loginUser(formData);
   }
 );
@@ -32,7 +32,7 @@ export const logout = createAsyncThunk(
 
 export const updateUserProfile = createAsyncThunk(
   'auth/patch',
-  async (formData: TUserUpdateData) => {
+  async (formData: TUserUpdateRequest) => {
     return updateUser(formData);
   }
 );
@@ -54,3 +54,5 @@ export const checkUserAuth = createAsyncThunk(
     }
   }
 );
+
+export type TExternalAuthActions = ReturnType<typeof checkUserAuth>;

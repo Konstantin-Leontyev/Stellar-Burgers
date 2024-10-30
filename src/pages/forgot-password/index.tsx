@@ -3,13 +3,13 @@ import { Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-comp
 import { Link, useNavigate } from 'react-router-dom';
 import styles from '../pages.module.css';
 
-import { TPasswordConformationData } from "../../components/utils/types";
+import { TPasswordConformationRequest } from "../../components/utils/types";
 import { sendPasswordResetConformationEmail } from '../../components/utils/api';
 import { useForm } from '../../components/utils/useForm';
 
 export function ForgotPassword(): React.JSX.Element {
   const navigate = useNavigate();
-  const { formData, handleOnChange } = useForm<TPasswordConformationData>({} as TPasswordConformationData);
+  const { formData, handleOnChange } = useForm<TPasswordConformationRequest>({} as TPasswordConformationRequest);
 
   function handleOnSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();

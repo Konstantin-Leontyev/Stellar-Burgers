@@ -51,3 +51,5 @@ export const authSlice = createSlice({
 export const { setIsAuthChecked } = authSlice.actions;
 
 export const { getIsAuthChecked, getUser } = authSlice.selectors;
+
+export type TInternalAuthActions = ReturnType<(typeof authSlice.actions)[keyof (typeof authSlice.actions)]>;

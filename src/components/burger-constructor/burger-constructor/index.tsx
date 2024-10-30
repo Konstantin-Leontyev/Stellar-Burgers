@@ -9,7 +9,7 @@ import { Modal, ModalPreloader } from '../../modal';
 import { OrderDetails } from '../components/order-details';
 import { TotalPrice } from '../components/total-price';
 
-import { TKeyIngredient } from "../../utils/types";
+import { TIngredientWithKeyField } from "../../utils/types";
 import {
   addCurrentBurgerBun,
   addCurrentBurgerIngredient,
@@ -24,14 +24,14 @@ import { useDispatch, useSelector} from "../../services/store";
 
 type TCollectedProps = {
   isOver: boolean;
-  item: TKeyIngredient;
+  item: TIngredientWithKeyField;
 };
 
 export function BurgerConstructor(): React.JSX.Element {
   const dispatch = useDispatch();
   const bun  = useSelector(currentBun);
   const ingredients = useSelector(currentIngredients);
-  const [{ isOver, item }, dropTarget] = useDrop<TKeyIngredient, unknown, TCollectedProps>({
+  const [{ isOver, item }, dropTarget] = useDrop<TIngredientWithKeyField, unknown, TCollectedProps>({
     accept: 'ingredient',
     drop(item) {
       if (item.type === 'bun') {

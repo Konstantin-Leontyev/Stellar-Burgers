@@ -1,9 +1,10 @@
 import { baseUrl } from './constants';
 import {
-  TIngredient, TIngredientsResponse, TLoginData, TLoginResponse, TLogoutResponse,
-  TOrderDetailsResponse, TPasswordResetResponse, TPasswordResetData,
-  TPasswordConfirmationResponse, TPasswordConformationData, TRefreshedData,
-  TUser, TUserDataResponse, TUserRegisterData, TUserRegisterResponse, TUserUpdateData, TUserData,
+  TIngredient, TIngredientsResponse, TLoginRequest, TLoginResponse, TLogoutResponse,
+  TOrderDetailsResponse, TPasswordResetResponse, TPasswordResetRequest,
+  TPasswordConfirmationResponse, TPasswordConformationRequest, TRefreshedTokensResponse,
+  TRegistrationRequest, TRegistrationResponse, TUser, TUserDataResponse,
+  TUserUpdateResponse, TUserUpdateRequest
 } from "./types";
 
 let defaultOptions = {
@@ -49,12 +50,12 @@ function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
  * @permission Auth only.
  * @returns {Object} Refresh request status and new JWT tokens.
  */
-function refreshToken(): Promise<TRefreshedData> {
+function refreshToken(): Promise<TRefreshedTokensResponse> {
   const options = {
     ...defaultOptions,
     body: JSON.stringify({token: localStorage.getItem('refreshToken')})
   };
-  return request<TRefreshedData>('auth/token', options)
+  return request<TRefreshedTokensResponse>('auth/token', options)
     .then((refreshedData) => {
       if (!refreshedData.success) {
         return Promise.reject(refreshedData);
@@ -144,13 +145,13 @@ export function getIngredients(): Promise<TIngredient[]> {
  * @permission Allow any.
  * @returns {Object} register request status, JWT tokens and user object.
  */
-export function registerUser(formData: TUserRegisterData): Promise<TUserRegisterResponse> {
+export function registerUser(formData: TRegistrationRequest): Promise<TRegistrationResponse> {
   const options = {
     ...defaultOptions,
     body: JSON.stringify(formData),
   };
 
-  return request<TUserRegisterResponse>('auth/register', options)
+  return request<TRegistrationResponse>('auth/register', options)
     .then((response) => {
       if (!response.success) {
         return Promise.reject(response);
@@ -184,7 +185,7 @@ export function registerUser(formData: TUserRegisterData): Promise<TUserRegister
  * @permission Allow any.
  * @returns {Object} login request status, JWT tokens and user object.
  */
-export function loginUser(formData: TLoginData): Promise<TLoginResponse> {
+export function loginUser(formData: TLoginRequest): Promise<TLoginResponse> {
   const options = {
     ...defaultOptions,
     body: JSON.stringify(formData),
@@ -253,7 +254,7 @@ export function logoutUser(): Promise<TLogoutResponse> {
  * @permission Auth user only.
  * @returns {Object} Email conformation sent status.
  */
-export async function sendPasswordResetConformationEmail(formData: TPasswordConformationData): Promise<TPasswordConfirmationResponse> {
+export async function sendPasswordResetConformationEmail(formData: TPasswordConformationRequest): Promise<TPasswordConfirmationResponse> {
   const options = {
     ...defaultOptions,
     body: JSON.stringify(formData)
@@ -280,7 +281,7 @@ export async function sendPasswordResetConformationEmail(formData: TPasswordConf
  * @permission Auth user only.
  * @returns {Object} Password reset request status.
  */
-export async function resetPassword(formData: TPasswordResetData): Promise<TPasswordResetResponse> {
+export async function resetPassword(formData: TPasswordResetRequest): Promise<TPasswordResetResponse> {
   const options = {
     ...defaultOptions,
     body: JSON.stringify(formData)
@@ -390,7 +391,7 @@ export async function getUser(): Promise<TUser> {
  * @permission Auth user only.
  * @returns {Object} Request status and user data.
  */
-export function updateUser(formData: TUserUpdateData): Promise<TUserDataResponse> {
+export function updateUser(formData: TUserUpdateRequest): Promise<TUserUpdateResponse> {
   const options = {
     ...defaultOptions,
     method: 'PATCH',
@@ -401,5 +402,5 @@ export function updateUser(formData: TUserUpdateData): Promise<TUserDataResponse
     body: JSON.stringify(formData)
   }
 
-  return requestWithRefresh<TUserDataResponse>('auth/user', options);
+  return requestWithRefresh<TUserUpdateResponse>('auth/user', options);
 }

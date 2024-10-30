@@ -4,14 +4,14 @@ import { useDrag, useDrop } from 'react-dnd';
 import styles from './filled-element.module.css';
 
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { TKeyIngredient } from "../../../utils/types";
+import { TIngredientWithKeyField } from "../../../utils/types";
 import { deleteCurrentBurgerIngredient, moveIngredients} from '../../../services/burger-constructor/slice';
 import { resetIngredientCount } from '../../../services/burger-ingredients/slice';
 
 type TFilledElementProps = {
   type?: "top" | "bottom";
   index?: number;
-  ingredient: TKeyIngredient;
+  ingredient: TIngredientWithKeyField;
 };
 
 type TDragObject = {

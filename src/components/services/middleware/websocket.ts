@@ -1,6 +1,6 @@
 import { ActionCreatorWithPayload, ActionCreatorWithoutPayload, Middleware } from "@reduxjs/toolkit";
 
-import { TRootState} from "../store";
+import { TRootState } from "../store";
 
 type TWsActions<S, R> = {
   connect: ActionCreatorWithPayload<string>;

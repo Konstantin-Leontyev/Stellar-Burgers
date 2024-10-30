@@ -5,6 +5,8 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { THeaderItem } from "./types";
 
+export const baseUrl: string = 'https://norma.nomoreparties.space/api/';
+
 export const headerItemsInitialState: THeaderItem[] = [
   {
     title: 'Конструктор',
@@ -29,5 +31,14 @@ export const headerItemsInitialState: THeaderItem[] = [
   },
 ];
 
-export const baseUrl: string = 'https://norma.nomoreparties.space/api/';
+export enum OrderStatus {
+  CREATED = 'created',
+  DONE = 'done',
+  PENDING = 'pending'
+}
 
+export enum WebsocketStatus {
+  CONNECTING = 'Connecting ...',
+  OFFLINE = 'Offline',
+  ONLINE = 'Online'
+}
