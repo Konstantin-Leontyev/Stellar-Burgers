@@ -1,6 +1,8 @@
 import { ActionCreatorWithPayload, ActionCreatorWithoutPayload, Middleware } from "@reduxjs/toolkit";
 
+import { DELAY, WSS_URL } from "../../utils/constants";
 import { TRootState } from "../store";
+import { wsConnect } from "../feed/actions";
 
 type TWsActions<S, R> = {
   connect: ActionCreatorWithPayload<string>;
@@ -26,6 +28,10 @@ export function socketMiddleware<S, R>(wsActions: TWsActions<S, R>): Middleware<
       onOpen,
       sendMessage
     } = wsActions;
+
+    let isConnect: boolean = false;
+    let reconnectInterval: number = 0;
+
     return (next) => {
       return (action) => {
         const {dispatch} = store;
@@ -35,6 +41,7 @@ export function socketMiddleware<S, R>(wsActions: TWsActions<S, R>): Middleware<
           onConnecting && dispatch(onConnecting());
 
           socket.onopen = () => {
+            isConnect = true;
             onOpen && dispatch(onOpen());
           }
 
@@ -44,6 +51,12 @@ export function socketMiddleware<S, R>(wsActions: TWsActions<S, R>): Middleware<
 
           socket.onclose = () => {
             onClose && dispatch(onClose());
+
+            if (isConnect) {
+              reconnectInterval = window.setInterval(() => {
+                dispatch(wsConnect(WSS_URL));
+              }, DELAY)
+            }
           }
 
           socket.onmessage = (event) => {
@@ -70,6 +83,8 @@ export function socketMiddleware<S, R>(wsActions: TWsActions<S, R>): Middleware<
         }
 
         if (socket && disconnect.match(action)) {
+          clearInterval(reconnectInterval)
+          isConnect = false;
           socket.close();
           socket = null;
         }

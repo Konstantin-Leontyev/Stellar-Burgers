@@ -6,12 +6,12 @@ import {
 
 import { rootReducer as reducer } from './root-reducer';
 import { socketMiddleware } from "./middleware/websocket";
-import {TExternalFeedActions, wsConnect, wsDisconnect} from "./feed/actions";
-import {TInternalFeedActions, wsClose, wsConnecting, wsError, wsMessage, wsOpen} from "./feed/slice";
+import { TExternalFeedActions, wsConnect, wsDisconnect } from "./feed/actions";
+import { TInternalFeedActions, wsClose, wsConnecting, wsError, wsMessage, wsOpen } from "./feed/slice";
 import { TExternalAuthActions } from "./auth/actions";
 import { TInternalAuthActions } from "./auth/slice";
-import {TInternalBurgerConstructorActions} from "./burger-constructor/slice";
-import {TInternalBurgerIngredientsActions} from "./burger-ingredients/slice";
+import { TInternalBurgerConstructorActions } from "./burger-constructor/slice";
+import { TInternalBurgerIngredientsActions } from "./burger-ingredients/slice";
 
 const webSocketMiddleware = socketMiddleware({
   connect: wsConnect,

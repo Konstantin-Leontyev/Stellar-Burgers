@@ -1,4 +1,4 @@
-import { baseUrl } from './constants';
+import { BASE_URL } from './constants';
 import {
   TIngredient, TIngredientsResponse, TLoginRequest, TLoginResponse, TLogoutResponse,
   TOrderDetailsResponse, TPasswordResetResponse, TPasswordResetRequest,
@@ -29,7 +29,7 @@ function checkResponse<T>(response: Response): Promise<T> {
  * Send request and check response status.
  */
 function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
-  return fetch(baseUrl.concat(endpoint), options)
+  return fetch(BASE_URL.concat(endpoint), options)
     .then(checkResponse<T>);
 }
 

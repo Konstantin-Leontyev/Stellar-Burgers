@@ -5,7 +5,11 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { THeaderItem } from "./types";
 
-export const baseUrl: string = 'https://norma.nomoreparties.space/api/';
+export const BASE_URL: string = 'https://norma.nomoreparties.space/api/';
+
+export const DELAY: number = 5000;
+
+export const WSS_URL: string = 'wss://norma.nomoreparties.space/orders/all'
 
 export const headerItemsInitialState: THeaderItem[] = [
   {
