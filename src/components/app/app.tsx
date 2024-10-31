@@ -3,14 +3,17 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 
 import './app.module.css';
 
-import { ForgotPassword, Home, Login, Logout, NotFound, Profile, Register, ResetPassword } from '../../pages';
+import {
+  CommonFeed, ForgotPassword, Home,
+  Login, Logout, NotFound, Profile,
+  Register, ResetPassword
+} from '../../pages';
 import { IngredientDetails } from "../burger-ingredients";
 import { Header } from '../header';
 import { OnlyAuth, OnlyUnAuth } from './protected-rout';
 import { getIngredients } from '../services/burger-ingredients/actions';
 import { checkUserAuth } from '../services/auth/actions';
 import { useDispatch } from "../services/store";
-import { Feed } from "../feed";
 
 export default function App(): React.JSX.Element {
   const dispatch = useDispatch();
@@ -35,7 +38,7 @@ export default function App(): React.JSX.Element {
 
         <Routes location={state?.backgroundLocation || location}>
           <Route path="/" element={<Home />} />
-          <Route path="/feed" element={<OnlyUnAuth component={<Feed />} />} />
+          <Route path="/feed" element={<OnlyUnAuth component={<CommonFeed />} />} />
           <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
           <Route path="/ingredients/:id" element={<IngredientDetails />}/>
           <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />

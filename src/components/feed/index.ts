@@ -1,3 +1,3 @@
-import { Feed } from './feed/index';
+import { CommonFeed } from '../../pages/common-feed';
 
-export { Feed };
+export { CommonFeed };

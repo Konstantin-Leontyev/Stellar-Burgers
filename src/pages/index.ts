@@ -1,3 +1,4 @@
+import { CommonFeed } from './common-feed';
 import { ForgotPassword } from './forgot-password';
 import { Home } from './home';
 import { Login } from './login';
@@ -8,7 +9,7 @@ import { Register } from './register';
 import { ResetPassword } from './reset-password';
 
 export {
-  ForgotPassword, Home, Login,
-  Logout, NotFound, Profile,
+  CommonFeed, ForgotPassword, Home,
+  Login, Logout, NotFound, Profile,
   Register, ResetPassword,
 };

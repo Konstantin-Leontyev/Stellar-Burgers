@@ -1,6 +1,6 @@
 import { ActionCreatorWithPayload, ActionCreatorWithoutPayload, Middleware } from "@reduxjs/toolkit";
 
-import { DELAY, WSS_URL } from "../../utils/constants";
+import { DELAY } from "../../utils/constants";
 import { TRootState } from "../store";
 import { refreshToken } from "../../utils/api";
 import { wsConnect } from "../feed/actions";
@@ -82,7 +82,9 @@ export function socketMiddleware<S, R>(wsActions: TWsActions<S, R>, tokenRefresh
                     dispatch(onError((error as Error).message));
                   })
 
-                dispatch(disconnect())
+                dispatch(disconnect());
+
+                return;
               }
 
               dispatch(onMessage(parsedData));

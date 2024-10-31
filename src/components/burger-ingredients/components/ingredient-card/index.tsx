@@ -6,7 +6,7 @@ import styles from './ingredients-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TIngredient } from "../../../utils/types";
 
-export function IngredientCard({ ingredient }: { ingredient: TIngredient }) {
+export function IngredientCard({ ingredient }: { ingredient: TIngredient }): React.JSX.Element {
   const location = useLocation();
 
   const [, dragRef] = useDrag<TIngredient, unknown, unknown>({
