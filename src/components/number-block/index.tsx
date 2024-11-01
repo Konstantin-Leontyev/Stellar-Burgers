@@ -15,7 +15,7 @@ export function NumberBlock({ title, numbers, colored }: TNumberBlockProps): Rea
         <ul className={styles.ul}>
           {
             numbers.map(number =>
-              <li className={`${styles.li} pb-2`}>
+              <li className={`${styles.li} pb-2`} key={number}>
                 <span className={`text text_type_digits-default ${(colored ? styles.colored : '')}`}>{number}</span>
               </li>)
           }

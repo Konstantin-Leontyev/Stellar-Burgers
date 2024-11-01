@@ -32,13 +32,13 @@ type TName = { name: string; };
 type TNumber = { number: number; };
 
 // order field type returned by the server to an order request
-type TOrder = TOrderStatus & TName & TNumber &
-    {
-      ingredients: string[];
-      _id: string;
-      createdAt: string;
-      updatedAt: string;
-    };
+export type TOrder = TOrderStatus & TName & TNumber &
+  {
+    ingredients: string[];
+    _id: string;
+    createdAt: string;
+    updatedAt: string;
+  };
 
 // order status field type
 type TOrderStatus = {
