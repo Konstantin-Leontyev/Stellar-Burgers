@@ -13,16 +13,11 @@ export function CommonFeed(): React.JSX.Element {
   const dispatch = useDispatch();
   const { orders, total, totalToday} = useSelector(getFeed);
 
-  // TODO remove log
-  console.log('Orders list:', orders);
-
   useEffect(() => {
     dispatch(wsConnect(WSS_URL));
 
     return () => {
       dispatch(wsDisconnect());
-      // TODO remove log
-      console.log('Connection abort')
     }
   // eslint-disable-next-line
   }, []);
@@ -45,15 +40,17 @@ export function CommonFeed(): React.JSX.Element {
         <h1 className="text text_type_main-large pt-10 pb-5">Лента заказов</h1>
         <div className={styles.wrapper}>
           <div className={styles.feed}>
-            <ul className={styles.ul}>
-              {
-                orders.slice(0, 1).map(order =>
-                  <li className={styles.li} key={order.number}>
-                    <BurgerCard order={order} />
-                  </li>
-                )
-              }
-            </ul>
+            <div className={`${styles.scroll} custom-scroll`}>
+              <ul className={styles.ul}>
+                {
+                  orders.map(order =>
+                    <li className={`${styles.li} mb-4`} key={order.number}>
+                      <BurgerCard order={order} />
+                    </li>
+                  )
+                }
+              </ul>
+            </div>
           </div>
           <div className={`${styles.data} pb-15`}>
             <div className={styles.numbers}>

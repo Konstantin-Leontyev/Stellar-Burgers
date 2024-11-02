@@ -10,14 +10,17 @@ import { OrderStatus } from "./constants";
 // accessToken field type
 type TAccessToken = { accessToken: string; };
 
+// accessToken field type
+type TCount = { count: number; };
+
 // email field type
 type TEmail = { email: string; };
 
 // ingredient type with key field
 export type TIngredientWithKeyField = TIngredient & TKey;
 
-// ingredients id's list type
-export type TIngredientsIdList = { ingredients: string[] };
+// ingredient type with count field
+export type TIngredientWithCountField = TIngredient & TCount;
 
 // key field type
 type TKey = { key: string; };

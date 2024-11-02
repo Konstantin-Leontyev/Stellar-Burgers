@@ -10,9 +10,9 @@
 .header {
   align-items: center;
   display: flex;
+  height: 24px;
   flex-direction: row;
   justify-content: space-between;
-  height: 24px;
   width: 536px;
 }
 
@@ -23,8 +23,8 @@
 .image {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   height: 64px;
+  justify-content: space-between;
   width: 536px;
 }
 
@@ -37,9 +37,9 @@
 
 .li {
   align-items: center;
-  display: flex;
   background: linear-gradient(to right, #801AB2, #4c4cff);
   border-radius: 50px;
+  display: flex;
   height: 64px;
   justify-content: center;
   list-style: none;
@@ -48,12 +48,25 @@
 }
 
 .circle {
-  display: flex;
-  justify-content: center;
-  height: 62px;
-  width: 62px;
-  border-radius: 50px;
+  align-items: center;
   background: #1c1c21;
+  border-radius: 50px;
+  display: flex;
+  height: 62px;
+  justify-content: center;
+  width: 62px;
+}
+
+.count {
+  align-items: center;
+  border-radius: 50px;
+  display: flex;
+  height: 62px;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 62px;
 }
 
 .img {
