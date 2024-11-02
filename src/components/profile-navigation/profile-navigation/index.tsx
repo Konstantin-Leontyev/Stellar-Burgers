@@ -20,7 +20,7 @@ export function ProfileNavigation(): React.JSX.Element {
         <li className={styles.li}>
           <NavLink
             className={({isActive}) => isActive ? active : inactive}
-            to="/feed">История заказов
+            to="/profile/orders">История заказов
           </NavLink>
         </li>
         <li className={styles.li}>

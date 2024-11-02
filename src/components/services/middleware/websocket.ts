@@ -16,7 +16,7 @@ type TWsActions<S, R> = {
   sendMessage?: ActionCreatorWithPayload<S>;
 };
 
-export function socketMiddleware<S, R>(wsActions: TWsActions<S, R>, tokenRefresh: boolean = false): Middleware<{}, TRootState> {
+export function socketMiddleware<S, R>(wsActions: TWsActions<S, R>): Middleware<{}, TRootState> {
   return (store) => {
     let socket: WebSocket | null = null;
     const {
@@ -68,13 +68,13 @@ export function socketMiddleware<S, R>(wsActions: TWsActions<S, R>, tokenRefresh
             try {
               const parsedData = JSON.parse(data);
 
-              if (tokenRefresh && parsedData.message === 'Invalid or missing token') {
+              if (parsedData.message === 'Invalid or missing token') {
                 refreshToken()
                   .then((refreshedData) => {
                     const wssUrl = new URL(url);
                     wssUrl.searchParams.set(
                       'token',
-                      refreshedData.accessToken.replace('Bearer', '')
+                      refreshedData.accessToken.replace('Bearer ', '')
                     );
                     dispatch(connect(wssUrl.toString()));
                   })

@@ -9,15 +9,6 @@
   height: 250px;
 }
 
-.active {
-  text-decoration: none;
-  color: white;
-}
-
-.inactive {
-  text-decoration: none;
-}
-
 .buttons {
   float: right;
 }

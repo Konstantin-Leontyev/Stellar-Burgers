@@ -13,11 +13,11 @@
   height: 24px;
   flex-direction: row;
   justify-content: space-between;
-  width: 536px;
+  width: calc(100% - 48px);
 }
 
 .span {
-  width: 536px;
+  width: calc(100% - 48px);
 }
 
 .image {
@@ -25,7 +25,7 @@
   flex-direction: row;
   height: 64px;
   justify-content: space-between;
-  width: 536px;
+  width: calc(100% - 48px);
 }
 
 .ul {

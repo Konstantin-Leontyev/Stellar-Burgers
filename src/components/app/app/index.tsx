@@ -6,7 +6,7 @@ import './app.module.css';
 import {
   CommonFeed, ForgotPassword, Home,
   Login, Logout, NotFound, Profile,
-  Register, ResetPassword
+  ProfileOrders, Register, ResetPassword
 } from '../../../pages';
 import { IngredientDetails } from '../../burger-ingredients';
 import { Header } from '../../header';
@@ -44,11 +44,12 @@ export function App(): React.JSX.Element {
           <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
           <Route path="/ingredients/:id" element={<IngredientDetails />}/>
           <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
-          <Route path="/logout" element={<Logout title={"Вы успешно вышли из аккаунта"} />} />
+          <Route path="/logout" element={<Logout title="Вы успешно вышли из аккаунта" />} />
           <Route path="/profile" element={<OnlyAuth component={<Profile />} />} />
+          <Route path="/profile/orders" element={<OnlyAuth component={<ProfileOrders />} />} />
           <Route path="/register" element={<OnlyUnAuth component={<Register />} />} />
           <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPassword />} />} />
-          <Route path="*" element={<NotFound title={"Такой страницы не существует"} />} />
+          <Route path="*" element={<NotFound title="Такой страницы не существует" />} />
         </Routes>
       </main>
     </>
