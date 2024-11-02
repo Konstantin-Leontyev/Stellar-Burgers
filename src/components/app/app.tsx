@@ -8,12 +8,14 @@ import {
   Login, Logout, NotFound, Profile,
   Register, ResetPassword
 } from '../../pages';
-import { IngredientDetails } from "../burger-ingredients";
+import { IngredientDetails } from '../burger-ingredients';
 import { Header } from '../header';
 import { OnlyAuth, OnlyUnAuth } from './protected-rout';
 import { getIngredients } from '../services/burger-ingredients/actions';
 import { checkUserAuth } from '../services/auth/actions';
-import { useDispatch } from "../services/store";
+import { useDispatch } from '../services/store';
+
+// TODO check all import fo ', html for ", and ) for; and last line fo _ text prop for ""
 
 export default function App(): React.JSX.Element {
   const dispatch = useDispatch();

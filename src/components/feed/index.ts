@@ -1,3 +1,4 @@
-import { CommonFeed } from '../../pages/common-feed';
+import { BurgerCard } from './components/burger-card';
+import { Feed } from './feed'
 
-export { CommonFeed };
+export { BurgerCard, Feed };

@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './burger-card.module.css'
 
 import {Counter, CurrencyIcon, FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
-import { TIngredientWithCountField, TOrder } from "../../utils/types";
-import { ingredientsList } from "../../services/burger-ingredients/slice";
-import { useSelector } from "../../services/store";
+import { TIngredientWithCountField, TOrder } from "../../../utils/types";
+import { ingredientsList } from "../../../services/burger-ingredients/slice";
+import { useSelector } from "../../../services/store";
 
 type TBurgerCardProps = {
   order: TOrder
