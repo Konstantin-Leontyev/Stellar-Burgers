@@ -16,10 +16,6 @@
   width: calc(100% - 48px);
 }
 
-.span {
-  width: calc(100% - 48px);
-}
-
 .image {
   display: flex;
   flex-direction: row;
@@ -52,9 +48,9 @@
   background: #1c1c21;
   border-radius: 50px;
   display: flex;
-  height: 62px;
+  height: 60px;
   justify-content: center;
-  width: 62px;
+  width: 60px;
 }
 
 .count {

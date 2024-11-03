@@ -20,6 +20,7 @@ import {
 } from '../../services/burger-constructor/slice';
 import { resetIngredientCount, setIngredientCount } from '../../services/burger-ingredients/slice';
 import { useDispatch, useSelector} from "../../services/store";
+import { useLocation } from "react-router-dom";
 
 type TCollectedProps = {
   isOver: boolean;
@@ -27,6 +28,9 @@ type TCollectedProps = {
 };
 
 export function BurgerConstructor(): React.JSX.Element {
+  const location = useLocation();
+  location.state = { backgroundLocation : location }
+
   const dispatch = useDispatch();
   const bun  = useSelector(currentBun);
   const ingredients = useSelector(currentIngredients);
@@ -56,7 +60,6 @@ export function BurgerConstructor(): React.JSX.Element {
   function onModalClose() {
     ingredients.map(ingredient => dispatch(resetIngredientCount(ingredient)));
     dispatch(resetIngredientCount(bun));
-    // @ts-ignore
     dispatch(resetOrderInfo());
   }
 

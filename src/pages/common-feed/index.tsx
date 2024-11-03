@@ -26,10 +26,6 @@ export function CommonFeed(): React.JSX.Element {
     return <ModalPreloader title="Подключение к серверу ..." />
   }
 
-
-  // TODO delete log
-  console.log(orders)
-
   const doneOrdersNumbers = orders
     .filter(order => order.status === OrderStatus.DONE)
     .splice(0, 14)

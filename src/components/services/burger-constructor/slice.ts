@@ -13,7 +13,7 @@ type TBurgerConstructorStore = {
 
 const initialState: TBurgerConstructorStore = {
   currentBun: null,
-  currentIngredients: [] as TIngredientWithKeyField[],
+  currentIngredients: [],
   orderInfo: null,
   isOrderInfoLoading: false,
   hasOrderInfoRequestError: null,

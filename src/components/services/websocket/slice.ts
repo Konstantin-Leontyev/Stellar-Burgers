@@ -3,20 +3,20 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { TOrderList } from "../../utils/types";
 import { WebsocketStatus } from "../../utils/constants";
 
-type TFeedStore = {
+type TWebsocketStore = {
   feed: TOrderList,
   status: WebsocketStatus,
   connectionError: string | null
 };
 
-const initialState: TFeedStore = {
+const initialState: TWebsocketStore = {
   feed: {} as TOrderList,
   status: WebsocketStatus.OFFLINE,
   connectionError: null
 };
 
 export const websocketSlice = createSlice({
-  name: 'feed',
+  name: 'websocket',
   initialState,
   reducers: {
     wsConnecting: (state) => {

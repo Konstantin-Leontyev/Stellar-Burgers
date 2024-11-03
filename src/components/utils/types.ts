@@ -16,6 +16,9 @@ type TCount = { count: number; };
 // email field type
 type TEmail = { email: string; };
 
+// ingredients ID field type
+export type TIngredientsId = { ingredients: string[]; };
+
 // ingredient type with key field
 export type TIngredientWithKeyField = TIngredient & TKey;
 
@@ -32,12 +35,11 @@ type TMessage = { message: string; };
 type TName = { name: string; };
 
 // number field type
-type TNumber = { number: number; };
+export type TNumber = { number: number; };
 
 // order field type returned by the server to an order request
-export type TOrder = TOrderStatus & TName & TNumber &
+export type TOrder = TOrderStatus & TName & TNumber & TIngredientsId &
   {
-    ingredients: string[];
     _id: string;
     createdAt: string;
     updatedAt: string;
@@ -46,7 +48,7 @@ export type TOrder = TOrderStatus & TName & TNumber &
   };
 
 // order status field type
-type TOrderStatus = {
+export type TOrderStatus = {
   status: OrderStatus;
 };
 

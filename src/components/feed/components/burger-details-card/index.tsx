@@ -1,37 +1,47 @@
 import React, {useEffect} from 'react';
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 import styles from './burger-details-cad.module.css';
 
-import { ModalPreloader } from "../../../modal";
-import { getFeed } from "../../../services/websocket/slice";
-import { useSelector } from "../../../services/store";
-import { getOrderDetails } from "../../../utils/api";
-import {TOrder} from "../../../utils/types";
+import { BurgerNameAndStatus } from "../burger-name-and-status";
+import { IngredientsLineCards } from "../ingredients-line-cards";
+import { ModalPreloader } from '../../../modal';
+import { TOrder } from '../../../utils/types';
+import { useDispatch, useSelector } from '../../../services/store';
+import { getOrderDetails } from '../../../services/order-details/actions';
+import {FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
 
 export function BurgerDetailsCard(): React.JSX.Element {
-  const { id } = useParams();
-  const { orders } = useSelector(getFeed);
-  let order: TOrder | undefined;
-
-  useEffect(() => {
-    if (orders) {
-      order = orders.find(order => order._id === id);
-      // TODO delete log
-      // console.log(order);
+  const dispatch = useDispatch();
+  const { number } = useParams();
+  const order: TOrder | null = useSelector(state => {
+    if (number) {
+      let orderDetails = state.websocket.feed.orders?.find(obj => obj.number === +number);
+      if (orderDetails) {
+        return orderDetails;
+      }
     }
 
-    if (id && !order) {
+    return state.order.orderDetails;
+  });
 
-      // TODO delete log
-      console.log(order);
+
+  useEffect(() => {
+      if (!order && number) {
+        dispatch(getOrderDetails(+number))
     }
     // eslint-disable-next-line
   }, []);
 
   return (
-    // {isLoading && <ModalPreloader title='Загрузка данных ингредиента ...' />}
-
-      <div className={styles.container}></div>
-
+    <>
+      { !order && <ModalPreloader title='Загрузка данных о заказе ...' /> }
+      { order &&
+        <>
+          <BurgerNameAndStatus name={order.name} status={order.status} extraClass={40}/>
+          <span className={`${styles.span} text text_type_main-medium ml-10 mt-15 mb-6`}>Состав:</span>
+          <IngredientsLineCards ingredients={order.ingredients} date={order.createdAt}/>
+        </>
+      }
+    </>
   );
 }

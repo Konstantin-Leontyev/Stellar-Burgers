@@ -3,20 +3,20 @@ import { createSlice } from '@reduxjs/toolkit';
 import { TOrder } from "../../utils/types";
 import { getOrderDetails } from './actions';
 
-type TFeedStore = {
+type TOrderStore = {
   orderDetails: TOrder | null,
   isOrderDetailsLoading: boolean,
   hasOrderDetailsRequestError: string | unknown,
 };
 
-const initialState: TFeedStore = {
+const initialState: TOrderStore = {
   orderDetails: null,
   isOrderDetailsLoading: false,
   hasOrderDetailsRequestError: null,
 }
 
-export const feedSlice = createSlice({
-  name: 'ordersFeed',
+export const orderSlice = createSlice({
+  name: 'order',
   initialState,
   reducers: {},
   selectors: {
@@ -45,4 +45,4 @@ export const {
   isOrderDetailsLoading,
   hasOrderDetailsRequestError,
   orderDetails,
-} = feedSlice.selectors;
+} = orderSlice.selectors;

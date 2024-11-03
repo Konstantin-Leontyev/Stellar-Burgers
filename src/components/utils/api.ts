@@ -1,10 +1,10 @@
 import { BASE_URL } from './constants';
 import {
-  TIngredient, TIngredientsResponse, TLoginRequest, TLoginResponse, TLogoutResponse,
-  TOrderInfoResponse, TPasswordResetResponse, TPasswordResetRequest,
+  TIngredient, TIngredientsId, TIngredientsResponse, TLoginRequest, TLoginResponse,
+  TLogoutResponse, TOrderInfoResponse, TPasswordResetResponse, TPasswordResetRequest,
   TPasswordConfirmationResponse, TPasswordConformationRequest, TRefreshedTokensResponse,
   TRegistrationRequest, TRegistrationResponse, TUser, TUserDataResponse,
-  TUserUpdateResponse, TUserUpdateRequest, TOrderDetailsResponse, TOrder
+  TUserUpdateResponse, TUserUpdateRequest, TOrderDetailsResponse, TOrder,
 } from "./types";
 
 let defaultOptions = {
@@ -316,18 +316,19 @@ export async function resetPassword(formData: TPasswordResetRequest): Promise<TP
  * @permisson Auth user only.
  * @returns {Object} Order details object.
  */
-export function getOrderInfo(ingredients: string[]): Promise<TOrderInfoResponse> {
+export function getOrderInfo(ingredients: TIngredientsId): Promise<TOrderInfoResponse> {
   const options = {
     ...defaultOptions,
-    // TODO search for using {}
-    body: JSON.stringify({ingredients}),
+    body: JSON.stringify(ingredients),
     headers: {
       ...defaultOptions.headers,
       authorization: localStorage.getItem("accessToken") || ''
     }
   }
+  console.log(ingredients)
 
-  return request<TOrderInfoResponse>('orders', options);
+
+  return requestWithRefresh<TOrderInfoResponse>('orders', options);
 }
 
 /**
