@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './ingredients-line-cards.module.css';
 
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
-import {TIngredient, TIngredientWithCountField} from "../../../utils/types";
+import { TIngredientWithCountField } from "../../../utils/types";
 import { ingredientsList as list} from "../../../services/burger-ingredients/slice";
 import { useSelector } from "../../../services/store";
 

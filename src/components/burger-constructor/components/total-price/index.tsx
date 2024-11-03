@@ -42,8 +42,6 @@ export function TotalPrice({ bun, ingredients }: TTotalPriceProps): React.JSX.El
     [burger]
   );
 
-  const ingredientsID = { ingredients: idList };
-
   const handleOnClick = useCallback(() => {
     if (!user) {
       return navigate('/login', { state: { from: location }});
