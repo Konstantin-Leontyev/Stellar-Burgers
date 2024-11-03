@@ -6,8 +6,8 @@ import {
 
 import { rootReducer as reducer } from './root-reducer';
 import { socketMiddleware } from "./middleware/websocket";
-import { TExternalFeedActions, wsConnect, wsDisconnect } from "./feed/actions";
-import { TInternalFeedActions, wsClose, wsConnecting, wsError, wsMessage, wsOpen } from "./feed/slice";
+import { TExternalFeedActions, wsConnect, wsDisconnect } from "./websocket/actions";
+import { TInternalFeedActions, wsClose, wsConnecting, wsError, wsMessage, wsOpen } from "./websocket/slice";
 import { TExternalAuthActions } from "./auth/actions";
 import { TInternalAuthActions } from "./auth/slice";
 import { TInternalBurgerConstructorActions } from "./burger-constructor/slice";

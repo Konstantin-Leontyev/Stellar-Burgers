@@ -19,7 +19,7 @@ export function IngredientDetailsCard(): React.JSX.Element {
 
   return (
     <>
-      {isLoading && <ModalPreloader title={'Загрузка ингредиентов ...'} />}
+      {isLoading && <ModalPreloader title='Загрузка данных ингредиента ...' />}
       {hasError && 'Произошла ошибка'}
       {
         !isLoading &&

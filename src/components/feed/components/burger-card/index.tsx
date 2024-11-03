@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './burger-card.module.css'
 
-import { Counter, CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
-import { TIngredientWithCountField, TOrder } from "../../../utils/types";
-import { ingredientsList } from "../../../services/burger-ingredients/slice";
-import { useSelector } from "../../../services/store";
-import { useLocation } from "react-router-dom";
+import { Counter, CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Link, useLocation } from 'react-router-dom';
+import { TIngredientWithCountField, TOrder } from '../../../utils/types';
+import { ingredientsList } from '../../../services/burger-ingredients/slice';
+import { useSelector } from '../../../services/store';
+
 
 type TBurgerCardProps = {
   order: TOrder
@@ -31,50 +32,56 @@ export function BurgerCard({ order }: TBurgerCardProps): React.JSX.Element {
     }
   });
 
-  const price = burgerIngredients.reduce((totalSum, ingredient) => totalSum += ingredient.price * ingredient.count, 0)
+  const price = burgerIngredients.reduce((totalSum, ingredient) => totalSum + ingredient.price * ingredient.count, 0)
 
   const orderStatus = (status: string): string => status === 'done' ? 'Выполнен' : status === 'created' ? 'Создан' : 'Готовиться';
 
   return (
-    <div className={styles.container}>
-      <div className={`${styles.header} mt-6`}>
+    <Link
+      className={styles.link}
+      to={ location.pathname === '/websocket' ? `/feed/${order._id}` : `/profile/orders/${order._id}` }
+      state={{ backgroundLocation : location }}
+      >
+      <div className={styles.container}>
+        <div className={`${styles.header} mt-6`}>
         <span className='text text_type_main-default'>#{order.number}</span>
         <FormattedDate date={new Date(order.createdAt)} className='text_color_inactive'/>
       </div>
-      <span className={`${styles.span} text text_type_main-medium mt-6`}>{order.name}</span>
-      { location.pathname === '/profile/orders' &&
-        <span className={`${styles.span} text text_type_main-default mt-2`}
-              style={ order.status === 'done' ? { color: '#00CCCC'} : {}}>
-          {orderStatus(order.status)}
-        </span>
-      }
-      <div className={`${styles.image} mt-6 mb-6`}>
-        <ul className={styles.ul}>
-          {
-            burgerIngredients.slice(0, slice).map((ingredient, index) =>
-              <li className={`${styles.li}`} style={{ left: `${-15 * index}px`, zIndex: `${10 -index}` }} key={ingredient._id}>
-                <div className={styles.circle}>
-                  { index === lastIndex && burgerIngredients.length - slice > 0
-                    ? <>
-                      <img className={styles.img} src={ingredient.image} alt={ingredient.name}
-                           style={{opacity: `60%`}}/>
-                      <div className={`${styles.count} text text_type_main-medium`}>
-                        +{burgerIngredients.length - slice}
-                      </div>
-                    </>
-                    : <img className={styles.img} src={ingredient.image} alt={ingredient.name}/>
-                  }
-                </div>
-                {ingredient.count > 1 && <Counter count={ingredient.count} size="small" extraClass="m-1"/> }
-              </li>
-            )
-          }
-        </ul>
-        <div className={styles.price}>
-          <span className='text text_type_main-default mr-1'>{price}</span>
-          <CurrencyIcon type='primary' />
+        <span className={`${styles.span} text text_type_main-medium mt-6`}>{order.name}</span>
+        { location.pathname === '/profile/orders' &&
+          <span className={`${styles.span} text text_type_main-default mt-2`}
+                style={ order.status === 'done' ? { color: '#00CCCC'} : {}}>
+            {orderStatus(order.status)}
+          </span>
+        }
+        <div className={`${styles.image} mt-6 mb-6`}>
+          <ul className={styles.ul}>
+            {
+              burgerIngredients.slice(0, slice).map((ingredient, index) =>
+                <li className={`${styles.li}`} style={{ left: `${-15 * index}px`, zIndex: `${10 -index}` }} key={ingredient._id}>
+                  <div className={styles.circle}>
+                    { index === lastIndex && burgerIngredients.length - slice > 0
+                      ? <>
+                        <img className={styles.img} src={ingredient.image} alt={ingredient.name}
+                             style={{opacity: `60%`}}/>
+                        <div className={`${styles.count} text text_type_main-medium`}>
+                          +{burgerIngredients.length - slice}
+                        </div>
+                      </>
+                      : <img className={styles.img} src={ingredient.image} alt={ingredient.name}/>
+                    }
+                  </div>
+                  {ingredient.count > 1 && <Counter count={ingredient.count} size="small" extraClass="m-1"/> }
+                </li>
+              )
+            }
+          </ul>
+          <div className={styles.price}>
+            <span className='text text_type_main-default mr-1'>{price}</span>
+            <CurrencyIcon type='primary' />
+          </div>
         </div>
       </div>
-    </div>
-  )
+    </Link>
+  );
 }

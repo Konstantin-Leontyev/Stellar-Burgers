@@ -6,9 +6,8 @@ import { ModalPreloader } from "../../components/modal";
 import { ProfileNavigation } from "../../components/profile-navigation";
 import { WSS_PRIVET_URL} from "../../components/utils/constants";
 import { useDispatch, useSelector } from "../../components/services/store";
-import { getFeed } from "../../components/services/feed/slice";
-import { wsConnect, wsDisconnect } from "../../components/services/feed/actions";
-import {TOrder} from "../../components/utils/types";
+import { getFeed } from "../../components/services/websocket/slice";
+import { wsConnect, wsDisconnect } from "../../components/services/websocket/actions";
 
 export function ProfileOrders(): React.JSX.Element {
   const dispatch = useDispatch();

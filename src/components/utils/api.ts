@@ -1,10 +1,10 @@
 import { BASE_URL } from './constants';
 import {
   TIngredient, TIngredientsResponse, TLoginRequest, TLoginResponse, TLogoutResponse,
-  TOrderDetailsResponse, TPasswordResetResponse, TPasswordResetRequest,
+  TOrderInfoResponse, TPasswordResetResponse, TPasswordResetRequest,
   TPasswordConfirmationResponse, TPasswordConformationRequest, TRefreshedTokensResponse,
   TRegistrationRequest, TRegistrationResponse, TUser, TUserDataResponse,
-  TUserUpdateResponse, TUserUpdateRequest
+  TUserUpdateResponse, TUserUpdateRequest, TOrderDetailsResponse, TOrder
 } from "./types";
 
 let defaultOptions = {
@@ -63,7 +63,7 @@ export function refreshToken(): Promise<TRefreshedTokensResponse> {
 
       localStorage.setItem('accessToken', refreshedData.accessToken);
       localStorage.setItem('refreshToken', refreshedData.refreshToken);
-      return refreshedData
+      return refreshedData;
     });
 }
 
@@ -159,7 +159,7 @@ export function registerUser(formData: TRegistrationRequest): Promise<TRegistrat
 
       localStorage.setItem('accessToken', response.accessToken);
       localStorage.setItem('refreshToken', response.refreshToken);
-      return response
+      return response;
     });
 }
 
@@ -199,7 +199,7 @@ export function loginUser(formData: TLoginRequest): Promise<TLoginResponse> {
 
       localStorage.setItem('accessToken', response.accessToken);
       localStorage.setItem('refreshToken', response.refreshToken);
-      return response
+      return response;
     });
 }
 
@@ -316,9 +316,10 @@ export async function resetPassword(formData: TPasswordResetRequest): Promise<TP
  * @permisson Auth user only.
  * @returns {Object} Order details object.
  */
-export function getOrderDetails(ingredients: string[]): Promise<TOrderDetailsResponse> {
+export function getOrderInfo(ingredients: string[]): Promise<TOrderInfoResponse> {
   const options = {
     ...defaultOptions,
+    // TODO search for using {}
     body: JSON.stringify({ingredients}),
     headers: {
       ...defaultOptions.headers,
@@ -326,7 +327,49 @@ export function getOrderDetails(ingredients: string[]): Promise<TOrderDetailsRes
     }
   }
 
-  return request<TOrderDetailsResponse>('orders', options);
+  return request<TOrderInfoResponse>('orders', options);
+}
+
+/**
+ * Send order request.
+ * @example
+ * // response
+ * {
+ *   "success": true,
+ *   "orders": [
+ *     {
+ *     "name": string;
+ *     "status": string;
+ *     "number": number;
+ *     "ingredients": string[];
+ *     "_id": string;
+ *     "createdAt": string;
+ *     "updatedAt": string;
+ *     "owner": string;
+ *     "__v": number;
+ *    }
+ *   ]
+ * }
+ * @permission Allow any.
+ * @returns {Object} Order request status and order data.
+ */
+export function getOrderDetails(number: number): Promise<TOrder> {
+  const options = {
+    ...defaultOptions,
+    method: 'GET',
+  }
+
+  try {
+    return request<TOrderDetailsResponse>(`orders/${number}`, options)
+      .then((response) => {
+        if (!response.success) {
+          return Promise.reject(response);
+        }
+        return response.orders[0];
+      });
+  } catch(error) {
+    throw error;
+  }
 }
 
 /**

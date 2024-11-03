@@ -2,6 +2,7 @@ import React from "react";
 import { Navigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+import { ModalPreloader } from "../../../modal";
 import { getIsAuthChecked, getUser } from '../../../services/auth/slice';
 
 type TProtectedProps = {
@@ -15,7 +16,7 @@ function Protected({ component, onlyUnAuth = false }: TProtectedProps): React.JS
   const location = useLocation();
 
   if (!isAuthChecked) {
-    return <p>Загрузка</p>;
+    return <ModalPreloader title='Загрузка' />;
   }
 
   if (!onlyUnAuth && !user) {

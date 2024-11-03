@@ -1,23 +1,22 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 
-import { TIngredientWithKeyField, TOrderDetailsResponse } from "../../utils/types";
-import { getOrderDetails } from './actions';
-import {authSlice} from "../auth/slice";
+import { TIngredientWithKeyField, TOrderInfoResponse } from '../../utils/types';
+import { getOrderInfo } from './actions';
 
 type TBurgerConstructorStore = {
   currentBun: TIngredientWithKeyField | null,
   currentIngredients: TIngredientWithKeyField[],
-  orderDetails: TOrderDetailsResponse | null,
-  isOrderDetailsLoading: boolean,
-  hasOrderDetailsRequestError: string | unknown,
+  orderInfo: TOrderInfoResponse | null,
+  isOrderInfoLoading: boolean,
+  hasOrderInfoRequestError: string | unknown,
 };
 
 const initialState: TBurgerConstructorStore = {
   currentBun: null,
-  currentIngredients: [],
-  orderDetails: null,
-  isOrderDetailsLoading: false,
-  hasOrderDetailsRequestError: null,
+  currentIngredients: [] as TIngredientWithKeyField[],
+  orderInfo: null,
+  isOrderInfoLoading: false,
+  hasOrderInfoRequestError: null,
 }
 
 export const burgerConstructorSlice = createSlice({
@@ -26,9 +25,9 @@ export const burgerConstructorSlice = createSlice({
   selectors: {
     currentBun: state => state.currentBun,
     currentIngredients: state => state.currentIngredients,
-    orderDetails: state => state.orderDetails,
-    isOrderDetailsLoading: state => state.isOrderDetailsLoading,
-    hasOrderDetailsRequestError: state => state.hasOrderDetailsRequestError,
+    orderInfo: state => state.orderInfo,
+    isOrderInfoLoading: state => state.isOrderInfoLoading,
+    hasOrderInfoRequestError: state => state.hasOrderInfoRequestError,
   },
   reducers: {
     addCurrentBurgerBun: ((state, action: PayloadAction<TIngredientWithKeyField>) => {
@@ -51,25 +50,25 @@ export const burgerConstructorSlice = createSlice({
       newIngredients.splice(hoverIndex, 0, newIngredients.splice(dragIndex, 1)[0]);
       state.currentIngredients = newIngredients;
     }),
-    resetOrderDetails: ((state) => {
+    resetOrderInfo: ((state) => {
       state.currentBun = null;
       state.currentIngredients = [];
-      state.orderDetails = null;
+      state.orderInfo = null;
 }),
   },
   extraReducers: builder => {
     builder
-      .addCase(getOrderDetails.pending, (state) => {
-        state.isOrderDetailsLoading = true;
-        state.hasOrderDetailsRequestError = false;
+      .addCase(getOrderInfo.pending, (state) => {
+        state.isOrderInfoLoading = true;
+        state.hasOrderInfoRequestError = false;
       })
-      .addCase(getOrderDetails.fulfilled, (state, action) => {
-        state.orderDetails = action.payload;
-        state.isOrderDetailsLoading = false;
+      .addCase(getOrderInfo.fulfilled, (state, action) => {
+        state.orderInfo = action.payload;
+        state.isOrderInfoLoading = false;
       })
-      .addCase(getOrderDetails.rejected, (state, action) => {
-        state.hasOrderDetailsRequestError = action.error?.message;
-        state.isOrderDetailsLoading = false;
+      .addCase(getOrderInfo.rejected, (state, action) => {
+        state.hasOrderInfoRequestError = action.error?.message;
+        state.isOrderInfoLoading = false;
       })
   }
 });
@@ -77,9 +76,9 @@ export const burgerConstructorSlice = createSlice({
 export const {
   currentBun,
   currentIngredients,
-  isOrderDetailsLoading,
-  hasOrderDetailsRequestError,
-  orderDetails,
+  isOrderInfoLoading,
+  hasOrderInfoRequestError,
+  orderInfo,
 } = burgerConstructorSlice.selectors;
 
 export const {
@@ -87,7 +86,7 @@ export const {
   addCurrentBurgerIngredient,
   deleteCurrentBurgerIngredient,
   moveIngredients,
-  resetOrderDetails,
+  resetOrderInfo,
 } = burgerConstructorSlice.actions;
 
 type TActionsCreator = typeof burgerConstructorSlice.actions;

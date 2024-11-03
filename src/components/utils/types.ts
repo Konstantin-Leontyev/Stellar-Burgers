@@ -41,6 +41,8 @@ export type TOrder = TOrderStatus & TName & TNumber &
     _id: string;
     createdAt: string;
     updatedAt: string;
+    owner?: string;
+    __v?: number;
   };
 
 // order status field type
@@ -115,13 +117,18 @@ export type TLogoutResponse = TMessageResponse;
 export type TMessageResponse = TSuccess & TMessage;
 
 // type of response returned by the server to an order details request
-export type TOrderDetailsResponse = TSuccess & TName & TOrderNumber;
+export type TOrderInfoResponse = TSuccess & TName & TOrderNumber;
 
 // type of websocket message returned by the server
 export type TOrderList = TSuccess & {
   orders: TOrder[];
   total: number;
   totalToday: number;
+}
+
+// type of response returned by the server to an order request
+export type TOrderDetailsResponse = TSuccess & {
+  orders: TOrder[];
 }
 
 // type of response returned by the server to a password reset request

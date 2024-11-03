@@ -5,9 +5,9 @@ import { Feed } from '../../components/feed';
 import { ModalPreloader } from '../../components/modal';
 import { NumberBlock } from '../../components/number-block';
 import { OrderStatus, WSS_PUBLIC_URL } from '../../components/utils/constants';
-import { getFeed } from '../../components/services/feed/slice';
+import { getFeed } from '../../components/services/websocket/slice';
 import { useDispatch, useSelector } from '../../components/services/store';
-import { wsConnect, wsDisconnect } from '../../components/services/feed/actions';
+import { wsConnect, wsDisconnect } from '../../components/services/websocket/actions';
 
 export function CommonFeed(): React.JSX.Element {
   const dispatch = useDispatch();
@@ -25,6 +25,10 @@ export function CommonFeed(): React.JSX.Element {
   if (!orders) {
     return <ModalPreloader title="Подключение к серверу ..." />
   }
+
+
+  // TODO delete log
+  console.log(orders)
 
   const doneOrdersNumbers = orders
     .filter(order => order.status === OrderStatus.DONE)

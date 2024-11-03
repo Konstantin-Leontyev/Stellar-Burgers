@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { TIngredient } from "../../utils/types";
 import { getIngredients } from './actions';
-import {authSlice} from "../auth/slice";
 
 type TBurgerIngredientStore = {
   ingredientsList: TIngredient[],

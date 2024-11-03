@@ -7,7 +7,7 @@ import {
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TIngredient } from "../../../utils/types";
-import { getOrderDetails } from '../../../services/burger-constructor/actions';
+import { getOrderInfo } from '../../../services/burger-constructor/actions';
 import { getUser } from '../../../services/auth/slice';
 import { useDispatch, useSelector } from "../../../services/store";
 
@@ -38,7 +38,7 @@ export function TotalPrice({ bun, ingredients }: TTotalPriceProps): React.JSX.El
   );
 
   const sum = useMemo(
-    () => burger.reduce((totalSum, ingredient) => totalSum += ingredient.price, 0),
+    () => burger.reduce((totalSum, ingredient) => totalSum + ingredient.price, 0),
     [burger]
   );
 
@@ -46,7 +46,7 @@ export function TotalPrice({ bun, ingredients }: TTotalPriceProps): React.JSX.El
     if (!user) {
       return navigate('/login', { state: { from: location }});
     }
-    dispatch(getOrderDetails(idList));
+    dispatch(getOrderInfo(idList));
     // eslint-disable-next-line
   }, [burger])
 

@@ -1,6 +1,10 @@
-import { createAction } from "@reduxjs/toolkit";
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const wsConnect = createAction<string, 'common-feed/connect'>('common-feed/connect');
-export const wsDisconnect = createAction('common-feed/disconnect');
+import { getOrderDetails as orderRequest } from '../../utils/api';
 
-export type TExternalFeedActions = ReturnType<typeof wsConnect> | ReturnType<typeof wsDisconnect>
+export const getOrderDetails = createAsyncThunk(
+  'feed/getOrderDetails',
+  async (number: number) => {
+    return orderRequest(number)
+  }
+);

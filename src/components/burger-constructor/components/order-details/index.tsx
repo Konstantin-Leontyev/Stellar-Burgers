@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './order-details.module.css';
 
-import { orderDetails } from '../../../services/burger-constructor/slice';
+import { orderInfo } from '../../../services/burger-constructor/slice';
 import { useSelector } from "../../../services/store";
 
 
 export function OrderDetails(): React.JSX.Element {
-  const details = useSelector(orderDetails);
+  const details = useSelector(orderInfo);
 
   return (
     <div className={`${styles.wrapper} mb-30`}>

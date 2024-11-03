@@ -3,7 +3,7 @@ import { ActionCreatorWithPayload, ActionCreatorWithoutPayload, Middleware } fro
 import { DELAY } from "../../utils/constants";
 import { TRootState } from "../store";
 import { refreshToken } from "../../utils/api";
-import { wsConnect } from "../feed/actions";
+import { wsConnect } from "../websocket/actions";
 
 type TWsActions<S, R> = {
   connect: ActionCreatorWithPayload<string>;

@@ -9,9 +9,9 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 export function IngredientsTab({ categories }: { categories: TCategories }): React.JSX.Element {
   const current = useSelector(currentTab);
 
-  function onClickHandler(value: string): void {
+  function onClickHandler(): void {
     return;
-  };
+  }
 
   return (
     <div className={`${styles.container} pb-10`}>

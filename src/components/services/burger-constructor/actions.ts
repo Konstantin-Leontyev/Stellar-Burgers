@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { getOrderDetails as orderRequest } from '../../utils/api';
+import { getOrderInfo as orderRequest } from '../../utils/api';
 
-export const getOrderDetails = createAsyncThunk(
-  'constructor/getOrderDetails',
+export const getOrderInfo = createAsyncThunk(
+  'constructor/getOrderInfo',
   async (burgerIngredients: string[]) => {
     return orderRequest(burgerIngredients)
   }
