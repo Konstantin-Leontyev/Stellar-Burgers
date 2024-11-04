@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useDrop } from 'react-dnd';
 import styles from './burger-constructor.module.css';
 
@@ -9,32 +8,33 @@ import { Modal, ModalPreloader } from '../../modal';
 import { OrderDetails } from '../components/order-details';
 import { TotalPrice } from '../components/total-price';
 
-import { TIngredient } from "../../utils/types";
+import { TIngredientWithKeyField } from '../../utils/types';
 import {
   addCurrentBurgerBun,
   addCurrentBurgerIngredient,
   currentBun, currentIngredients,
-  isOrderDetailsLoading,
-  hasOrderDetailsRequestError,
-  resetOrderDetails,
-  orderDetails,
-} from '../../services/burger-constructor/reducers';
-import { resetIngredientCount, setIngredientCount } from '../../services/burger-ingredients/reducers';
-
-// TODO replace key
-type TKeyIngredient = TIngredient & { key: string };
+  isOrderInfoLoading,
+  hasOrderInfoRequestError,
+  resetOrderInfo,
+  orderInfo,
+} from '../../services/burger-constructor/slice';
+import { resetIngredientCount, setIngredientCount } from '../../services/burger-ingredients/slice';
+import { useDispatch, useSelector} from "../../services/store";
+import { useLocation } from "react-router-dom";
 
 type TCollectedProps = {
   isOver: boolean;
-  item: TIngredient;
+  item: TIngredientWithKeyField;
 };
 
 export function BurgerConstructor(): React.JSX.Element {
+  const location = useLocation();
+  location.state = { backgroundLocation : location }
+
   const dispatch = useDispatch();
-  // TODO type useSelector
-  const bun: TKeyIngredient  = useSelector(currentBun);
-  const ingredients: TKeyIngredient[] = useSelector(currentIngredients);
-  const [{ isOver, item }, dropTarget] = useDrop<TIngredient, unknown, TCollectedProps>({
+  const bun  = useSelector(currentBun);
+  const ingredients = useSelector(currentIngredients);
+  const [{ isOver, item }, dropTarget] = useDrop<TIngredientWithKeyField, unknown, TCollectedProps>({
     accept: 'ingredient',
     drop(item) {
       if (item.type === 'bun') {
@@ -51,17 +51,16 @@ export function BurgerConstructor(): React.JSX.Element {
     }),
   });
 
-  const isLoading = useSelector(isOrderDetailsLoading);
-  const hasError = useSelector(hasOrderDetailsRequestError);
-  const details = useSelector(orderDetails);
+  const isLoading = useSelector(isOrderInfoLoading);
+  const hasError = useSelector(hasOrderInfoRequestError);
+  const details = useSelector(orderInfo);
 
   const scroll = ingredients.length > 5 ? `${styles.scroll} custom-scroll` : 'mr-5';
 
   function onModalClose() {
     ingredients.map(ingredient => dispatch(resetIngredientCount(ingredient)));
     dispatch(resetIngredientCount(bun));
-    // @ts-ignore
-    dispatch(resetOrderDetails());
+    dispatch(resetOrderInfo());
   }
 
   return (

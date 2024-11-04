@@ -1,20 +1,16 @@
-import PropTypes from 'prop-types';
-import React from "react";
-
 import {
   BurgerIcon,
   ListIcon,
   ProfileIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { TIconProps } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/utils";
+import { THeaderItem } from "./types";
 
-export type THeaderItem = {
-  title: string;
-  name: string;
-  route: string;
-  type: string;
-  Icon: ({type}: TIconProps) => React.JSX.Element
-};
+export const BASE_URL: string = 'https://norma.nomoreparties.space/api/';
+
+export const DELAY: number = 5000;
+
+export const WSS_PUBLIC_URL: string = 'wss://norma.nomoreparties.space/orders/all'
+export const WSS_PRIVET_URL: string = 'wss://norma.nomoreparties.space/orders'
 
 export const headerItemsInitialState: THeaderItem[] = [
   {
@@ -40,25 +36,14 @@ export const headerItemsInitialState: THeaderItem[] = [
   },
 ];
 
-export const baseUrl: string = 'https://norma.nomoreparties.space/api/';
+export enum OrderStatus {
+  CREATED = 'created',
+  DONE = 'done',
+  PENDING = 'pending'
+}
 
-
-export const ingredientPropTypes = PropTypes.shape({
-  _id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  proteins: PropTypes.number.isRequired,
-  fat: PropTypes.number.isRequired,
-  carbohydrates: PropTypes.number.isRequired,
-  calories: PropTypes.number.isRequired,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-  image_mobile: PropTypes.string.isRequired,
-  image_large: PropTypes.string.isRequired,
-  __v: PropTypes.number.isRequired,
-});
-
-export const categoryPropTypes = PropTypes.shape({
-  title: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-});
+export enum WebsocketStatus {
+  CONNECTING = 'Connecting ...',
+  OFFLINE = 'Offline',
+  ONLINE = 'Online'
+}

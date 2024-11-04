@@ -1,8 +1,8 @@
 .container {
   box-sizing: border-box;
-  position: relative;
   max-width: 272px;
   max-height: 208px;
+  position: relative;
 }
 
 .li {

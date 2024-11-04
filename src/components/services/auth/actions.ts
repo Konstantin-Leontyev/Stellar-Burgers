@@ -5,18 +5,20 @@ import {
   loginUser, logoutUser,
   registerUser, updateUser,
 } from '../../utils/api';
-import { setIsAuthChecked } from './reducers';
+import { TLoginRequest, TUser, TRegistrationRequest, TUserUpdateRequest } from "../../utils/types";
+import { setIsAuthChecked } from './slice';
+
 
 export const register = createAsyncThunk(
   'auth/register',
-  async (formData) => {
+  async (formData: TRegistrationRequest) => {
     return registerUser(formData);
   }
 );
 
 export const login = createAsyncThunk(
   'auth/login',
-  async (formData) => {
+  async (formData: TLoginRequest) => {
     return loginUser(formData);
   }
 );
@@ -28,31 +30,29 @@ export const logout = createAsyncThunk(
   }
 );
 
-export const getUserProfile = createAsyncThunk(
-  'auth/user',
-  async () => {
-    return getUser();
-  }
-);
-
 export const updateUserProfile = createAsyncThunk(
   'auth/patch',
-  async (formData) => {
+  async (formData: TUserUpdateRequest) => {
     return updateUser(formData);
   }
 );
 
-export const setUser = createAction('auth/setUser');
+export const setUser = createAction<TUser>('auth/setUser');
 
 export const checkUserAuth = createAsyncThunk(
   'auth/checkUserAuth',
   async (_, { dispatch }) => {
-    if (localStorage.getItem('accessToken')) {
-      return getUser()
-        .then((user) => dispatch(setUser(user)))
-        .finally(dispatch(setIsAuthChecked(true)));
-    } else {
-      dispatch(setIsAuthChecked(true))
+    try {
+      if (localStorage.getItem('accessToken')) {
+        return getUser()
+          .then((user) => dispatch(setUser(user)))
+      }
+    } catch(error) {
+      throw error
+    } finally {
+      dispatch(setIsAuthChecked(true));
     }
   }
 );
+
+export type TExternalAuthActions = ReturnType<typeof setUser>;

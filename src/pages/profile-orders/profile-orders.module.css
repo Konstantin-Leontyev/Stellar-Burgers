@@ -1,0 +1,17 @@
+.container {
+  align-items: stretch;
+  display: flex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%, -50%);
+  width: 1300px;
+  height: 250px;
+}
+
+.wrapper {
+  height: 700px;
+  position: relative;
+  top: -150px;
+  width: 844px;
+}

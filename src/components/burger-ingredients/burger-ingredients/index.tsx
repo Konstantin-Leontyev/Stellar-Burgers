@@ -1,11 +1,10 @@
 import React, { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import styles from './burger-ingredients.module.css';
 
 import { IngredientCard } from '../components/ingredient-card';
 import { IngredientsTab } from '../components/ingredients-tab';
-import { ingredientsList, setTab } from '../../services/burger-ingredients/reducers';
-import { TIngredient } from "../../utils/types";
+import { ingredientsList, setTab } from '../../services/burger-ingredients/slice';
+import { useDispatch, useSelector } from "../../services/store";
 
 export type TCategories = {
   title: string;
@@ -15,8 +14,7 @@ export type TCategories = {
 
 export function BurgerIngredients(): React.JSX.Element {
   const dispatch = useDispatch();
-  // TODO type useSelector
-  const ingredients: TIngredient[] = useSelector(ingredientsList);
+  const ingredients = useSelector(ingredientsList);
 
   const bunRef = useRef({} as HTMLDivElement);
   const innerRef = useRef({} as HTMLDivElement);
@@ -46,7 +44,6 @@ export function BurgerIngredients(): React.JSX.Element {
   }
 
   return (
-
     <section className={styles.container}>
       <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
       <IngredientsTab categories={categories} />

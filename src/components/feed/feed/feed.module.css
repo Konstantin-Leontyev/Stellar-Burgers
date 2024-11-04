@@ -1,0 +1,20 @@
+.feed {
+  height: 500px;
+  margin-left: 0;
+  width: 100%;
+}
+
+.ul {
+  margin-top: 0;
+  padding-left: 0;
+  padding-right: 8px;
+}
+
+.li {
+  list-style: none;
+}
+
+.scroll {
+  max-height: 700px;
+  overflow-y: scroll;
+}

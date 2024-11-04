@@ -1,21 +1,19 @@
 import React, {FormEvent} from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import styles from '../pages.module.css';
 
 import { Button, EmailInput, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { TLoginData } from "../../components/utils/types";
+import { TLoginRequest } from "../../components/utils/types";
 import { login } from '../../components/services/auth/actions';
 import { useForm } from '../../components/utils/useForm';
+import { useDispatch } from "../../components/services/store";
 
 export function Login(): React.JSX.Element {
   const dispatch = useDispatch();
-  const { formData, handleOnChange } = useForm<TLoginData>({} as TLoginData);
+  const { formData, handleOnChange } = useForm<TLoginRequest>({} as TLoginRequest);
 
   function handleOnSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
-    // TODO remove ts-ignore
-    // @ts-ignore
     dispatch(login(formData));
   }
 

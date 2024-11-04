@@ -3,13 +3,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from '../pages.module.css';
 
 import { Button, Input, PasswordInput } from '@ya.praktikum/react-developer-burger-ui-components';
-import { TPasswordResetData } from "../../components/utils/types";
+import { TPasswordResetRequest } from "../../components/utils/types";
 import { resetPassword } from '../../components/utils/api';
 import { useForm } from '../../components/utils/useForm';
 
 export function ResetPassword(): React.JSX.Element {
   const navigate = useNavigate();
-  const { formData, handleOnChange } = useForm<TPasswordResetData>({} as TPasswordResetData);
+  const { formData, handleOnChange } = useForm<TPasswordResetRequest>({} as TPasswordResetRequest);
 
   function handleOnSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();

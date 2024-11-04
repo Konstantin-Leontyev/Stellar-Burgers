@@ -1,9 +1,10 @@
-import { baseUrl } from './constants';
+import { BASE_URL } from './constants';
 import {
-  TIngredient, TIngredientsResponse, TLogoutResponse, TPasswordResetResponse,
-  TRefreshedData, TPasswordResetData, TUserUpdateData, TUserDataResponse,
-  TUserRegisterData, TUserRegisterResponse, TLoginData, TLoginResponse,
-  TPasswordConfirmationResponse, TIngredientID, TOrderDetails, TPasswordConformationData,
+  TIngredient, TIngredientsId, TIngredientsResponse, TLoginRequest, TLoginResponse,
+  TLogoutResponse, TOrderInfoResponse, TPasswordResetResponse, TPasswordResetRequest,
+  TPasswordConfirmationResponse, TPasswordConformationRequest, TRefreshedTokensResponse,
+  TRegistrationRequest, TRegistrationResponse, TUser, TUserDataResponse,
+  TUserUpdateResponse, TUserUpdateRequest, TOrderDetailsResponse, TOrder,
 } from "./types";
 
 let defaultOptions = {
@@ -28,22 +29,9 @@ function checkResponse<T>(response: Response): Promise<T> {
  * Send request and check response status.
  */
 function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
-  return fetch(baseUrl.concat(endpoint), options)
+  return fetch(BASE_URL.concat(endpoint), options)
     .then(checkResponse<T>);
 }
-
-// /**
-//  * Set JWT tokens to local storage.
-//  */
-// function tokenUpload(responseData: TRefreshedData): Promise<TRefreshedData> {
-//   if (!responseData.success) {
-//     return Promise.reject(responseData);
-//   }
-//
-//   localStorage.setItem('accessToken', responseData.accessToken);
-//   localStorage.setItem('refreshToken', responseData.refreshToken);
-//   return Promise.resolve(responseData);
-// }
 
 /**
  * Send JWT tokens refresh request and set them to local storage.
@@ -62,12 +50,12 @@ function request<T>(endpoint: string, options?: RequestInit): Promise<T> {
  * @permission Auth only.
  * @returns {Object} Refresh request status and new JWT tokens.
  */
-function refreshToken(): Promise<TRefreshedData> {
+export function refreshToken(): Promise<TRefreshedTokensResponse> {
   const options = {
     ...defaultOptions,
     body: JSON.stringify({token: localStorage.getItem('refreshToken')})
   };
-  return request<TRefreshedData>('auth/token', options)
+  return request<TRefreshedTokensResponse>('auth/token', options)
     .then((refreshedData) => {
       if (!refreshedData.success) {
         return Promise.reject(refreshedData);
@@ -75,7 +63,7 @@ function refreshToken(): Promise<TRefreshedData> {
 
       localStorage.setItem('accessToken', refreshedData.accessToken);
       localStorage.setItem('refreshToken', refreshedData.refreshToken);
-      return refreshedData
+      return refreshedData;
     });
 }
 
@@ -157,13 +145,13 @@ export function getIngredients(): Promise<TIngredient[]> {
  * @permission Allow any.
  * @returns {Object} register request status, JWT tokens and user object.
  */
-export function registerUser(formData: TUserRegisterData): Promise<TUserRegisterResponse> {
+export function registerUser(formData: TRegistrationRequest): Promise<TRegistrationResponse> {
   const options = {
     ...defaultOptions,
     body: JSON.stringify(formData),
   };
 
-  return request<TUserRegisterResponse>('auth/register', options)
+  return request<TRegistrationResponse>('auth/register', options)
     .then((response) => {
       if (!response.success) {
         return Promise.reject(response);
@@ -171,7 +159,7 @@ export function registerUser(formData: TUserRegisterData): Promise<TUserRegister
 
       localStorage.setItem('accessToken', response.accessToken);
       localStorage.setItem('refreshToken', response.refreshToken);
-      return response
+      return response;
     });
 }
 
@@ -197,7 +185,7 @@ export function registerUser(formData: TUserRegisterData): Promise<TUserRegister
  * @permission Allow any.
  * @returns {Object} login request status, JWT tokens and user object.
  */
-export function loginUser(formData: TLoginData): Promise<TLoginResponse> {
+export function loginUser(formData: TLoginRequest): Promise<TLoginResponse> {
   const options = {
     ...defaultOptions,
     body: JSON.stringify(formData),
@@ -211,7 +199,7 @@ export function loginUser(formData: TLoginData): Promise<TLoginResponse> {
 
       localStorage.setItem('accessToken', response.accessToken);
       localStorage.setItem('refreshToken', response.refreshToken);
-      return response
+      return response;
     });
 }
 
@@ -266,7 +254,7 @@ export function logoutUser(): Promise<TLogoutResponse> {
  * @permission Auth user only.
  * @returns {Object} Email conformation sent status.
  */
-export async function sendPasswordResetConformationEmail(formData: TPasswordConformationData): Promise<TPasswordConfirmationResponse> {
+export async function sendPasswordResetConformationEmail(formData: TPasswordConformationRequest): Promise<TPasswordConfirmationResponse> {
   const options = {
     ...defaultOptions,
     body: JSON.stringify(formData)
@@ -293,7 +281,7 @@ export async function sendPasswordResetConformationEmail(formData: TPasswordConf
  * @permission Auth user only.
  * @returns {Object} Password reset request status.
  */
-export async function resetPassword(formData: TPasswordResetData): Promise<TPasswordResetResponse> {
+export async function resetPassword(formData: TPasswordResetRequest): Promise<TPasswordResetResponse> {
   const options = {
     ...defaultOptions,
     body: JSON.stringify(formData)
@@ -328,17 +316,61 @@ export async function resetPassword(formData: TPasswordResetData): Promise<TPass
  * @permisson Auth user only.
  * @returns {Object} Order details object.
  */
-export function getOrderDetails(ingredients: { ingredients: TIngredientID[] }): Promise<TOrderDetails> {
+export function getOrderInfo(ingredients: TIngredientsId): Promise<TOrderInfoResponse> {
   const options = {
     ...defaultOptions,
-    body: JSON.stringify({ingredients}),
+    body: JSON.stringify(ingredients),
     headers: {
       ...defaultOptions.headers,
       authorization: localStorage.getItem("accessToken") || ''
     }
   }
+  console.log(ingredients)
 
-  return request<TOrderDetails>('orders', options);
+
+  return requestWithRefresh<TOrderInfoResponse>('orders', options);
+}
+
+/**
+ * Send order request.
+ * @example
+ * // response
+ * {
+ *   "success": true,
+ *   "orders": [
+ *     {
+ *     "name": string;
+ *     "status": string;
+ *     "number": number;
+ *     "ingredients": string[];
+ *     "_id": string;
+ *     "createdAt": string;
+ *     "updatedAt": string;
+ *     "owner": string;
+ *     "__v": number;
+ *    }
+ *   ]
+ * }
+ * @permission Allow any.
+ * @returns {Object} Order request status and order data.
+ */
+export function getOrderDetails(number: number): Promise<TOrder> {
+  const options = {
+    ...defaultOptions,
+    method: 'GET',
+  }
+
+  try {
+    return request<TOrderDetailsResponse>(`orders/${number}`, options)
+      .then((response) => {
+        if (!response.success) {
+          return Promise.reject(response);
+        }
+        return response.orders[0];
+      });
+  } catch(error) {
+    throw error;
+  }
 }
 
 /**
@@ -355,7 +387,7 @@ export function getOrderDetails(ingredients: { ingredients: TIngredientID[] }): 
  * @permission Auth user only.
  * @returns {Object} Request status and user data.
  */
-export async function getUser(): Promise<TUserDataResponse | unknown> {
+export async function getUser(): Promise<TUser> {
   const options = {
     ...defaultOptions,
     method: 'GET',
@@ -372,8 +404,7 @@ export async function getUser(): Promise<TUserDataResponse | unknown> {
           return Promise.reject(response);
         }
 
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
+        return response.user;
       });
   } catch(error) {
     localStorage.removeItem('accessToken');
@@ -404,7 +435,7 @@ export async function getUser(): Promise<TUserDataResponse | unknown> {
  * @permission Auth user only.
  * @returns {Object} Request status and user data.
  */
-export function updateUser(formData: TUserUpdateData): Promise<TUserDataResponse> {
+export function updateUser(formData: TUserUpdateRequest): Promise<TUserUpdateResponse> {
   const options = {
     ...defaultOptions,
     method: 'PATCH',
@@ -415,5 +446,5 @@ export function updateUser(formData: TUserUpdateData): Promise<TUserDataResponse
     body: JSON.stringify(formData)
   }
 
-  return requestWithRefresh<TUserDataResponse>('auth/user', options);
+  return requestWithRefresh<TUserUpdateResponse>('auth/user', options);
 }
