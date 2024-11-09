@@ -3,14 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 import { TIngredient } from "../../utils/types";
 import { getIngredients } from './actions';
 
-type TBurgerIngredientStore = {
+export type TBurgerIngredientStore = {
   ingredientsList: TIngredient[],
   isIngredientsListLoading: boolean,
   hasIngredientsListRequestError: string | unknown,
-  currentTab: string
+  currentTab: 'Булки' | 'Соусы' | 'Начинки'
 };
 
-const initialState: TBurgerIngredientStore = {
+export const initialState: TBurgerIngredientStore = {
   ingredientsList: [],
   isIngredientsListLoading: false,
   hasIngredientsListRequestError: null,
@@ -49,7 +49,7 @@ export const burgerIngredientsSlice = createSlice({
         ...state.ingredientsList.map(ingredient => ingredient._id === action.payload._id
           ? {
             ...ingredient,
-            __v: action.payload.type === 'bun' ? -2 : ingredient.__v -= 1
+            __v: ingredient.__v -= 1
           }
           : ingredient
         )

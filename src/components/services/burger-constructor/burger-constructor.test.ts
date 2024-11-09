@@ -1,6 +1,6 @@
 import { TIngredientWithKeyField, TOrderInfoResponse } from '../../utils/types';
 import { getOrderInfo } from './actions';
-import { currentBun, currentIngredients, hasOrderInfoRequestError, initialState, isOrderInfoLoading, orderInfo, burgerConstructorSlice as slice } from './slice';
+import { initialState, burgerConstructorSlice as slice } from './slice';
 
 const testBun: TIngredientWithKeyField = {
   _id:"643d69a5c3f7b9001cfa093d",
@@ -14,6 +14,22 @@ const testBun: TIngredientWithKeyField = {
   image: "https://code.s3.yandex.net/react/code/bun-01.png",
   image_mobile: "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
   image_large: "https://code.s3.yandex.net/react/code/bun-01-large.png",
+  __v: 0,
+  key: ''
+};
+
+const otherBun: TIngredientWithKeyField = {
+  _id: "643d69a5c3f7b9001cfa093c",
+  name: "Краторная булка N-200i",
+  type: "bun",
+  proteins: 80,
+  fat: 24,
+  carbohydrates: 53,
+  calories: 420,
+  price: 1255,
+  image: "https://code.s3.yandex.net/react/code/bun-02.png",
+  image_mobile: "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
+  image_large: "https://code.s3.yandex.net/react/code/bun-02-large.png",
   __v: 0,
   key: ''
 };
@@ -88,6 +104,14 @@ describe('burger-constructor reducer', () => {
         expect(state).toEqual({ ...initialState, currentBun: testBun });
       });
 
+      it('should change bun', () => {
+        const prevState = {...initialState, currentBun: testBun}
+        const action = { type: slice.actions.addCurrentBurgerBun.type, payload: otherBun };
+        const state = slice.reducer(prevState, action);
+
+        expect(state).toEqual({ ...prevState, currentBun: otherBun });
+      });
+
       it('should add ingredient to burger', () => {
         const action = { type: slice.actions.addCurrentBurgerIngredient.type, payload: firstIngredient };
         const state = slice.reducer(initialState, action);
@@ -122,7 +146,7 @@ describe('burger-constructor reducer', () => {
     });
 
     describe('order info actions', () => { 
-      it('should order info load', () => {
+      it('should order info load set to true', () => {
         const action = { type: getOrderInfo.pending.type };
         const state = slice.reducer(initialState, action);
 
@@ -133,7 +157,7 @@ describe('burger-constructor reducer', () => {
         const action = { type: getOrderInfo.fulfilled.type, payload: testOrderInfoResponse };
         const state = slice.reducer(initialState, action);
 
-        expect(state).toEqual({ ...initialState, isOrderInfoLoading: false, hasOrderInfoRequestError: null, orderInfo: testOrderInfoResponse });
+        expect(state).toEqual({ ...initialState, isOrderInfoLoading: false, orderInfo: testOrderInfoResponse });
       });    
 
       it('should order info request falls with error', () => {
