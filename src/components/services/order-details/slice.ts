@@ -9,7 +9,7 @@ type TOrderStore = {
   hasOrderDetailsRequestError: string | unknown,
 };
 
-const initialState: TOrderStore = {
+export const initialState: TOrderStore = {
   orderDetails: null,
   isOrderDetailsLoading: false,
   hasOrderDetailsRequestError: null,

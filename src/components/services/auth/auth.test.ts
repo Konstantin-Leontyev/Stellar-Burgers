@@ -9,8 +9,8 @@ import { register, login, logout } from './actions';
 import { TUser } from '../../utils/types';
 
 const user: TUser = {
-    email:"test_user@yandex.ru",
-    name: "Test_user_name",
+    email:'test_user@yandex.ru',
+    name: 'Test_user_name',
 };
 
 const testPayload: TAuthStore = {
@@ -18,7 +18,7 @@ const testPayload: TAuthStore = {
     isAuthChecked: true,
 };
 
-describe("auth slice", () => {
+describe('auth slice', () => {
     it('should initialized correctly', () => {
         const sate = slice.reducer(undefined, { type: '' });
 

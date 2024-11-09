@@ -43,7 +43,7 @@ export type TOrder = TOrderStatus & TName & TNumber & TIngredientsId &
     _id: string;
     createdAt: string;
     updatedAt: string;
-    owner?: string;
+    owner?: TUser;
     __v?: number;
   };
 
