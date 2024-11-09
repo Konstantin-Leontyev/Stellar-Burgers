@@ -15,10 +15,6 @@ function Protected({ component, onlyUnAuth = false }: TProtectedProps): React.JS
   const user = useSelector(getUser);
   const location = useLocation();
 
-  if (!isAuthChecked) {
-    return <ModalPreloader title='Загрузка' />;
-  }
-
   if (!onlyUnAuth && !user) {
     return <Navigate to={'/login'} state={{ from: location }} />;
   }

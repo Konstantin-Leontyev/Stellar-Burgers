@@ -3,7 +3,7 @@ import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import { TIngredientWithKeyField, TOrderInfoResponse } from '../../utils/types';
 import { getOrderInfo } from './actions';
 
-type TBurgerConstructorStore = {
+export type TBurgerConstructorStore = {
   currentBun: TIngredientWithKeyField | null,
   currentIngredients: TIngredientWithKeyField[],
   orderInfo: TOrderInfoResponse | null,
@@ -11,7 +11,7 @@ type TBurgerConstructorStore = {
   hasOrderInfoRequestError: string | unknown,
 };
 
-const initialState: TBurgerConstructorStore = {
+export const initialState: TBurgerConstructorStore = {
   currentBun: null,
   currentIngredients: [],
   orderInfo: null,

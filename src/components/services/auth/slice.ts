@@ -4,12 +4,12 @@ import { TUser } from "../../utils/types";
 import { login, logout, register, setUser, updateUserProfile } from './actions'
 
 
-type TAuthStore = {
+export type TAuthStore = {
   user: TUser | null,
   isAuthChecked: boolean
 };
 
-const initialState: TAuthStore= {
+export const initialState: TAuthStore= {
   user: null,
   isAuthChecked: false
 }
@@ -38,6 +38,7 @@ export const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
+        state.isAuthChecked = false;
       })
       .addCase(setUser, (state, action) => {
         state.user = action.payload;

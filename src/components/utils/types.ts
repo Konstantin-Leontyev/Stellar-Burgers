@@ -98,7 +98,7 @@ export type TIngredient = TName & TType & {
   calories: number;
   price: number;
   image: string;
-  image_mobil: string;
+  image_mobile: string;
   image_large: string;
   __v: number;
 };
