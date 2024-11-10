@@ -1,7 +1,7 @@
 # Проект React-burger
 
 ### Технологии
-![example workflow](https://github.com/Konstantin-Leontyev/kkalogram/actions/workflows/kkalogram.yml/badge.svg)  
+![example workflow](https://github.com/Konstantin-Leontyev/React_Burger/actions/workflows/kkalogram.yml/badge.svg)  
   
 [![Nginx](https://img.shields.io/badge/-NGINX-464646?style=flat-square&logo=NGINX)](https://nginx.org/ru/)
 [![docker](https://img.shields.io/badge/-Docker-464646?style=flat-square&logo=docker)](https://www.docker.com/)
@@ -135,7 +135,7 @@ Workflow состоит из слудующих шагов:
 * Автоматический деплой на удаленный сервер.
 * Отправка уведомления о результате в телеграм-чат.
 
-<p align="right">(<a href="#description">Вернуться в начало</a>)</p>
+<p align="right">(<a href="#start">Вернуться в начало</a>)</p>
 
 <a name="team"><h3>Команда проекта</h3></a>
 ___
