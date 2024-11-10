@@ -66,14 +66,14 @@ export function BurgerConstructor(): React.JSX.Element {
   return (
     <section className={`${styles.container} pt-25`} ref={dropTarget}>
       <>
-        <div className={styles.topBottomElement} >
+        <div className={styles.topBottomElement} data-testid='bun_drop'>
           {
             bun
             ? <FilledElement type="top" ingredient={bun} />
             : <EmptyElement type="top" item={item} isOver={isOver} />
           }
         </div>
-        <ul className={styles.ul} >
+        <ul className={styles.ul} data-testid='ingredient_drop'>
           <div className={scroll}>
             {
               ingredients.length > 0
@@ -90,7 +90,7 @@ export function BurgerConstructor(): React.JSX.Element {
             }
           </div>
         </ul>
-        <div className={styles.topBottomElement} >
+        <div className={styles.topBottomElement}>
           {
             bun
             ? <FilledElement type="bottom" ingredient={bun} />

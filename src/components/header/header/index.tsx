@@ -17,7 +17,7 @@ export function Header(): React.JSX.Element {
   return (
     <header className={styles.header}>
       <nav className={`${styles.container} pb-4 pt-4`}>
-        <ul className={`${styles.ul} ${styles.navItems}`}>
+        <ul data-testid='nav_items' className={`${styles.ul} ${styles.navItems}`}>
           { navItems.map(item =>
             user && item.route === '/feed'
               ? ''
@@ -25,9 +25,9 @@ export function Header(): React.JSX.Element {
                   {({isActive}) => <HeaderItem item={item} isActive={isActive}/>}
                 </NavLink>
           )}
-        </ul>
+        </ul >
         <Logo />
-        <ul className={`${styles.ul} ${styles.authItems}`}>
+        <ul data-testid='auth_items' className={`${styles.ul} ${styles.authItems}`}>
           {authItems.map(item =>
             <NavLink className={styles.link} to={item.route} key={item.name} >
               {({isActive}) => <HeaderItem item={item} isActive={isActive}/>}

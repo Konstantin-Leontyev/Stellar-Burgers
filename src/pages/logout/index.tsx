@@ -12,5 +12,7 @@ export function Logout ({ title }: { title: string }): React.JSX.Element {
     // eslint-disable-next-line
   }, [])
 
-  return <span className={`${styles.container} text text_type_main-large`}>{title}</span>
+  return <span 
+    data-testid='logout_title'
+    className={`${styles.container} text text_type_main-large`}>{title}</span>
 }

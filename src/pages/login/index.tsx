@@ -21,6 +21,7 @@ export function Login(): React.JSX.Element {
     <form className={styles.container} onSubmit={handleOnSubmit}>
       <span className="text text_type_main-medium">Вход</span>
       <EmailInput
+        data-testid='email_input'
         extraClass="mt-6"
         name="email"
         onChange={handleOnChange}
@@ -28,12 +29,14 @@ export function Login(): React.JSX.Element {
         value={formData.email ?? ""}
       />
       <PasswordInput
+        data-testid='password_input'
         extraClass="mt-6"
         name="password"
         onChange={handleOnChange}
         value={formData.password ?? ""}
       />
       <Button
+        data-testid='login_button'
         extraClass="mt-6"
         htmlType="submit"
         size={"medium"}

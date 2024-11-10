@@ -51,10 +51,12 @@ export function Modal({ title, children, onClose, closeIcon = true }: TModalProp
         <ModalOverlay onClose={onModalClose}/>
         <div className={styles.modal} style={backgroundColor}>
           <div className={`${styles.wrapper} mt-10`} style={justifyContent}>
-            <span className={`${styles.span} text text_type_${textStyle}`}>{title}</span>
+            <span data-testid='modal_title' className={`${styles.span} text text_type_${textStyle}`}>{title}</span>
             {
               closeIcon && isModal &&
+              <div data-testid='close_btn' >
                 <CloseIcon type="primary" onClick={onModalClose}/>
+              </div>
             }
           </div>
           {children}

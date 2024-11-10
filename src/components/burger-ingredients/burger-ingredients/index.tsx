@@ -45,13 +45,15 @@ export function BurgerIngredients(): React.JSX.Element {
 
   return (
     <section className={styles.container}>
-      <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
+      <h1 
+        data-testid='main_page_title'
+        className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
       <IngredientsTab categories={categories} />
       <div className={`${styles.scroll} custom-scroll`} onScroll={handleOnScroll}>
         {categories.map(category =>
           <div className="pb-10" key={category.type} ref={category.ref} >
             <span className="text text_type_main-medium">{category.title}</span>
-            <ul className={`${styles.wrapper} pl-4 pr-4`}>
+            <ul data-testid='burger_ingredients' className={`${styles.wrapper} pl-4 pr-4`}>
               {ingredients.filter(ingredient => ingredient.type === category.type)
                 .map(ingredient =>
                   <IngredientCard ingredient={ingredient} key={ingredient._id}/>

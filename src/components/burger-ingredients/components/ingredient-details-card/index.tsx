@@ -31,7 +31,9 @@ export function IngredientDetailsCard(): React.JSX.Element {
             className={styles.img}
             src={ingredient.image_large}
             alt={ingredient.name}/>
-          <span className={`${styles.span} text text_type_main-medium mt-4 mb-8`}>{ingredient.name}</span>
+          <span 
+            data-testid='ingredient_name'
+            className={`${styles.span} text text_type_main-medium mt-4 mb-8`}>{ingredient.name}</span>
           <ul className={`${styles.ul} mb-15 `}>
             <li className={styles.li}>
               <span className="text text_type_main-sml text_color_inactive">Калории, ккал</span>

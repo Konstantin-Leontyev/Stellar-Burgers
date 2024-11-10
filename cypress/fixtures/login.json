@@ -1,0 +1,9 @@
+{
+    "success": true,
+    "accessToken": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2ZWViMmYzMTE5ZDQ1MDAxYjUwODFjOSIsImlhdCI6MTczMTIyNTU1NCwiZXhwIjoxNzMxMjI2NzU0fQ.vbaDKp318gQHlPDlz7V4mg4ZcNzB9-whss_Uu8K3n5s",
+    "refreshToken": "80bf12b29213bb07e6a34b2750e9596730a13ebb2e84c2d13cec41e135abdfe2c174e563d925eef4",
+    "user": {
+        "email": "k.a.leontyev@yandex.ru",
+        "name": "Konstyantin"
+    }
+}

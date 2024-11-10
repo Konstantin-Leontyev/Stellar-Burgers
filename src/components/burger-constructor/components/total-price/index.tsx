@@ -51,7 +51,7 @@ export function TotalPrice({ bun, ingredients }: TTotalPriceProps): React.JSX.El
   }, [burger])
 
   return (
-    <div className={`${styles.total} pt-10`}>
+    <div data-testid='order_create_button' className={`${styles.total} pt-10`}>
       <span className="text text_type_digits-medium mr-2">{sum}</span>
       <CurrencyIcon type="primary"/>
       <Button htmlType="button" type="primary" size="large" extraClass="ml-10" onClick={handleOnClick}>

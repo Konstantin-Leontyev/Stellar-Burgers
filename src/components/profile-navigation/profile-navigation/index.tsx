@@ -9,8 +9,8 @@ export function ProfileNavigation(): React.JSX.Element {
   const inactive = `${styles.inactive} text text_type_main-medium text_color_inactive`
 
   return (
-    <div className={styles.navigation}>
-      <ul className={styles.ul}>
+    <div className={styles.navigation} >
+      <ul className={styles.ul} data-testid='profile_navigation' >
         <li className={styles.li}>
           <NavLink
             className={({isActive}) => isActive ? active : inactive}
@@ -30,7 +30,9 @@ export function ProfileNavigation(): React.JSX.Element {
           </NavLink>
         </li>
       </ul>
-      <span className="text text_type_main-default text_color_inactive">
+      <span 
+          data-testid='profile_notice'
+          className="text text_type_main-default text_color_inactive">
           В этом разделе вы можете изменить свои персональные данные
         </span>
     </div>
