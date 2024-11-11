@@ -3,7 +3,7 @@ name: React-burger Workflow
 on:
   push:
     branches:
-      - sprint-6/step-1
+      # - sprint-6/step-1
 
 jobs:
 
