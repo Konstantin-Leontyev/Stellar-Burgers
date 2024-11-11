@@ -1,6 +1,8 @@
 describe('order creation', function() {
+  const orderDetails = '[data-testid=order-details]';
+
   it('should create order', () => { 
-    cy.intercept('POST', 'https://norma.nomoreparties.space/api/orders', { fixture: 'order-creation-response' }).as('orderCreationRequest')
+    cy.intercept('POST', 'api/orders', { fixture: 'order-creation-response' }).as('orderCreationRequest')
     cy.login();
     cy.drop_bun('Флюоресцентная булка R2-D3');
     cy.drop_ingredient('Биокотлета из марсианской Магнолии');
@@ -22,7 +24,7 @@ describe('order creation', function() {
         '643d69a5c3f7b9001cfa093d'
       ]
     });
-    cy.get('[data-testid=order-details]').contains('58996').should('exist')
-    cy.get('[data-testid=order-details]').contains('идентификатор заказа').should('exist')
+    cy.get(orderDetails).contains('58996').should('exist')
+    cy.get(orderDetails).contains('идентификатор заказа').should('exist')
   });
 });

@@ -30,7 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cypress": "npx cypress open",
+    "cypress": "npx cypress open --config baseUrl=http://localhost:3000/",
     "deploy": "scp -r ./build/* root@147.45.175.164:/var/www/stellar-burger/html"
   },
   "eslintConfig": {
