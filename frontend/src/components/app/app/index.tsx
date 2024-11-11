@@ -43,8 +43,8 @@ export function App(): React.JSX.Element {
 
         <Routes location={state?.backgroundLocation || location}>
           <Route path="/" element={<Home />} />
-          <Route path="/feed" element={<OnlyUnAuth component={<CommonFeed />} />} />
-          <Route path="/feed/:number" element={<OnlyUnAuth component={<BurgerDetails />} />} />
+          <Route path="/feed" element={<CommonFeed />} />
+          <Route path="/feed/:number" element={<BurgerDetails />} />
           <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPassword />} />} />
           <Route path="/ingredients/:id" element={<IngredientDetails />}/>
           <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
