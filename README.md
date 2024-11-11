@@ -1,4 +1,4 @@
-# Проект React-burger
+# Проект Stellar-burger
 
 ### Технологии
 ![example workflow](https://github.com/Konstantin-Leontyev/React-Burger/actions/workflows/react-burger.yml/badge.svg)  
