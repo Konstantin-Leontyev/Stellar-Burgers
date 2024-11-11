@@ -8,7 +8,6 @@ import { ModalPreloader } from '../../../modal';
 import { TOrder } from '../../../utils/types';
 import { useDispatch, useSelector } from '../../../services/store';
 import { getOrderDetails } from '../../../services/order-details/actions';
-import {FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
 
 export function BurgerDetailsCard(): React.JSX.Element {
   const dispatch = useDispatch();

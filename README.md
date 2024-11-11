@@ -1,7 +1,7 @@
 # Проект React-burger
 
 ### Технологии
-![example workflow](https://github.com/Konstantin-Leontyev/React_Burger/actions/workflows/kkalogram.yml/badge.svg)  
+![example workflow](https://github.com/Konstantin-Leontyev/React-Burger/actions/workflows/react-burger.yml/badge.svg)  
   
 [![Nginx](https://img.shields.io/badge/-NGINX-464646?style=flat-square&logo=NGINX)](https://nginx.org/ru/)
 [![docker](https://img.shields.io/badge/-Docker-464646?style=flat-square&logo=docker)](https://www.docker.com/)

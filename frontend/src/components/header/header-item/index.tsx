@@ -8,8 +8,8 @@ type THeaderItemProps = {
   isActive: boolean;
 };
 
-export function HeaderItem({ item, isActive}: THeaderItemProps) {
-  const {Icon, name, title} = item;
+export function HeaderItem({ item, isActive}: THeaderItemProps): React.JSX.Element {
+  const {Icon, title} = item;
 
   return (
     <li className={`${styles.li} pr-5 pl-5`}>
