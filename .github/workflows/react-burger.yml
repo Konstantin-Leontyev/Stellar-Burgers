@@ -1,9 +1,11 @@
-name: react-burger
+name: React-burger Workflow
 
 on:
   push:
     branches:
       - sprint-6/step-1
+
+jobs:
 
   build_and_push_frontend_to_docker_hub:
     name: Push frontend Docker image to DockerHub
