@@ -38,10 +38,10 @@ export const authSlice = createSlice({
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
-        state.isAuthChecked = false;
       })
       .addCase(setUser, (state, action) => {
         state.user = action.payload;
+        state.isAuthChecked = true;
       })
       .addCase(updateUserProfile.fulfilled, (state, action) => {
         state.user = action.payload.user;
