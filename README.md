@@ -1,4 +1,4 @@
-# Проект React-burger
+# Проект Stellar-burger
 
 ### Технологии
 ![example workflow](https://github.com/Konstantin-Leontyev/React-Burger/actions/workflows/react-burger.yml/badge.svg)  
@@ -11,7 +11,6 @@
 
 [Описание](#description)  
 [Как запустить проект](#start)  
-[Знакомство с проектом](#command)  
 [Команда проекта](#team)
 
 <a name="description"><h3>Описание проекта</h3></a>
@@ -28,7 +27,7 @@ ___
 * Лента заказов - список последних 50 заказов. Доступна всем пользователям. Изменения в списке отражаются в онлайне режиме. Данные летны обновляются по websocket. 
 * Личный кабинет - страница где пользователь может отредактировать свои учётные данные. Посмотреть список своих заказов, и покинуть ресурс.
 
-<p align="right">(<a href="#description">Вернуться в начало</a>)</p> -->
+<p align="right">(<a href="#description">Вернуться в начало</a>)</p>
 
 <a name="start"><h3>Как запустить проект:</h3></a>
 ___
