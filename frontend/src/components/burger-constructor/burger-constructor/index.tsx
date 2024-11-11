@@ -29,8 +29,6 @@ type TCollectedProps = {
 
 export function BurgerConstructor(): React.JSX.Element {
   const location = useLocation();
-  location.state = { backgroundLocation : location }
-
   const dispatch = useDispatch();
   const bun  = useSelector(currentBun);
   const ingredients = useSelector(currentIngredients);
@@ -54,6 +52,10 @@ export function BurgerConstructor(): React.JSX.Element {
   const isLoading = useSelector(isOrderInfoLoading);
   const hasError = useSelector(hasOrderInfoRequestError);
   const details = useSelector(orderInfo);
+  
+  if(details || isLoading){
+    location.state = { backgroundLocation : location }
+  }
 
   const scroll = ingredients.length > 5 ? `${styles.scroll} custom-scroll` : 'mr-5';
 

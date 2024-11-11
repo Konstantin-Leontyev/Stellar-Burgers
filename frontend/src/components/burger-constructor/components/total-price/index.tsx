@@ -48,7 +48,7 @@ export function TotalPrice({ bun, ingredients }: TTotalPriceProps): React.JSX.El
     }
     dispatch(getOrderInfo({ingredients: idList }));
     // eslint-disable-next-line
-  }, [burger])
+  }, [idList])
 
   return (
     <div data-testid='order_create_button' className={`${styles.total} pt-10`}>
