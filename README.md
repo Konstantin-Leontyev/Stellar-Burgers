@@ -1,46 +1,123 @@
-# Getting Started with Create React App
+# Проект Stellar-burger
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Технологии
+![example workflow](https://github.com/Konstantin-Leontyev/React-Burger/actions/workflows/react-burger.yml/badge.svg)  
+  
+[![Nginx](https://img.shields.io/badge/-NGINX-464646?style=flat-square&logo=NGINX)](https://nginx.org/ru/)
+[![docker](https://img.shields.io/badge/-Docker-464646?style=flat-square&logo=docker)](https://www.docker.com/)
+[![GitHub%20Actions](https://img.shields.io/badge/-GitHub%20Actions-464646?style=flat-square&logo=GitHub%20actions)](https://github.com/features/actions)
 
-## Available Scripts
+### Содержание
 
-In the project directory, you can run:
+[Описание](#description)  
+[Как запустить проект](#start)  
+[Команда проекта](#team)
 
-### `npm start`
+<a name="description"><h3>Описание проекта</h3></a>
+___
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+«Stellar-Burgers» — сайт, футуристичной бургерной. Где посетители сайта - космические путешественники со всей вселенной, могут попробовать лучшие бургеры галактики млечного пути.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<p align="center"><img height="425" src="preview.png"></p>
 
-### `npm test`
+Проект доступен по [ссылке](https://stellar-burger.ru).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Проект состоит из следующих страниц: 
+* Констурктор - список ингредиентов и конструктор бургера. При прокрутке списка ингредиентов меняются вкладки категорий. Создание будущего бургера реализованно с помощью технологии drag & drop - перетаскиванием нужного ингредиента. При наведении перетаскиваемым ингредиентом на область конструктора подсвечивается соответствующая ингредиенту область конструктора. При добавлении ингредиента в бургер, в списке ингредиентов, на используемом ингредиенте отражается количество.   
+* Лента заказов - список последних 50 заказов. Доступна всем пользователям. Изменения в списке отражаются в онлайне режиме. Данные летны обновляются по websocket. 
+* Личный кабинет - страница где пользователь может отредактировать свои учётные данные. Посмотреть список своих заказов, и покинуть ресурс.
 
-### `npm run build`
+<p align="right">(<a href="#description">Вернуться в начало</a>)</p>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<a name="start"><h3>Как запустить проект:</h3></a>
+___
+Проведите подготовку своего сервера к запуску проекта.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* Подключитесь к своему удаленному серверу. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Обновите систему:
+  
+  ```angular2html
+  sudo apt-get update && sudo apt-get -y install -f && sudo apt-get -y full-upgrade && sudo apt-get -y autoremove && sudo apt-get -y autoclean && sudo apt-get -y clean
+  ```
 
-### `npm run eject`
+* Установите [docker](https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script):
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  ```angular2html
+  sudo apt install curl
+  curl -fsSL https://test.docker.com -o test-docker.sh
+  sudo sh test-docker.sh
+  ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* Проверьте, что Docker работает:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  ```angular2html
+  sudo systemctl status docker
+  ```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* Установите права пользователя для docker-compose:
 
-## Learn More
+  ```angular2html
+  sudo chmod +x /usr/local/bin/docker-compose
+  ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+* В корневой директории создайте папку react-burger.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  ```angular2html
+  mkdir react-burger
+  ```
+
+Проведите подготовку проекта на локальном компьютере:
+
+* Клонируйте репозиторий проекта на свой локальный компьютер по SSH ссылке:
+
+  ```angular2html
+  git@github.com:Konstantin-Leontyev/React-Burger.git
+  ```
+
+<!-- * Создайте .env файл и заполните его согласно примеру в .env.example: -->
+
+* Скопируйте файлы docker-compose.yml в созданную ранее на удаленном сервере папку react-burger.
+
+  ```angular2html
+  scp -i <path_to_your_SSH_key>/<your_SSH_key_name> docker-compose.yml \ 
+    <your_username>@<your_server_ip>:<directory_path>/react-burger/
+  ```
+  
+* На удаленном сервере находясь в дирректории с проектом запустите его сборку:
+
+  ```angular2html
+  sudo docker compose -f docker-compose.yml up -d
+  ```
+
+Для использования Workflow:
+
+* Добавьте в Secrets GitHub переменные окружения:
+
+  ``` 
+  DOCKER_PASSWORD=<your_DockerHub_password>
+  DOCKER_USERNAME=<your_DockerHub_username>
+  
+  TELEGRAM_TO=<your_telegram_ID>
+  TELEGRAM_TOKEN=<your_telegram_bot_token>
+  
+  HOST=<your_remote_server_IP>
+  PASSPHRASE=<your_remote_server_passphrase>
+  SSH_KEY=<your_privet_ssh_key (для получения команда: cat ~/.ssh/id_rsa)>
+  USER=<your_remote_sever_username>
+  ```
+
+Workflow состоит из слудующих шагов:
+
+* Сборка и публикация образа на DockerHub.
+* Автоматический деплой на удаленный сервер.
+* Отправка уведомления о результате в телеграм-чат.
+
+<p align="right">(<a href="#start">Вернуться в начало</a>)</p>
+
+<a name="team"><h3>Команда проекта</h3></a>
+___
+
+[![Gmail Badge](https://img.shields.io/badge/-K.A.Leontyev@gmail.com-c14438?style=flat&logo=Gmail&logoColor=white&link=mailto:K.A.Leontyev@gmail.com)](mailto:K.A.Leontyev@gmail.com)<p align='left'>
+
+Фронтенд - Константин Леонтьев
