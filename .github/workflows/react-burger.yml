@@ -71,7 +71,6 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          password: ${{ secrets.HOST_PASSWORD }}
           script: |
             cd react-burger
             # Выполняет pull образов с Docker Hub
