@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      # - sprint-6/step-1
 
 jobs:
 
@@ -62,7 +61,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          passphrase: ${{ secrets.HOST_PASSWORD }}
           source: "docker-compose.yml"
           target: "react-burger"
       - name: Executing remote ssh commands to deploy
@@ -71,7 +70,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          passphrase: ${{ secrets.HOST_PASSWORD }}
           script: |
             cd react-burger
             # Выполняет pull образов с Docker Hub
