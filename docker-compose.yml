@@ -3,6 +3,7 @@ version: '3'
 volumes:
   static:
 
+services:
   frontend:
     container_name: frontend
     image: kaleontyev/react_burger_frontend
