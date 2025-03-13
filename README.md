@@ -1,7 +1,7 @@
 # Проект Stellar-burger
 
 ### Технологии
-![example workflow](https://github.com/Konstantin-Leontyev/React-Burger/actions/workflows/react-burger.yml/badge.svg)  
+![example workflow](https://github.com/Konstantin-Leontyev/React-Burger/actions/workflows/Stellar-Burgers.yml/badge.svg)  
   
 [![Nginx](https://img.shields.io/badge/-NGINX-464646?style=flat-square&logo=NGINX)](https://nginx.org/ru/)
 [![docker](https://img.shields.io/badge/-Docker-464646?style=flat-square&logo=docker)](https://www.docker.com/)
@@ -61,10 +61,10 @@ ___
   sudo chmod +x /usr/local/bin/docker-compose
   ```
 
-* В корневой директории создайте папку react-burger.
+* В корневой директории создайте папку stellar-burgers.
 
   ```angular2html
-  mkdir react-burger
+  mkdir stellar-burgers
   ```
 
 Проведите подготовку проекта на локальном компьютере:
@@ -72,7 +72,7 @@ ___
 * Клонируйте репозиторий проекта на свой локальный компьютер по SSH ссылке:
 
   ```angular2html
-  git@github.com:Konstantin-Leontyev/React-Burger.git
+  git@github.com:Konstantin-Leontyev/Stellar-Burgers.git
   ```
 
 <!-- * Создайте .env файл и заполните его согласно примеру в .env.example: -->
@@ -81,7 +81,7 @@ ___
 
   ```angular2html
   scp -i <path_to_your_SSH_key>/<your_SSH_key_name> docker-compose.yml \ 
-    <your_username>@<your_server_ip>:<directory_path>/react-burger/
+    <your_username>@<your_server_ip>:<directory_path>/stellar-burgers/
   ```
   
 * На удаленном сервере находясь в дирректории с проектом запустите его сборку:
