@@ -1,4 +1,4 @@
-# Проект Stellar-burger
+# Проект Stellar-Burgers
 
 ### Технологии
 ![example workflow](https://github.com/Konstantin-Leontyev/Stellar-Burgers/actions/workflows/stellar-burgers.yml/badge.svg)  
