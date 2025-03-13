@@ -64,7 +64,7 @@ jobs:
           # passphrase: ${{ secrets.SSH_PASSPHRASE }}
           password: ${{ secrets.HOST_PASSWORD }}
           source: "docker-compose.yml"
-          target: "react-burger"
+          target: "stellar-burgers"
       - name: Executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
