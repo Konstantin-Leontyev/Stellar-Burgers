@@ -6,14 +6,14 @@ volumes:
 services:
   frontend:
     container_name: frontend
-    image: kaleontyev/react_burger_frontend
+    image: kaleontyev/stellar_burgers_frontend
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static:/frontend_static
 
   gateway:
     container_name: gateway
-    image: kaleontyev/react_burger_gateway
+    image: kaleontyev/stellar_burgers_gateway
     depends_on:
       - frontend
     ports:
