@@ -1,7 +1,7 @@
 # Проект Stellar-burger
 
 ### Технологии
-![example workflow](https://github.com/Konstantin-Leontyev/React-Burger/actions/workflows/Stellar-Burgers.yml/badge.svg)  
+![example workflow](https://github.com/Konstantin-Leontyev/Stellar-Burgers/actions/workflows/stellar-burgers.yml/badge.svg)  
   
 [![Nginx](https://img.shields.io/badge/-NGINX-464646?style=flat-square&logo=NGINX)](https://nginx.org/ru/)
 [![docker](https://img.shields.io/badge/-Docker-464646?style=flat-square&logo=docker)](https://www.docker.com/)
@@ -55,7 +55,7 @@ ___
   sudo systemctl status docker
   ```
 
-* Установите права пользователя для docker-compose:
+* Если требуется, становите права пользователя для docker-compose:
 
   ```angular2html
   sudo chmod +x /usr/local/bin/docker-compose
@@ -77,7 +77,7 @@ ___
 
 <!-- * Создайте .env файл и заполните его согласно примеру в .env.example: -->
 
-* Скопируйте файлы docker-compose.yml в созданную ранее на удаленном сервере папку react-burger.
+* Скопируйте файлы docker-compose.yml в созданную ранее на удаленном сервере папку stellar-burgers.
 
   ```angular2html
   scp -i <path_to_your_SSH_key>/<your_SSH_key_name> docker-compose.yml \ 
