@@ -74,7 +74,7 @@ jobs:
           # passphrase: ${{ secrets.SSH_PASSPHRASE }}
           password: ${{ secrets.HOST_PASSWORD }}
           script: |
-            cd react-burger
+            cd stellar-burgers
             # Выполняет pull образов с Docker Hub
             sudo docker compose -f docker-compose.yml pull
             # Перезапускает все контейнеры в Docker Compose
