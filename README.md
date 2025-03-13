@@ -61,6 +61,12 @@ ___
   sudo chmod +x /usr/local/bin/docker-compose
   ```
 
+* Авторизуйтесь с удаленного сервера на DockerHub:
+
+  ```angular2html
+  sudo docker login --username=<your_docker_hub_user_name>
+  ```
+
 * В корневой директории создайте папку stellar-burgers.
 
   ```angular2html
@@ -103,7 +109,7 @@ ___
   
   HOST=<your_remote_server_IP>
   PASSPHRASE=<your_remote_server_passphrase>
-  SSH_KEY=<your_privet_ssh_key (для получения команда: cat ~/.ssh/id_rsa)>
+  SSH_KEY=<your_privet_ssh_key (для получения команда: cat ~/.ssh/<key.pub_file_name>)>
   USER=<your_remote_sever_username>
   ```
 
