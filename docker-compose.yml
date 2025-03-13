@@ -1,22 +1,22 @@
 version: '3'
 
 volumes:
-  static:
+  stellar_burgers_static:
 
 services:
   frontend:
-    container_name: frontend
+    container_name: stellar_burgers_frontend
     image: kaleontyev/stellar_burgers_frontend
     command: cp -r /app/build/. /frontend_static/
     volumes:
-      - static:/frontend_static
+      - stellar_burgers_static:/frontend_static
 
   gateway:
-    container_name: gateway
+    container_name: stellar_burgers_gateway
     image: kaleontyev/stellar_burgers_gateway
     depends_on:
-      - frontend
+      - stellar_burgers_frontend
     ports:
-      - 8000:80
+      - 7000:80
     volumes:
-      - static:/staticfiles
+      - stellar_burgers_static:/staticfiles
