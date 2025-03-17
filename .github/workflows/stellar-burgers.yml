@@ -90,4 +90,4 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: Деплой бургерной успешно выполнен!
+          message: Деплой stellar-burgers успешно выполнен!
